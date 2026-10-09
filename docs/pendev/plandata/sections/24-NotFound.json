@@ -1,0 +1,37 @@
+{
+ "key": "NotFound",
+ "code": "NF",
+ "kind": "section",
+ "pages": "404",
+ "ikas": "not-found-section",
+ "props": "`title`, `text`, `buttonText` TEXT · `buttonLink` LINK · `backgroundColor` COLOR",
+ "desktop": "1440 × 560. Sola yaslı: dev `404` (text-display × Counter, 00'dan yuvarlanır), text-h2 başlık, text-body muted metin, koyu Button. Altında ProductGrid öneri satırı ayrı section.",
+ "mobile": "390; aynı sıra, 404 text-display mobil.",
+ "tree": [
+  "not-found",
+  "├─ not-found-code                    {code:statusCode} text-display; Counter",
+  "├─ not-found-title                   {title:TEXT} text-h2",
+  "├─ not-found-text                    {text:TEXT} text-body muted",
+  "└─ not-found-button (clip)           {buttonText:TEXT} {buttonLink:LINK}; koyu Button"
+ ],
+ "checks": [
+  "404 haneleri sabit genişlikte"
+ ],
+ "anims": [
+  {
+   "layer": "not-found-code",
+   "recipe": "I-M-01",
+   "trigger": "load",
+   "what": "404 hane hane yuvarlanır",
+   "frm": "{ value: 000 }",
+   "to": "{ value: 404 }",
+   "via": "Counter"
+  },
+  {
+   "layer": "not-found-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

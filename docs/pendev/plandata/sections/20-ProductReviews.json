@@ -1,0 +1,45 @@
+{
+ "key": "ProductReviews",
+ "code": "REV",
+ "kind": "section",
+ "pages": "Ürün detay",
+ "ikas": "product-reviews-section (IkasCustomerReviewList, customerReviewSettings)",
+ "props": "`title`, `reviewsCountText`, `writeReviewText`, `verifiedText`, `emptyTitle`, `emptyText`, `formTitle`, `ratingLabel`, `reviewTitleLabel`, `reviewTextLabel`, `submitText`, `submittingText`, `successText`, `loginRequiredText` TEXT · `backgroundColor` COLOR · `merchantReplyLabel` TEXT",
+ "desktop": "1440; üst ve alt $space-section, üstte 1px çizgi. Solda 420'lik özet: text-h2 başlık, büyük puan (text-display, mono) + RatingStars + değerlendirme sayısı, 5→1 dağılım çubukları, çerçeveli Yorum yaz butonu. Sağda alt çizgili ReviewCard listesi (3) + çerçeveli Daha fazla yorum butonu.",
+ "mobile": "Özet üstte (puan + yıldız + çubuklar + buton), liste altta.",
+ "tree": [
+  "product-reviews",
+  "├─ reviews-summary",
+  "│   ├─ reviews-title                 {title:TEXT} text-h2",
+  "│   ├─ reviews-score                 {data:product.stars} text-display mono + RatingStars + {data:product.reviewCount} {reviewsCountText:TEXT}",
+  "│   ├─ reviews-bars                  rating-bar ×5 {code:star} + çubuk + {data:review.countByStar}",
+  "│   └─ write-review-button           {writeReviewText:TEXT}; çerçeveli Button",
+  "├─ reviews-list                      review-card ×3 (ReviewCard): {data:review.title} {data:review.comment} {data:review.author} {data:review.date} {verifiedText:TEXT}",
+  "│   ├─ review-images                 yorum görselleri {data:review.images}; tıklayınca ImagePreview",
+  "│   ├─ merchant-reply                {merchantReplyLabel:TEXT} + {data:review.reply} (ReviewCard)",
+  "│   └─ reviews-pagination            {code:page} numaralı sayfalama",
+  "├─ reviews-empty                     {emptyTitle:TEXT} + {emptyText:TEXT}",
+  "└─ review-form                       {formTitle:TEXT} + {ratingLabel:TEXT} yıldız seçimi + FormField {reviewTitleLabel:TEXT} {reviewTextLabel:TEXT} + {submitText:TEXT} / {submittingText:TEXT} · {successText:TEXT} · {loginRequiredText:TEXT}"
+ ],
+ "checks": [
+  "yorumlu · boş · yorum formu halleri ayrı frame",
+  "yorum için giriş ya da satın alma şartı mağaza ayarından gelir (loginRequiredText)"
+ ],
+ "anims": [
+  {
+   "layer": "review-card",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Yorumlar sırayla yukarı belirir",
+   "frm": "{ y: 16, opacity: 0 }",
+   "timing": "{ duration: 0.5, ease: ease-out-soft, stagger: 0.06 }",
+   "impl": "css-keyframes + io-hook"
+  },
+  {
+   "layer": "write-review-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

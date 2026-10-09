@@ -1,0 +1,29 @@
+{
+ "key": "EmailVerification",
+ "code": "EMV",
+ "kind": "section",
+ "pages": "E-posta doğrulama",
+ "ikas": "email-verification-section",
+ "props": "`verifyingText`, `successTitle`, `successText`, `errorTitle`, `errorText`, `buttonText`, `resendTitle`, `resendButtonText`, `resendSuccessText` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440 × 520; ortalı 440'lık blok: durum ikonu (Spinner / onay / uyarı), text-h3 başlık, text-body metin, koyu Button.",
+ "mobile": "390; aynı.",
+ "tree": [
+  "email-verification",
+  "├─ verify-icon                       Spinner | onay ($color-success) | uyarı ($color-danger)",
+  "├─ verify-title                      {verifyingText:TEXT} | {successTitle:TEXT} | {errorTitle:TEXT} text-h3",
+  "├─ verify-text                       {successText:TEXT} | {errorText:TEXT} text-body muted",
+  "└─ verify-button (clip)              {buttonText:TEXT}; koyu Button",
+  "└─ resend-form                       hata halinde: {resendTitle:TEXT} + FormField + {resendButtonText:TEXT} · {resendSuccessText:TEXT}"
+ ],
+ "checks": [
+  "doğrulanıyor · başarılı · hata (tekrar gönder formu) halleri"
+ ],
+ "anims": [
+  {
+   "layer": "verify-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

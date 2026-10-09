@@ -1,0 +1,27 @@
+{
+ "key": "LocaleSwitcher",
+ "code": "LCL",
+ "kind": "overlay",
+ "pages": "Footer (alt satırdaki dil/para birimi düğmesi)",
+ "ikas": "Footer sub-component (setLocalization, baseStore.localeOptions)",
+ "desktop": "Footer'daki dil düğmesinin üstünde açılan 320 panel.",
+ "mobile": "Alttan açılan sayfa.",
+ "tree": [
+  "locale-overlay",
+  "├─ scrim",
+  "└─ locale-panel",
+  "    ├─ locale-title                  {localeTitle:TEXT}",
+  "    └─ locale-option ×N              {data:locale.countryName} + {data:locale.currency} + seçili işareti"
+ ],
+ "checks": [
+  "açık hali, bir seçenek seçili"
+ ],
+ "anims": [
+  {
+   "layer": "locale-panel",
+   "recipe": "M-06",
+   "trigger": "click",
+   "what": "Panel aşağı doğru açılır"
+  }
+ ]
+}

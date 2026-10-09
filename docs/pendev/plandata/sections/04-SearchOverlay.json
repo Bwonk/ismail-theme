@@ -1,0 +1,46 @@
+{
+ "key": "SearchOverlay",
+ "code": "SRCH",
+ "kind": "overlay",
+ "pages": "Header",
+ "ikas": "Header sub-component (search)",
+ "desktop": "Header altından açılan 1440 × 520 panel, `color-bg`; arkada scrim. Büyük arama alanı (text-h3, alt 1px çizgi), altında öneri etiketleri ya da 4'lü `ProductCardSmall` sonuç satırı ve tüm sonuçlar linki.",
+ "mobile": "Tam ekran; alan üstte, sonuçlar tek sütun liste.",
+ "tree": [
+  "search-overlay",
+  "├─ scrim",
+  "└─ search-panel",
+  "    ├─ search-field                  {searchPlaceholder:TEXT} text-h3 + kapat; alt çizgi {closeAriaLabel:TEXT}",
+  "    ├─ search-suggestions            {searchEmptyTitle:TEXT} text-label mono + öneri çipleri (kategoriler)",
+  "    ├─ search-results                ProductCardSmall ×4",
+  "    │   └─ result-count              {data:search.resultCount} mono",
+  "    ├─ search-empty                  {searchNoResultText:TEXT} text-h4 + search-empty-text {searchNoResultHint:TEXT} muted",
+  "    └─ link                          {searchAllResultsText:TEXT}"
+ ],
+ "checks": [
+  "boş · yazarken (sonuçlu) · sonuçsuz halleri ayrı frame"
+ ],
+ "anims": [
+  {
+   "layer": "search-panel",
+   "recipe": "M-21",
+   "trigger": "click",
+   "what": "Panel üstten iner, alan odaklanır"
+  },
+  {
+   "layer": "search-results",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Sonuçlar sırayla belirir",
+   "frm": "{ y: 12, opacity: 0 }",
+   "timing": "{ duration: 0.3, ease: ease-out-soft, stagger: 0.04 }",
+   "impl": "css-transition"
+  },
+  {
+   "layer": "link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Ok kayar, alt çizgi uzar"
+  }
+ ]
+}

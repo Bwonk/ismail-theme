@@ -1,0 +1,87 @@
+{
+ "key": "HeroSlider",
+ "code": "HERO",
+ "kind": "section",
+ "pages": "Ana sayfa",
+ "ikas": "hero-slider-section (uyarlanır)",
+ "props": "`slides` COMPONENT_LIST (HeroSlide: image IMAGE, mobileImage IMAGE, title TEXT, text TEXT, buttonText TEXT, buttonLink LINK, metaText TEXT) · `autoplaySeconds`, `overlayOpacity` NUMBER · `heightMode` ENUM · `backgroundColor` COLOR",
+ "desktop": "1440 × $size-hero (760), header altına uzanır. Tam kaplama görsel + %35 düz karartma (`color-scrim`). Metin bloğu sol altta, kenardan $space-page, alttan 64: text-display başlık (en fazla 2 satır, 880 genişlik), text-body açıklama (520), 24 aralıkla açık Button. Sağ altta mono meta satırı (koordinat · rakım) ve slayt sayacı `01 / 03`.",
+ "mobile": "390 × 600; görsel `mobileImage` (4:5). Metin sol altta, başlık text-display mobil (48), buton tam genişlik değil. Meta satırı gizli; sayaç başlığın üstüne çıkar.",
+ "tree": [
+  "hero-slider",
+  "├─ hero-slides                       {slides:COMPONENT_LIST}",
+  "│   └─ hero-slide ×N",
+  "│       ├─ hero-slide-mask (clip)",
+  "│       │   └─ hero-bg               {image:IMAGE} + {mobileImage:IMAGE}, kabından %15 yüksek",
+  "│       └─ hero-scrim                $color-scrim",
+  "├─ hero-text                         sol alt",
+  "│   ├─ hero-title-mask (clip) → hero-title   {title:TEXT} text-display, koyu mod metin",
+  "│   ├─ hero-description              {text:TEXT} text-body",
+  "│   └─ hero-button (clip)            {buttonText:TEXT} {buttonLink:LINK}; açık Button",
+  "└─ hero-meta                         sağ alt",
+  "    ├─ hero-meta-text                {metaText:TEXT} text-label mono",
+  "    └─ hero-counter                  {code:slideCounter} text-label mono; Counter"
+ ],
+ "checks": [
+  "başlık kendi clip maskesinde, satır başına bir metin node'u",
+  "hero-bg kabından %15 yüksek",
+  "metin kontrastı karartma üstünde ≥ 4.5"
+ ],
+ "anims": [
+  {
+   "layer": "hero-bg",
+   "recipe": "M-02",
+   "trigger": "load",
+   "what": "Görsel yumuşakça belirir",
+   "timing": "{ duration: 1.0, ease: ease-standard }"
+  },
+  {
+   "layer": "hero-title",
+   "recipe": "M-03",
+   "trigger": "load",
+   "what": "Başlık kelime kelime açılır (yalnızca y + opacity)",
+   "frm": "{ opacity: 0, y: 50 }",
+   "to": "{ opacity: 1, y: 0 }",
+   "timing": "{ duration: 0.7, ease: ease-out-soft, stagger: 0.06, delay: 0.2 }"
+  },
+  {
+   "layer": "hero-description",
+   "recipe": "M-01",
+   "trigger": "load",
+   "what": "Açıklama yukarı belirir",
+   "timing": "{ duration: 0.5, ease: ease-standard, delay: 0.5 }"
+  },
+  {
+   "layer": "hero-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "hero-slides",
+   "recipe": "M-07",
+   "trigger": "auto-loop",
+   "what": "Birden çok slaytta çapraz geçiş + görsel 1.08 → 1",
+   "frm": "{ opacity: 0, image.scale: 1.08 }",
+   "to": "{ opacity: 1, image.scale: 1 }",
+   "timing": "{ duration: 0.8, ease: ease-out-soft, interval: autoplaySeconds }"
+  },
+  {
+   "layer": "hero-counter",
+   "recipe": "I-M-01",
+   "trigger": "state-change",
+   "what": "Slayt sayacı hane hane yuvarlanır",
+   "via": "Counter"
+  },
+  {
+   "layer": "hero-bg",
+   "recipe": "M-27",
+   "trigger": "scroll-scrub",
+   "what": "Görsel içerikten yavaş kayar",
+   "to": "{ bg.y: 15% }"
+  }
+ ],
+ "desktopOnly": [
+  "hero-meta"
+ ]
+}

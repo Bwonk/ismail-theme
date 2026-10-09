@@ -1,0 +1,51 @@
+{
+ "key": "AuthForms",
+ "code": "AUTH",
+ "kind": "section",
+ "pages": "Giriş, kayıt, şifremi unuttum, şifre yenile",
+ "ikas": "login-section, register-section, forgot-password-section, recover-password-section",
+ "props": "`variant` ENUM · `image` IMAGE · `loginTitle`, `registerTitle`, `forgotTitle`, `recoverTitle`, `loginText`, `registerText`, `forgotText`, `recoverText`, `submitText`, `submittingText`, `emailLabel`, `passwordLabel`, `firstNameLabel`, `lastNameLabel`, `consentText`, `marketingConsentText`, `agreementConsentText`, `socialDividerText`, `googleText`, `facebookText`, `smsLoginText`, `phoneLabel`, `codeLabel`, `resendCodeText`, `successText`, `errorText`, `invalidTokenText`, `switchText` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440 × 760. Sol yarı siyah-beyaz görsel (720, kenar boşluksuz); sağ yarıda ortalı 400'lük form: text-h2 başlık, text-body açıklama, alanlar, koyu tam genişlik Button, alt link.",
+ "mobile": "Görsel gizli; form tam genişlik, üst 48.",
+ "tree": [
+  "auth-forms",
+  "    │   ├─ social-login              SocialLoginButton ×2 {googleText:TEXT} {facebookText:TEXT} + {socialDividerText:TEXT} ayraç",
+  "    │   ├─ sms-login                 {smsLoginText:TEXT} · FormField {phoneLabel:TEXT} → FormField {codeLabel:TEXT} + {resendCodeText:TEXT}",
+  "    │   ├─ register-consents         kayıtta iki ayrı Checkbox: {marketingConsentText:TEXT} · {agreementConsentText:TEXT}",
+  "├─ auth-media                        {image:IMAGE}",
+  "└─ auth-panel",
+  "    ├─ auth-title                    {loginTitle:TEXT} | {registerTitle:TEXT} | {forgotTitle:TEXT} | {recoverTitle:TEXT} text-h2",
+  "    ├─ auth-text                     {loginText:TEXT} | {registerText:TEXT} | {forgotText:TEXT} | {recoverText:TEXT} text-body muted",
+  "    ├─ auth-form",
+  "    │   ├─ auth-name-stage           kayıtta görünür: FormField {firstNameLabel:TEXT} {lastNameLabel:TEXT}",
+  "    │   ├─ email-field · password-field   FormField {emailLabel:TEXT} {passwordLabel:TEXT}",
+  "    │   └─ auth-extra-stage          kayıtta Checkbox {consentText:TEXT}; şifre yenilede tekrar alanı",
+  "    ├─ auth-button (clip)            {submitText:TEXT} / {submittingText:TEXT}; koyu Button",
+  "    ├─ auth-message                  {successText:TEXT} $color-success | {errorText:TEXT} $color-danger | {invalidTokenText:TEXT}",
+  "    └─ auth-switch                   {switchText:TEXT} + link"
+ ],
+ "checks": [
+  "4 varyant × (varsayılan, alan hatası) frame'i; şifremi unuttum başarılı; şifre yenile geçersiz bağlantı",
+  "SMS telefon · SMS kod halleri ayrı frame; kayıt halinde iki ayrı onay"
+ ],
+ "anims": [
+  {
+   "layer": "auth-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "auth-message",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Mesaj belirir",
+   "frm": "{ y: 8, opacity: 0 }",
+   "timing": "{ duration: 0.3 }",
+   "impl": "css-transition"
+  }
+ ],
+ "desktopOnly": [
+  "auth-media"
+ ]
+}

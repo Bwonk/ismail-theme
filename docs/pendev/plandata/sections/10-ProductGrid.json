@@ -1,0 +1,53 @@
+{
+ "key": "ProductGrid",
+ "code": "GRID",
+ "kind": "section",
+ "pages": "Ana sayfa, ürün detay (benzer ürünler), 404 (öneriler)",
+ "ikas": "product-slider-section (ızgara düzenine uyarlanır)",
+ "props": "`title`, `subtitle`, `buttonText` TEXT · `products` PRODUCT_LIST · `maxItems`, `mobileMaxItems`, `columns` NUMBER · `buttonLink` LINK · `addToCartAriaLabel`, `favoriteAriaLabel` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section (ilk bölümde 96). SectionHeading ortalı (başlık + alt metin), 40 boşluk, 4 sütun × 326 ProductCard, aralık $space-grid (24), satır aralığı 40. 2 satır = 8 kart. Altta 48 boşlukla ortalı koyu Button.",
+ "mobile": "2 sütun × 177, aralık 12; `mobileMaxItems` (4). Buton ortalı.",
+ "tree": [
+  "product-grid",
+  "├─ section-heading                   SectionHeading",
+  "│   ├─ section-title                 {title:TEXT} text-h2",
+  "│   └─ section-subtitle              {subtitle:TEXT} text-body muted",
+  "├─ product-grid-list                 {products:PRODUCT_LIST} 4 sütun",
+  "│   └─ ProductCard ×8                card-media → image-front + image-back · card-title {data:product.name} · card-price {data:product.price} · card-cart {addToCartAriaLabel:TEXT} · FavoriteButton {favoriteAriaLabel:TEXT}",
+  "└─ grid-button (clip)                {buttonText:TEXT} {buttonLink:LINK}; koyu Button"
+ ],
+ "checks": [
+  "en az 8 kart, isimler 1 satıra sığıyor",
+  "rozetli (SINIRLI), favoride ve indirimli kart örnekleri var"
+ ],
+ "anims": [
+  {
+   "layer": "section-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık grubu sırayla yukarı belirir",
+   "via": "SectionHeading"
+  },
+  {
+   "layer": "product-grid-list",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Kartlar sırayla girer",
+   "timing": "{ duration: 0.5, ease: ease-standard, stagger: 0.05 }",
+   "impl": "animejs + io-hook"
+  },
+  {
+   "layer": "image-back",
+   "recipe": "M-09",
+   "trigger": "hover",
+   "what": "Ön görsel arka görsele geçer",
+   "via": "ProductCard"
+  },
+  {
+   "layer": "grid-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

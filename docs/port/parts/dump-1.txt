@@ -1,0 +1,58 @@
+ROOT|I/DS/Colors|hxUZt|device=-|props=|data=|code=ds-title;mode-title;swatch-name;swatch-hex;pairs-title;pair-sample;pair-label;pair-ratio;schemes-title;scheme-name;scheme-desc;scheme-sample-title;scheme-sample-body;scheme-sample-muted;scheme-slot-name;scheme-slot-token;scheme-slot-hex;scheme-usage|anims=I-CMP-05
+ROOT|I/Sub/Spinner|qkbmz|device=-|props=|data=|code=|anims=
+ROOT|I/Sub/ArrowLink|jK03J|device=-|props=label:TEXT|data=|code=|anims=I-CMP-06
+ROOT|I/Sub/CartLineItem|L7PFO|device=-|props=editText:TEXT;maxQuantityText:TEXT;removeText:TEXT|data=cart-line-title=cart.line.title;cart-line-variant=cart.line.variant;cart-line-option=cart.line.options;cart-line-bundle-item=cart.line.bundleProducts;cart-line-qty-static=cart.line.quantity;cart-line-compare=cart.line.overriddenPrice;cart-line-price=cart.line.price|code=|anims=
+ROOT|I/Sub/Checkbox|QVXWn|device=-|props=label:TEXT|data=|code=|anims=
+ROOT|I/Sub/FavoriteButton — hover|yfLdN|device=-|props=|data=|code=|anims=I-CMP-07
+ROOT|I/Sub/Button — açık|c8wPY8|device=-|props=|data=|code=|anims=I-CMP-05
+ROOT|I/Sub/ProductCard — hover|Enuv3|device=-|props=|data=|code=|anims=I-CMP-01;I-CMP-02;I-CMP-07
+ROOT|I/Sub/ProductCardSmall — hover|eNy09|device=-|props=|data=|code=|anims=I-CMP-03
+ROOT|I/Sub/Tabs — dikey|YfUWI|device=-|props=|data=|code=|anims=I-CMP-09
+ROOT|I/Sub/FormField — hata|Uxj49|device=-|props=|data=|code=|anims=
+ROOT|I/Section/Header@desktop — şeffaf|eorrj|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-08;I-HDR-01;I-HDR-02;I-HDR-03;I-HDR-04
+ROOT|I/Overlay/CartDrawer@desktop — dolu|I34BT|device=desktop|props=cartTitleText:TEXT;closeAriaLabel:TEXT;drawerRecommendTitle:TEXT;couponToggleText:TEXT;cartSubtotalLabel:TEXT;cartShippingNote:TEXT|data=drawer-count=cart.itemCount;adjustment-name=adjustment.name;adjustment-amount=adjustment.amount;subtotal-value=cart.subtotal|code=|anims=I-CART-01;I-CART-02;I-CART-03;I-CART-04;I-CMP-03;I-CMP-05;I-CMP-06
+ROOT|I/Overlay/SearchOverlay@desktop — yazarken|x5QP6T|device=desktop|props=closeAriaLabel:TEXT|data=search-query=search.query;result-count=search.resultCount|code=|anims=I-CMP-03;I-CMP-06;I-CMP-08;I-HDR-01;I-HDR-02;I-HDR-03;I-HDR-04;I-SRCH-01;I-SRCH-02;I-SRCH-03
+ROOT|I/Section/HeroSlider@mobile|dxdG3|device=mobile|props=backgroundColor:COLOR;slides:COMPONENT_LIST;mobileImage:IMAGE;title:TEXT;text:TEXT|data=|code=digit-reel;digit-sep|anims=I-CMP-05;I-CMP-08;I-HERO-01;I-HERO-02;I-HERO-03;I-HERO-04;I-HERO-05;I-HERO-06;I-HERO-07
+ROOT|I/Section/CollectionMosaic@mobile|xAP4U|device=mobile|props=backgroundColor:COLOR;tiles:COMPONENT_LIST;image:IMAGE;title:TEXT;text:TEXT|data=|code=|anims=I-CMP-05;I-CMP-12;I-MOS-01;I-MOS-02;I-MOS-03;I-MOS-04
+ROOT|I/Section/ProductList@desktop — yükleniyor|rPb2u|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-01;I-CMP-02;I-CMP-05;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-14;I-PLP-01;I-PLP-02;I-PLP-03
+ROOT|I/Section/ProductDetail@desktop — ekleniyor|g7tn1|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/CartPage@desktop — boş|e6m162|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-03;I-CMP-05;I-CRTP-01;I-CRTP-02
+ROOT|I/Section/Account@desktop — siparişler boş|TAGAp|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-ACC-01;I-CMP-05;I-CMP-06;I-CMP-09
+ROOT|I/Section/AuthForms@desktop — kayıt|IdF9Y|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-AUTH-01;I-AUTH-02;I-CMP-05;I-CMP-06
+ROOT|I/Section/NotFound@mobile|r2HnVM|device=mobile|props=backgroundColor:COLOR;title:TEXT;text:TEXT|data=|code=digit-reel|anims=I-CMP-05;I-CMP-08;I-NF-01;I-NF-02
+ROOT|I/Section/BlogList@mobile|OLmDR|device=mobile|props=backgroundColor:COLOR;blogs:BLOG_LIST;emptyText:TEXT|data=|code=|anims=I-BLOG-01;I-BLOG-02;I-CMP-04;I-CMP-05;I-CMP-06;I-CMP-09;I-CMP-12
+ROOT|I/Section/StoreList@desktop|be2Kh|device=desktop|props=backgroundColor:COLOR;stores:COMPONENT_LIST;image:IMAGE;name:TEXT;address:TEXT;hoursLabel:TEXT;hours:TEXT|data=|code=|anims=I-CMP-06;I-CMP-12;I-STOR-01;I-STOR-02
+ROOT|I/Page/Collection@desktop|iygVB|device=desktop|props=|data=|code=|anims=
+ROOT|I/Page/Account@desktop|jpUdO|device=desktop|props=|data=|code=|anims=
+ROOT|I/Page/Auth — ForgotPassword@desktop|E7m53|device=desktop|props=|data=|code=|anims=
+ROOT|I/Page/Search@desktop|pz4rh|device=desktop|props=|data=|code=|anims=
+ROOT|I/Page/BlogPost@desktop|jGIJI|device=desktop|props=|data=|code=|anims=
+ROOT|I/Motion/M-03 HeroSlider|qgYpV|device=-|props=|data=|code=hero-title-word|anims=
+ROOT|I/Motion/M-21 SearchOverlay|b70Koh|device=-|props=|data=|code=search-query;suggest-chip-label|anims=I-CMP-03
+ROOT|I/Section/ContactForm@mobile|yw9lH|device=mobile|props=backgroundColor:COLOR;title:TEXT;intro:TEXT;responseText:TEXT;formTitle:TEXT;topics:COMPONENT_LIST;topicLabel:TEXT;label:TEXT;successText:TEXT;channels:COMPONENT_LIST;icon:SVG;value:TEXT;hint:TEXT;socialLinks:COMPONENT_LIST;socialTitle:TEXT|data=|code=|anims=I-CMP-05;I-CONT-01;I-CONT-02;I-CONT-03;I-CONT-04
+ROOT|I/Section/StoreLocator@desktop|G6eqZ|device=desktop|props=backgroundColor:COLOR;title:TEXT;text:TEXT;image:IMAGE;name:TEXT;openNowText:TEXT;address:TEXT;hours:TEXT;stores:COMPONENT_LIST;district:TEXT|data=|code=store-row-status|anims=I-CMP-05;I-LOC-01;I-LOC-02
+ROOT|I/Section/ActivityGrid@desktop|PZ9xS|device=desktop|props=backgroundColor:COLOR;activities:COMPONENT_LIST;image:IMAGE;title:TEXT;text:TEXT;countText:TEXT;buttonText:TEXT|data=|code=|anims=I-ACT-01;I-ACT-02;I-ACT-03;I-ACT-04;I-CMP-06;I-CMP-12
+ROOT|I/Overlay/QuickBuy@desktop — açık|cBTGM|device=desktop|props=closeAriaLabel:TEXT;showPayWithIkas:BOOLEAN|data=qb-title=product.name;qb-price-value=product.price;qb-price-compare=product.compareAtPrice;qb-variant-label=variant.name;qb-pay-label=payWithIkas.label;qb-stock-text=variant.stockCount|code=qb-media-count-text|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-14;I-PDP-03;I-QB-01;I-QB-02;I-QB-03;I-QB-04;I-QB-05
+ROOT|I/Section/CollectionMosaic@desktop — hover|UJQvy|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-12;I-MOS-01;I-MOS-02;I-MOS-03;I-MOS-04;I-MOS-05
+ROOT|I/Sub/BundleItem|EzTBR|device=-|props=outOfStockText:TEXT|data=bundle-title=bundle.product.name;bundle-variant=bundle.variant.name;bundle-qty-static=bundle.quantity;bundle-price=bundle.price|code=|anims=
+ROOT|I/Sub/RatingStars — yorumsuz|kHR9v|device=-|props=|data=|code=|anims=
+ROOT|I/Section/ProductDetail@desktop — kişiselleştirme|H3DsO|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/ProductReviews@mobile|Aqk9L|device=mobile|props=backgroundColor:COLOR;title:TEXT;reviewsCountText:TEXT;emptyTitle:TEXT;emptyText:TEXT;formTitle:TEXT;ratingLabel:TEXT;successText:TEXT;loginRequiredText:TEXT|data=reviews-score-value=product.stars;reviews-count-value=product.reviewCount;rating-bar-count=review.countByStar|code=rating-bar-star;page-label;page-gap|anims=I-CMP-05;I-REV-01;I-REV-02
+ROOT|I/Sub/VariantSwatch — stok yok|J6Y1Qo|device=-|props=|data=|code=|anims=I-CMP-14
+ROOT|I/Sub/Skeleton|G1jR7I|device=-|props=|data=|code=|anims=
+ROOT|I/Section/ProductDetail@desktop — sepeti güncelle|earaa|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/Account@desktop — yükleniyor|X9HsH|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-ACC-01;I-CMP-05;I-CMP-06;I-CMP-09
+ROOT|I/Section/Header@desktop — duyurular|malFx|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-08;I-HDR-01;I-HDR-02;I-HDR-03;I-HDR-04
+ROOT|I/Overlay/ImagePreview@mobile — açık|y2P4iK|device=mobile|props=closeAriaLabel:TEXT|data=|code=preview-count|anims=I-PREV-01
+ROOT|I/Section/OrderTracking@desktop — bulunamadı|ZJETb|device=desktop|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-TRK-01
+ROOT|I/Page/OrderDetail@mobile|AkaCk|device=mobile|props=|data=|code=|anims=
+ROOT|I/Section/Account@mobile — iade talebi|Kt2Gx|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-ACC-01;I-CMP-05;I-CMP-06;I-CMP-09
+ROOT|I/Section/Account@mobile — kaydedildi|bg6HA|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-ACC-01;I-CMP-05;I-CMP-06;I-CMP-09
+ROOT|I/Section/AuthForms@mobile — alan hatası|DiGHF|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-AUTH-01;I-AUTH-02;I-CMP-05;I-CMP-06
+ROOT|I/Section/BlogList@mobile — kategori boş|u7bbW|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-BLOG-01;I-BLOG-02;I-CMP-04;I-CMP-05;I-CMP-06;I-CMP-09;I-CMP-12
+ROOT|I/Section/ContactForm@mobile — gönderiliyor|BqaXM|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CONT-01;I-CONT-02;I-CONT-03;I-CONT-04
+ROOT|I/Section/Footer@mobile — bildirim hata|Q4SoG|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-11;I-FTR-01;I-FTR-02;I-FTR-03;I-FTR-04
+ROOT|I/Section/ProductDetail@mobile — eklendi|rwcXg|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/ProductDetail@mobile — kişiselleştirme|sOnAI|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/ProductDetail@mobile — ürün grubu|UdwHZ|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-CMP-06;I-CMP-07;I-CMP-10;I-CMP-11;I-CMP-13;I-CMP-14;I-PDP-01;I-PDP-02;I-PDP-03;I-PDP-04;I-PDP-05;I-PDP-06;I-PDP-07
+ROOT|I/Section/ProductReviews@mobile — yorum formu|NduMm|device=mobile|props=backgroundColor:COLOR|data=|code=|anims=I-CMP-05;I-REV-01;I-REV-02

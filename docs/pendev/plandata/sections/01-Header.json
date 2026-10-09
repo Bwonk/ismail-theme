@@ -1,0 +1,73 @@
+{
+ "key": "Header",
+ "code": "HDR",
+ "kind": "section",
+ "pages": "tüm sayfalar",
+ "ikas": "header-section (--isHeader) + navigation",
+ "props": "`logo` SVG · `logoAltText` TEXT · `showAnnouncement`, `transparentOnHero` BOOLEAN · `announcementText` TEXT · `announcementLink` LINK · `announcements` COMPONENT_LIST (AnnouncementItem: text TEXT, link LINK) · `stickyEnabled` BOOLEAN · `countdownTarget` DATE · `navLinks` LIST_OF_LINK · `megamenuColumns` COMPONENT_LIST (MegamenuColumn) · `searchLabel`, `cartLabel`, `accountLabel`, `menuAriaLabel` TEXT · arama ve sepet metinleri (components.md Header ile aynı) · `backgroundColor` COLOR",
+ "desktop": "İki satır. Üstte 36'lık duyuru bandı (`color-bg`, ortalı mono metin + turuncu hap içinde geri sayım `Counter`). Altında 72'lik ana satır: varsayılan `color-bg` + alt 1px `color-line`; hero'lu sayfada kodda hero'nun üstüne biner ve şeffaf + koyu mod metin rengine geçer (`— şeffaf` durum frame'i). Sayfa frame'lerinde section'lar alt alta durduğu için kök opak çizilir. Solda wordmark (yükseklik `$size-logo`) ve 32 aralıkla 5 nav linki; sağda arama, sepet (mono sayaçlı) ve giriş: ikon + etiket.",
+ "mobile": "Duyuru bandı 32: geri sayım + kısa metin. Ana satır 56: solda menü ikonu, ortada wordmark, sağda arama ve sepet ikonu (sayaç rozetli). Nav, hesap ve favoriler MenuOverlay'de.",
+ "tree": [
+  "header",
+  "├─ announcement-bar                  36, $color-bg, ortalı",
+  "│   ├─ announcement-text             {announcementText:TEXT} text-label mono",
+  "│   └─ countdown-chip                hap, $color-accent; Counter",
+  "│       └─ countdown-value           {code:countdown} text-label mono, SS:DD:SS",
+  "│   └─ announcement-pager            {announcements:COMPONENT_LIST} birden fazlaysa nokta + oklar",
+  "└─ header-main                       72; şeffaf (hero üstü) | $color-bg + alt çizgi",
+  "    ├─ header-left",
+  "    │   ├─ header-logo               {logo:SVG} yükseklik $size-logo + {logoAltText:TEXT} (görsel alt metni)",
+  "    │   └─ header-nav                {navLinks:LIST_OF_LINK}",
+  "    │       └─ nav-link ×5           text-ui; ilki megamenu açar",
+  "    └─ header-actions                aralık 24",
+  "        ├─ search-button             ikon 18 + {searchLabel:TEXT}",
+  "        ├─ cart-button               ikon 18 + {cartLabel:TEXT}",
+  "        │   └─ cart-count            {data:cart.itemCount} text-badge mono; Counter",
+  "        └─ account-button            ikon 18 + {accountLabel:TEXT}"
+ ],
+ "checks": [
+  "varsayılan kök opak (`$color-bg` + alt çizgi); hero üstü şeffaf hali ayrı durum frame'i: `I/Section/Header@desktop — şeffaf` (header-main koyu mod, zemin `$color-transparent`)",
+  "geri sayım haneleri sabit genişlikte (tabular)",
+  "mobilde menü butonu 40×40 dokunma alanı",
+  "kaydırınca yapışkan hal ayrı frame: `— yapışkan` (72 → 60, alt çizgi, duyuru gizli); birden fazla duyuruda `— duyurular`"
+ ],
+ "anims": [
+  {
+   "layer": "countdown-value",
+   "recipe": "I-M-01",
+   "trigger": "auto-loop",
+   "what": "Geri sayım her saniye son haneyi yuvarlar",
+   "timing": "{ interval: 1, duration: 0.35, ease: ease-out-soft }",
+   "via": "Counter"
+  },
+  {
+   "layer": "nav-link",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Link rengi muted → metin; aktif sayfa altı 1px çizgili"
+  },
+  {
+   "layer": "cart-count",
+   "recipe": "I-M-01",
+   "trigger": "state-change",
+   "what": "Sepet sayısı değişince hane yuvarlanır",
+   "via": "Counter"
+  },
+  {
+   "layer": "header-main",
+   "recipe": "M-28",
+   "trigger": "scroll",
+   "what": "Hero geçilince şeffaf zemin $color-bg'ye, metin koyuya döner",
+   "frm": "{ bg: transparent, text: color-inverse-text }",
+   "to": "{ bg: color-bg, text: color-text }",
+   "timing": "{ duration: 0.3, ease: ease-standard }",
+   "impl": "io-hook + css-transition"
+  }
+ ],
+ "desktopOnly": [
+  "header-nav",
+  "search-button-label",
+  "cart-button-label",
+  "account-button"
+ ]
+}

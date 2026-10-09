@@ -1,0 +1,46 @@
+{
+ "key": "MenuOverlay",
+ "code": "MENU",
+ "kind": "overlay",
+ "pages": "Header",
+ "ikas": "Header sub-component (navigation deseni)",
+ "desktop": "Megamenu: header altında 1440 × 420, `color-bg`, üst 1px çizgi. Solda 3 link sütunu (`MegamenuColumn`), sağda 440'lık görsel kart (radius-card, alt kenarda başlık). Arkada `color-scrim`.",
+ "mobile": "Tam ekran, `mode: dark`. Linkler text-h3 alt alta; alt kategoriler akordeon. Altta hesap / favori / mağazalar satırı ve mono `TL · TÜRKÇE`.",
+ "tree": [
+  "menu-overlay",
+  "├─ scrim",
+  "└─ menu-panel",
+  "    ├─ close-button                  {closeAriaLabel:TEXT} (mobil tam ekran panelde)",
+  "    ├─ menu-columns                  {megamenuColumns:COMPONENT_LIST}",
+  "    │   └─ menu-column ×3            {title:TEXT} text-label mono + {links:LIST_OF_LINK} text-ui",
+  "    ├─ menu-feature                  {image:IMAGE} radius-card + {title:TEXT} text-h4",
+  "    ├─ menu-auth                     (mobil) misafir: {loginText:TEXT} + {registerText:TEXT} · üye: {data:customer.firstName} + {logoutText:TEXT}",
+  "    └─ menu-footer                   (mobil) {accountLabel:TEXT} · {favoritesLabel:TEXT} · {localeText:TEXT}"
+ ],
+ "checks": [
+  "masaüstü megamenu ve mobil tam ekran ayrı frame",
+  "mobil panel koyu modda"
+ ],
+ "anims": [
+  {
+   "layer": "menu-panel",
+   "recipe": "M-06",
+   "trigger": "hover",
+   "what": "Panel aşağı doğru açılır, scrim belirir",
+   "timing": "{ duration: 0.4, ease: ease-out-soft }"
+  },
+  {
+   "layer": "menu-column",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Sütunlar 0.05 aralıkla belirir",
+   "frm": "{ y: 12, opacity: 0 }",
+   "timing": "{ duration: 0.4, ease: ease-out-soft, stagger: 0.05 }",
+   "impl": "css-transition"
+  }
+ ],
+ "desktopOnly": [
+  "menu-column-title",
+  "menu-feature"
+ ]
+}

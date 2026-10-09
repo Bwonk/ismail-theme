@@ -1,0 +1,68 @@
+{
+ "key": "Footer",
+ "code": "FTR",
+ "kind": "section",
+ "pages": "tüm sayfalar",
+ "mode": "dark",
+ "ikas": "footer-section (--isFooter) + form-handling (bülten aboneliği)",
+ "props": "`ctaImage` IMAGE · `ctaTitle`, `ctaButtonText`, `notifyTitle`, `notifyText`, `notifyPlaceholder`, `notifyButtonText`, `notifySubmittingText`, `notifySuccessText`, `notifyErrorText` TEXT · `ctaButtonLink` LINK · `logo` SVG · `aboutText` TEXT · `columns` COMPONENT_LIST (FooterColumn) · `socialLinks` COMPONENT_LIST (SocialLink) · `contactText`, `localeText`, `copyrightText`, `coordinateText` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440, koyu mod. Üstte 560 yüksekliğinde kenardan kenara görsel bant: fotoğraf + %60 karartma; alt 260'ta zemine akan gradyan ve 180'lik arka plan bulanıklığı şeridi (sert çizgi yok). Bandın altına yaslı iki kart: solda buzlu cam iletişim kartı (yarı saydam `color-scrim`, arka plan bulanıklığı, 1px çizgi; text-h2 iki satır + açık \"Bize ulaş\" butonu), sağda 480'lik açık zeminli e-posta bildirim kartı (başlık, açıklama, alan + koyu Kaydol, sonuç mesajı). Altında logo + sosyal (halkalı butonlar), 3 link sütunu, alt satır (koordinat · telif · TL · Türkçe).",
+ "mobile": "Görsel bant 390 × 640, kartlar alt alta (iletişim kartı, bildirim kartı; form dikey, buton tam genişlik). Altında logo + metin, akordeon link sütunları, sosyal, alt satırlar alt alta.",
+ "tree": [
+  "footer",
+  "├─ footer-cta-band                   kenardan kenara; kodda backdrop-filter",
+  "│   ├─ footer-cta-image              {ctaImage:IMAGE}",
+  "│   ├─ footer-cta-tint · footer-cta-fade · footer-cta-blur   $color-scrim, $color-transparent → $color-bg gradyan, arka plan bulanıklığı",
+  "│   └─ footer-cta",
+  "│       ├─ footer-cta-card           buzlu cam: {ctaTitle:TEXT} text-h2 + footer-cta-button",
+  "│       │   └─ footer-cta-button (clip)   {ctaButtonText:TEXT} {ctaButtonLink:LINK}; açık Button",
+  "│       └─ footer-cta-notify         açık mod kart: {notifyTitle:TEXT} text-h4 + {notifyText:TEXT}",
+  "│           ├─ cta-notify-form       FormField {notifyPlaceholder:TEXT} + cta-notify-button",
+  "│           │   └─ cta-notify-button (clip)   {notifyButtonText:TEXT} / {notifySubmittingText:TEXT}; koyu Button",
+  "│           └─ cta-notify-message    {notifySuccessText:TEXT} $color-success | {notifyErrorText:TEXT} $color-danger",
+  "└─ footer-lower",
+  "    ├─ footer-brand                  {logo:SVG} 44 + {aboutText:TEXT} + footer-social {socialLinks:COMPONENT_LIST}",
+  "    ├─ footer-columns                {columns:COMPONENT_LIST}",
+  "    │   └─ footer-column ×3          {title:TEXT} text-label mono + {links:LIST_OF_LINK} text-ui-sm muted",
+  "    └─ footer-bottom                 {coordinateText:TEXT} · {copyrightText:TEXT} · {contactText:TEXT} · locale-button {localeText:TEXT} (dünya ikonu + ok; LocaleSwitcher'ı her zaman buradan açar)"
+ ],
+ "checks": [
+  "görsel ile footer zemini arasında sert çizgi yok (gradyan + bulanıklık)",
+  "bildirim formu başarılı ve hata durum frame'leri",
+  "koyu modda kontrast"
+ ],
+ "anims": [
+  {
+   "layer": "footer-column",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Link rengi muted → metin"
+  },
+  {
+   "layer": "footer-social",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "İkon rengi turuncuya döner",
+   "to": "{ color: color-accent }"
+  },
+  {
+   "layer": "footer-cta-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "cta-notify-message",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Bildirim sonucu belirir",
+   "frm": "{ y: 8, opacity: 0 }",
+   "timing": "{ duration: 0.3, ease: ease-standard }",
+   "impl": "css-transition"
+  }
+ ],
+ "desktopOnly": [
+  "footer-column-title",
+  "footer-link"
+ ]
+}

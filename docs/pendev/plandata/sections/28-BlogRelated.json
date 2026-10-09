@@ -1,0 +1,27 @@
+{
+ "key": "BlogRelated",
+ "code": "BREL",
+ "kind": "section",
+ "pages": "Blog yazısı",
+ "ikas": "blog-home-section (kart düzeni)",
+ "props": "`title` TEXT · `blogs` BLOG_LIST · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section; sola yaslı text-h2 başlık + 3 BlogCard.",
+ "mobile": "Yatay kaydırmalı kartlar (300).",
+ "tree": [
+  "blog-related",
+  "├─ related-title                     {title:TEXT} text-h2",
+  "└─ related-grid                      {blogs:BLOG_LIST}",
+  "    └─ BlogCard ×3"
+ ],
+ "checks": [],
+ "anims": [
+  {
+   "layer": "related-grid",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Kartlar sırayla girer",
+   "timing": "{ duration: 0.5, ease: ease-standard, stagger: 0.06 }",
+   "impl": "animejs + io-hook"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "key": "Account",
+ "code": "ACC",
+ "kind": "section",
+ "pages": "Hesabım",
+ "ikas": "account-info-section",
+ "props": "`greetingText`, `infoTabText`, `ordersTabText`, `addressesTabText`, `favoritesTabText`, `logoutText`, `saveText`, `savingText`, `savedText`, `ordersEmptyText`, `addressesEmptyText`, `addAddressText`, `ordersColumnLabels` TEXT, `orderDetailTitle`, `cargoLabel`, `trackingLabel`, `copiedText`, `returnTitle`, `returnButtonText`, `returnSuccessText`, `settingsTabText`, `marketingText`, `phoneLabel`, `deleteAccountText`, `exportDataText`, `errorText`, `retryText`, `editText`, `deleteText`, `makeDefaultText`, `defaultBadgeText`, `confirmDeleteText`, `cancelText`, `addressFormTitle`, `accountDeleteConfirmText`, `passwordLabel` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440. Solda 280'lik dikey Tabs + selamlama; sağda içerik paneli (880): bilgiler formu (2 sütun FormField), sipariş tablosu (mono numara, tarih, durum rozeti, tutar), sipariş detayı, adres kartları (1px çizgi, radius-card).",
+ "mobile": "Sekmeler üstte yatay kaydırmalı; içerik tek sütun.",
+ "tree": [
+  "account",
+  "├─ account-header                    {greetingText:TEXT} + {data:customer.firstName} text-h2",
+  "├─ account-tabs                      tab-item ×5: {infoTabText:TEXT} {ordersTabText:TEXT} {addressesTabText:TEXT} {favoritesTabText:TEXT} {logoutText:TEXT}",
+  "└─ account-panel",
+  "    ├─ info-form                     FormField ×4 + save-button {saveText:TEXT} / {savingText:TEXT} + {savedText:TEXT}",
+  "    ├─ orders-list                   {data:order.number} · {data:order.date} · {data:order.status} · {data:order.total}",
+  "    ├─ orders-empty                  {ordersEmptyText:TEXT}",
+  "    └─ addresses-list                {data:customer.address} + {addAddressText:TEXT} | {addressesEmptyText:TEXT}",
+  "    ├─ order-detail                  {orderDetailTitle:TEXT} + {data:order.number} + {data:order.status}",
+  "    │   ├─ order-packages            paket ×N: {data:package.status} + {cargoLabel:TEXT} {data:package.cargoCompany} + {trackingLabel:TEXT} {data:package.trackingNumber} kopyala {copiedText:TEXT}",
+  "    │   ├─ order-items               satır ×N {data:order.line.title} {data:order.line.price}",
+  "    │   ├─ order-addresses           {data:order.shippingAddress} · {data:order.billingAddress}",
+  "    │   └─ order-summary             {data:order.subtotal} · indirim satırları · {data:order.total} + {returnButtonText:TEXT} · {subtotalLabel:TEXT}",
+  "    ├─ return-form                   {returnTitle:TEXT} + satır seçimi (Checkbox + QuantitySelector) + gönder + {returnSuccessText:TEXT}",
+  "    ├─ account-settings              {settingsTabText:TEXT}: {marketingText:TEXT} anahtar · FormField {phoneLabel:TEXT} · {exportDataText:TEXT} · {deleteAccountText:TEXT} (onay adımıyla)",
+  "    ├─ address-card-actions          adres kartında {editText:TEXT} · {deleteText:TEXT} · {makeDefaultText:TEXT} + {defaultBadgeText:TEXT} rozeti",
+  "    ├─ address-delete-confirm        kart içinde satır içi onay: {confirmDeleteText:TEXT} + {cancelText:TEXT} / {deleteText:TEXT}",
+  "    ├─ address-form                  satır içi: {addressFormTitle:TEXT} + FormField ×N {data:addressForm.fields} (ülke → il → ilçe) + kurumsal fatura + varsayılan + {saveText:TEXT} / {cancelText:TEXT} · kurumsal fatura {corporateText:TEXT} · varsayılan {defaultAddressText:TEXT}",
+  "    ├─ account-delete-confirm        {deleteAccountText:TEXT} + {accountDeleteConfirmText:TEXT} + FormField {passwordLabel:TEXT} + {cancelText:TEXT}",
+  "    └─ orders-error                  {errorText:TEXT} + {retryText:TEXT}"
+ ],
+ "checks": [
+  "her sekme ayrı durum frame'i",
+  "siparişler boş hali",
+  "sipariş detayı · iade talebi · hesap ayarları · yükleniyor (iskelet) · hata · adres ekle · adres sil onayı · hesap silme onayı halleri ayrı frame; formlar ve silme düğmeleri tema stiliyle"
+ ],
+ "anims": [
+  {
+   "layer": "tab-item",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Sekme rengi muted → metin",
+   "via": "Tabs"
+  }
+ ]
+}

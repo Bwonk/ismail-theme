@@ -1,0 +1,29 @@
+{
+ "key": "CollectionHero",
+ "code": "COLL",
+ "kind": "section",
+ "pages": "Koleksiyon",
+ "ikas": "(özel)",
+ "props": "`image` IMAGE · `category` CATEGORY · `description` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440 × 480; siyah-beyaz tam kaplama görsel + karartma. Sol altta text-display koleksiyon adı, text-body açıklama (520).",
+ "mobile": "390 × 360; başlık text-display mobil.",
+ "tree": [
+  "collection-hero",
+  "├─ collection-hero-media (clip)      {image:IMAGE}",
+  "├─ collection-hero-scrim             $color-scrim",
+  "└─ collection-hero-text",
+  "    ├─ collection-hero-title         {data:category.name} text-display",
+  "    └─ collection-hero-description   {description:TEXT} text-body"
+ ],
+ "checks": [
+  "metin kontrastı karartma üstünde"
+ ],
+ "anims": [
+  {
+   "layer": "collection-hero-title",
+   "recipe": "M-01",
+   "trigger": "load",
+   "what": "Başlık ve açıklama yukarı belirir"
+  }
+ ]
+}

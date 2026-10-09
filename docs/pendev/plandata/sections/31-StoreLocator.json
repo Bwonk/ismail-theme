@@ -1,0 +1,39 @@
+{
+ "key": "StoreLocator",
+ "code": "LOC",
+ "kind": "section",
+ "pages": "İletişim",
+ "ikas": "(özel)",
+ "props": "`title`, `text`, `allStoresText`, `directionsText`, `openNowText`, `closedText` TEXT · `allStoresLink` LINK · `stores` COMPONENT_LIST (StoreItem: image IMAGE, name TEXT, district TEXT, address TEXT, hours TEXT, statusNote TEXT, mapLink LINK) · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section. Başlık satırı: solda text-h2 başlık + altında açıklama, sağda çerçeveli \"tüm mağazalar\" butonu. Altında 520 yüksekliğinde iki parça: solda 880'lik öne çıkan mağaza görseli (radius-card), sol altta bilgi kartı (ad + açık rozeti, adres, saat, yol tarifi butonu); sağda mağaza listesi (4 satır, seçili satır yüzey renkli, diğerleri çizgili; ad + semt, adres, sağda durum + ok butonu).",
+ "mobile": "Başlık ve buton alt alta; görsel 358 × 260, bilgi kartı görselin altında; liste tek sütun.",
+ "tree": [
+  "store-locator",
+  "├─ locator-head                      {title:TEXT} text-h2 + {text:TEXT} + {allStoresText:TEXT} {allStoresLink:LINK}",
+  "└─ locator-body",
+  "    ├─ store-feature                 {image:IMAGE} radius-card",
+  "    │   └─ store-feature-card        {name:TEXT} + {openNowText:TEXT} rozet · {address:TEXT} · {hours:TEXT} · {directionsText:TEXT} {mapLink:LINK}",
+  "    └─ store-rows                    {stores:COMPONENT_LIST}",
+  "        └─ store-row ×4              {name:TEXT} {district:TEXT} · {address:TEXT} · {code:storeStatus} · ok butonu · kapalıysa {closedText:TEXT}"
+ ],
+ "checks": [
+  "seçili satır ve görsel aynı mağaza",
+  "durum metni kodda saatlerden hesaplanır"
+ ],
+ "anims": [
+  {
+   "layer": "store-row",
+   "recipe": "M-28",
+   "trigger": "click",
+   "what": "Seçilen satır yüzey rengine geçer, ok butonu koyulaşır"
+  },
+  {
+   "layer": "store-feature",
+   "recipe": "M-02",
+   "trigger": "state-change",
+   "what": "Seçilen mağazanın görseli yumuşakça değişir",
+   "timing": "{ duration: 0.5, ease: ease-standard }",
+   "impl": "css-transition"
+  }
+ ]
+}

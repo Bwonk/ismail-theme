@@ -1,0 +1,60 @@
+{
+ "key": "ActivityGrid",
+ "code": "ACT",
+ "kind": "section",
+ "pages": "Ana sayfa",
+ "ikas": "(özel; category-images-section yerine aktivite şeridi)",
+ "props": "`title`, `subtitle`, `linkText` TEXT · `link` LINK · `activities` COMPONENT_LIST (ActivityCard: image IMAGE, title TEXT, text TEXT, countText TEXT, buttonText TEXT, link LINK) · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section, alt 0 (ardından StoreSpotlight). Başlık satırı: solda sola yaslı SectionHeading, sağda ArrowLink; 40 boşluk. Altında 480 yüksekliğinde 5 kartlık şerit, aralık 12: açık kart 524, kapalılar 201 (flex 2.6 : 1). Kartlar radius-card, görsel + alttan gradyan karartma; metin sol altta (kar beyazı): başlık text-h3 (kapalıda text-h4), açık kartta açıklama + adet + 'Keşfet →'.",
+ "mobile": "Başlık ve ArrowLink alt alta ($space-page içte). Şerit sağa taşar (yatay kaydırma, scroll-snap), yükseklik 400: açık kart 240, diğerleri 88, aralık 8.",
+ "tree": [
+  "activity-grid",
+  "├─ activity-head",
+  "│   ├─ section-heading               SectionHeading (sola yaslı)",
+  "│   │   ├─ section-title             {title:TEXT} text-h2",
+  "│   │   └─ section-subtitle          {subtitle:TEXT} text-body muted",
+  "│   └─ link                          ArrowLink {linkText:TEXT} {link:LINK}",
+  "└─ activity-row                      {activities:COMPONENT_LIST} yatay şerit",
+  "    └─ activity-card ×5 (clip)       radius-card; ilk kart açık",
+  "        ├─ activity-image            {image:IMAGE}",
+  "        ├─ activity-scrim            alttan gradyan $color-transparent → $color-scrim",
+  "        └─ activity-content          sol alt, kar beyazı",
+  "            ├─ activity-title        {title:TEXT} text-h3 (kapalıda text-h4)",
+  "            ├─ activity-text         {text:TEXT} text-ui-sm (yalnız açık kart)",
+  "            ├─ activity-count        {countText:TEXT} text-ui-sm",
+  "            └─ activity-link         {buttonText:TEXT} + ok ikonu (yalnız açık kart)"
+ ],
+ "checks": [
+  "açık kart 524, kapalılar eşit 201",
+  "kapalı kartlarda başlık tek satıra sığıyor",
+  "metinler karartma üstünde okunur"
+ ],
+ "anims": [
+  {
+   "layer": "section-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık grubu sırayla yukarı belirir",
+   "via": "SectionHeading"
+  },
+  {
+   "layer": "link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Alt çizgi uzar, ok kayar",
+   "via": "ArrowLink"
+  },
+  {
+   "layer": "activity-row",
+   "recipe": "I-M-04",
+   "trigger": "inview",
+   "what": "Kartlar sırayla perdeden çıkar, köşeler yuvarlak kalır"
+  },
+  {
+   "layer": "activity-card",
+   "recipe": "I-M-05",
+   "trigger": "hover",
+   "what": "Kart genişler, açıklama ve 'Keşfet →' belirir; giriş bitince ilk kart kendiliğinden açılır"
+  }
+ ]
+}

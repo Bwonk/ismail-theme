@@ -1,0 +1,100 @@
+{
+ "key": "ProductDetail",
+ "code": "PDP",
+ "kind": "section",
+ "pages": "Ürün detay",
+ "ikas": "product-detail-section + variant-selection, add-to-cart, product-pricing, image-handling, bundle-products, campaign offers (CROSS_SELL/UPSELL), product-options, back-in-stock, PayWithIkas",
+ "props": "`product` PRODUCT · `addToCartText`, `addingText`, `addedText`, `outOfStockText`, `sizeGuideText`, `lowStockText`, `descriptionTitle`, `shippingTitle`, `skuLabel`, `reviewsLinkText`, `tiersTitle`, `groupLabel`, `optionsTitle`, `fileUploadText`, `bundleTitle`, `offersAddText`, `offerInCartText`, `offerSoldOutText`, `backInStockTitle`, `backInStockPlaceholder`, `backInStockButtonText`, `backInStockSuccessText`, `backInStockLoginText` TEXT · `showPayWithIkas` BOOLEAN · `shippingText` RICH_TEXT · `highlights` COMPONENT_LIST (ServiceHighlight: icon SVG, title TEXT, text TEXT) · `backgroundColor` COLOR · `updateCartText`, `updatingCartText`, `stockLocationsTitle`, `pickupText`, `optionSetErrorText` TEXT",
+ "desktop": "1440. Breadcrumbs üstte. Solda 2 sütun galeri (görseller 4:5, `color-surface`, radius-card, aralık 12; toplam 880), sağda 452'lik yapışkan bilgi sütunu: rozetler, text-h3 ad, mono SKU, fiyat (+ eski fiyat), renk ve beden VariantChip'leri, beden rehberi linki, adet + koyu Button (tam genişlik) + FavoriteButton, stok notu, hizmet şeridi (ücretsiz kargo · 14 gün iade · 2 yıl garanti; yüzey renkli kutu, ikon + başlık + açıklama, yan yana), akordeonlar.",
+ "mobile": "Galeri yatay kaydırmalı tek görsel + nokta göstergesi; bilgiler altta; alt kenarda sabit sepete ekle çubuğu (fiyat + buton).",
+ "tree": [
+  "product-detail",
+  "├─ breadcrumbs                       Breadcrumbs {data:category.path}",
+  "├─ pdp-gallery                       2 sütun, gerçek yükseklik",
+  "│   └─ pdp-image ×6                  ürün görselleri",
+  "│   └─ pdp-video                     {data:product.video}; oynat ikonu + süre, görsellerle karışık sırada",
+  "└─ pdp-details                       yapışkan",
+  "    ├─ pdp-badges                    Badge {data:product.badge}",
+  "    ├─ pdp-title                     {data:product.name} text-h3",
+  "    ├─ pdp-rating                    RatingStars {data:product.stars} + {data:product.reviewCount} {reviewsLinkText:TEXT}",
+  "    ├─ pdp-sku                       {skuLabel:TEXT} + {data:variant.sku} text-label mono",
+  "    ├─ pdp-price                     {data:product.price} text-price + {data:product.compareAtPrice}",
+  "    ├─ pdp-campaign                  {data:campaign.title} text-ui-sm + etiket ikonu (kampanya yoksa gizli)",
+  "    ├─ pdp-tiers                     {tiersTitle:TEXT} + tier-row ×3 {data:tier.range} {data:tier.unitPrice} (kademeli indirim varsa)",
+  "    ├─ pdp-group                     {groupLabel:TEXT} + group-swatch ×3 {data:productGroup.image} (ürün grubu varsa)",
+  "    ├─ pdp-variants                  variant-chip ×N (VariantChip) {data:variant.value} + link {sizeGuideText:TEXT}",
+  "    ├─ pdp-variant-swatches          renk tipi varyantta VariantSwatch ×N {data:variant.thumbnail}; beden gibi metin tiplerinde VariantChip",
+  "    ├─ pdp-options                   {optionsTitle:TEXT} + {data:option.name} {data:option.price}; ikas seçenek türlerinin hepsi tema stiliyle · option-error (gizli, seçim eksikse) {optionSetErrorText:TEXT} color-danger",
+  "    │   ├─ option-text · option-textarea   kısa / uzun metin, sayaç {code:charCount}",
+  "    │   ├─ option-select · option-box · option-swatch · option-image   açılır liste · kutu (VariantChip) · yuvarlak (VariantSwatch) · görsel; option-limit {code:selectionLimit}",
+  "    │   ├─ option-checkbox · option-color · option-date   onay kutusu + ek ücret · renk seçici · tarih",
+  "    │   ├─ option-file                {fileUploadText:TEXT}",
+  "    │   └─ option-child               bağlı seçenek: üst seçim işaretlenince açılır",
+  "    ├─ pdp-bundle                    {bundleTitle:TEXT} + BundleItem ×3 (set ürünse)",
+  "    ├─ pdp-quantity                  QuantitySelector",
+  "    ├─ pdp-actions",
+  "    │   ├─ add-to-cart-button (clip) {addToCartText:TEXT} / {addingText:TEXT} / {addedText:TEXT} / {outOfStockText:TEXT} / {updateCartText:TEXT} / {updatingCartText:TEXT} (sepeti güncelle · sepet güncelleniyor)",
+  "    │   └─ pdp-fav                   FavoriteButton",
+  "    ├─ pdp-pay                       PayWithIkas yuvası {showPayWithIkas:BOOLEAN}; iframe'i ikas çizer",
+  "    ├─ pdp-back-in-stock             {backInStockTitle:TEXT} + FormField {backInStockPlaceholder:TEXT} + {backInStockButtonText:TEXT} · {backInStockSuccessText:TEXT} · {backInStockLoginText:TEXT} (varyant tükendiyse)",
+  "    ├─ pdp-stock-note                {lowStockText:TEXT} + {data:variant.stockCount} text-label mono",
+  "    ├─ pdp-stock-locations           {stockLocationsTitle:TEXT} + mağaza ×N {data:stockLocation.name} {data:stockLocation.stock} + {pickupText:TEXT} (teslim noktası tanımlıysa)",
+  "    ├─ pdp-offers                    birlikte al: {data:offer.title} text-h4 + offer-card ×2 (OfferCard) {offerInCartText:TEXT} {offerSoldOutText:TEXT}",
+  "    │   └─ offers-summary            {data:offers.compareTotal} + {data:offers.total} + {data:offers.discount} + offers-add-button {offersAddText:TEXT}",
+  "    ├─ pdp-highlights                {highlights:COMPONENT_LIST}; $color-surface, radius-card; masaüstü yan yana, mobil alt alta",
+  "    │   └─ pdp-highlight ×3          {icon:SVG} + {title:TEXT} text-ui + {text:TEXT} text-ui-sm muted",
+  "    └─ pdp-accordions                AccordionItem: {descriptionTitle:TEXT} {data:product.description} · {shippingTitle:TEXT} {shippingText:RICH_TEXT}"
+ ],
+ "checks": [
+  "varyant seçili · stok yok · ekleniyor · eklendi · indirimli halleri",
+  "birlikte al (varsayılanda görünür) · set ürün · kişiselleştirme · kademeli indirim · ürün grubu · haber ver kaydedildi · haber ver giriş gerekli halleri ayrı frame",
+  "galeri gerçek yükseklikte, bilgi sütunu ilk ekranda",
+  "sepeti güncelle (editLineID) · sepet güncelleniyor (düğme yükleniyor + updatingCartText) · yükleniyor (iskelet) · mağazada stok halleri ayrı frame; mobilde yapışkan satın alma çubuğunun düğmesi her durumda ana düğmeyle aynı"
+ ],
+ "anims": [
+  {
+   "layer": "pdp-details",
+   "recipe": "M-13",
+   "trigger": "scroll",
+   "what": "Bilgi sütunu header altında sabit kalır"
+  },
+  {
+   "layer": "pdp-gallery",
+   "recipe": "M-19",
+   "trigger": "scroll",
+   "what": "Görünen görsele göre mobil nokta göstergesi güncellenir"
+  },
+  {
+   "layer": "variant-chip",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Çip çerçevesi ve metni koyulaşır"
+  },
+  {
+   "layer": "add-to-cart-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "pdp-accordions",
+   "recipe": "M-22",
+   "trigger": "click",
+   "what": "Akordeon açılır",
+   "via": "AccordionItem"
+  },
+  {
+   "layer": "offer-card",
+   "recipe": "M-28",
+   "trigger": "click",
+   "what": "Teklif seçilince kart çerçevesi ve onay kutusu koyulaşır, toplam yeniden hesaplanır",
+   "via": "OfferCard"
+  },
+  {
+   "layer": "offers-add-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

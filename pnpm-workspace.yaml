@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@ikas/bp-storefront@2.10.0'
+  - '@ikas/code-components-mcp@2.10.0'
+  - '@ikas/component-cli@2.10.0'

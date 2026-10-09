@@ -1,0 +1,88 @@
+{
+ "key": "Bestsellers",
+ "code": "BEST",
+ "kind": "section",
+ "pages": "Ana sayfa",
+ "ikas": "product-slider-section (sıralı liste + önizleme düzenine uyarlanır)",
+ "props": "`title`, `subtitle`, `linkText`, `addToCartAriaLabel`, `favoriteAriaLabel` TEXT · `link` LINK · `tabs` COMPONENT_LIST (BestsellerTab: label TEXT, products PRODUCT_LIST) · `maxItems` NUMBER · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section, alt 0 (ardından CollectionMosaic). Başlık satırı: solda sola yaslı SectionHeading, sağda Tabs; 40 boşluk. Gövde iki parça, aralık $space-panel: solda sıralı liste (5 satır × 128, satırlar arası 1px çizgi; sıra no text-h4 mono muted, 80×100 görsel, ad text-h4, fiyat text-price, sağda 36'lık sepet halkası; etkin satır color-surface zemin), altında ArrowLink; sağda 560 × 680 önizleme (radius-card, color-surface) etkin satırın ürün görselini ve FavoriteButton'ı gösterir. StoreSpotlight'ın tersine görsel sağda.",
+ "mobile": "Başlık, Tabs (yatay kaydırma). 1 numara tam genişlik 358 × 448 önizleme + altında ad ve fiyat; 02–05 satır listesi (64×80 görsel). ArrowLink en altta.",
+ "tree": [
+  "bestsellers",
+  "├─ bestsellers-head",
+  "│   ├─ section-heading               SectionHeading (sola yaslı)",
+  "│   │   ├─ section-title             {title:TEXT} text-h2",
+  "│   │   └─ section-subtitle          {subtitle:TEXT} text-body muted",
+  "│   └─ bestsellers-tabs              Tabs {tabs:COMPONENT_LIST}",
+  "│       └─ tab-item ×4               {label:TEXT}; etkin = 2px alt çizgi",
+  "└─ bestsellers-body",
+  "    ├─ bestsellers-list              {products:PRODUCT_LIST} (etkin sekmenin)",
+  "    │   ├─ bestseller-row ×5",
+  "    │   │   ├─ bestseller-rank       {code:rank} text-h4 mono muted (01–05)",
+  "    │   │   ├─ bestseller-media      {data:product.image} 80×100 radius-card",
+  "    │   │   ├─ bestseller-info       {data:product.name} text-h4 · {data:product.price} text-price",
+  "    │   │   └─ row-cart              36 halka + çanta ikonu; {addToCartAriaLabel:TEXT}; tıklanınca QuickBuy açılır",
+  "    │   └─ link                      ArrowLink {linkText:TEXT} {link:LINK}",
+  "    └─ bestsellers-preview (clip)    {data:product.image} etkin satırın ürünü; FavoriteButton {favoriteAriaLabel:TEXT}"
+ ],
+ "checks": [
+  "etkin satır ve önizleme aynı ürün",
+  "sıra numaraları kodda üretilir (01–05)",
+  "liste ve önizleme alt kenarları hizalı"
+ ],
+ "anims": [
+  {
+   "layer": "section-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık grubu sırayla yukarı belirir",
+   "via": "SectionHeading"
+  },
+  {
+   "layer": "tab-item",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Sekme rengi muted → metin",
+   "via": "Tabs"
+  },
+  {
+   "layer": "bestsellers-list",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Satırlar sırayla yukarı belirir; sekme değişince liste yeniden sıralı girer",
+   "frm": "{ y: 16, opacity: 0 }",
+   "timing": "{ duration: 0.45, ease: ease-standard, stagger: 0.05 }",
+   "impl": "animejs + io-hook"
+  },
+  {
+   "layer": "bestseller-row",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Satır color-surface zemine geçer, ad muted → metin"
+  },
+  {
+   "layer": "bestsellers-preview",
+   "recipe": "M-02",
+   "trigger": "state-change",
+   "what": "Önizleme görseli etkin satırın ürününe yumuşakça geçer",
+   "timing": "{ duration: 0.4, ease: ease-standard }",
+   "impl": "css-transition"
+  },
+  {
+   "layer": "row-cart",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Sepet halkası grafit dolguya döner, ikon kar beyazı olur",
+   "frm": "{ ring.fill: transparent, icon: color-text }",
+   "to": "{ ring.fill: color-inverse-bg, icon: color-inverse-text }",
+   "timing": "{ duration: 0.2 }"
+  },
+  {
+   "layer": "link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Alt çizgi uzar, ok kayar",
+   "via": "ArrowLink"
+  }
+ ]
+}

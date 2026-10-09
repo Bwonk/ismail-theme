@@ -1,0 +1,51 @@
+{
+ "key": "StoreSpotlight",
+ "code": "SPOT",
+ "kind": "section",
+ "pages": "Ana sayfa, mağazalar",
+ "ikas": "(özel)",
+ "props": "`image` IMAGE · `title`, `text`, `offerLabel`, `offerValue`, `offerNote`, `buttonText` TEXT · `buttonLink` LINK · `imagePosition` ENUM · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section. Solda 900 × 560 görsel (radius-card); sağda 452'lik sütun, aralık $space-panel. Sütun dikeyde iki uca yaslı: üstte text-h3 başlık (3 satır) + text-body muted paragraf; altta mono etiket, **dev teklif rakamı** (`text-display` 96, mono değil, Counter ile yuvarlanır), küçük not ve koyu Button. Teklif rakamı sayfanın tek büyük tipografi anı.",
+ "mobile": "Görsel üstte 390 × 292 (4:3, kenar boşluksuz); sütun altta, teklif rakamı text-display mobil (48).",
+ "tree": [
+  "store-spotlight",
+  "├─ spotlight-media (clip)            {image:IMAGE} radius-card",
+  "└─ spotlight-content",
+  "    ├─ spotlight-intro",
+  "    │   ├─ spotlight-title           {title:TEXT} text-h3",
+  "    │   └─ spotlight-text            {text:TEXT} text-body muted",
+  "    └─ spotlight-offer",
+  "        ├─ offer-label               {offerLabel:TEXT} text-label mono",
+  "        ├─ offer-value               {offerValue:TEXT} text-display; Counter",
+  "        ├─ offer-note                {offerNote:TEXT} text-ui-sm muted",
+  "        └─ spotlight-button (clip)   {buttonText:TEXT} {buttonLink:LINK}; koyu Button"
+ ],
+ "checks": [
+  "teklif rakamı hane maskeleri sabit genişlikte",
+  "görsel ve sütun alt kenarları hizalı"
+ ],
+ "anims": [
+  {
+   "layer": "spotlight-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık ve paragraf yukarı belirir"
+  },
+  {
+   "layer": "offer-value",
+   "recipe": "I-M-01",
+   "trigger": "inview",
+   "what": "Teklif rakamı 00'dan hedef değere yuvarlanır (imza)",
+   "frm": "{ value: 0 }",
+   "to": "{ value: offerValue }",
+   "timing": "{ duration: 1.1, ease: ease-out-soft, stagger: 0.06, threshold: 0.6, once: true }",
+   "via": "Counter"
+  },
+  {
+   "layer": "spotlight-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

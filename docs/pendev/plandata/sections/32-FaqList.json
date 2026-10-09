@@ -1,0 +1,28 @@
+{
+ "key": "FaqList",
+ "code": "FAQ",
+ "kind": "section",
+ "pages": "İletişim",
+ "ikas": "(özel; rich-text yerine akordeon)",
+ "props": "`title`, `text` TEXT · `items` COMPONENT_LIST (FaqItem: question TEXT, answer RICH_TEXT) · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section, alt $space-section. Solda 420'lik sütun: text-h2 başlık + altında kısa açıklama; sağda akordeon listesi (ilki açık, diğerleri kapalı).",
+ "mobile": "Başlık ve açıklama üstte, akordeon tam genişlik.",
+ "tree": [
+  "faq-list",
+  "├─ faq-intro                         {title:TEXT} text-h2 + {text:TEXT} text-body muted",
+  "└─ faq-items                         {items:COMPONENT_LIST}",
+  "    └─ AccordionItem ×5              {question:TEXT} + {answer:RICH_TEXT}"
+ ],
+ "checks": [
+  "ilk soru açık"
+ ],
+ "anims": [
+  {
+   "layer": "faq-items",
+   "recipe": "M-22",
+   "trigger": "click",
+   "what": "Soru açılır, artı döner",
+   "via": "AccordionItem"
+  }
+ ]
+}

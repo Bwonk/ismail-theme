@@ -1,0 +1,29 @@
+{
+ "key": "CookieBar",
+ "code": "CKE",
+ "kind": "overlay",
+ "pages": "tüm sayfalar (Header içinde)",
+ "ikas": "Header child CookieBar (handleCustomerConsentGrant)",
+ "desktop": "Alt kenarda 1440 şerit, $color-inverse-bg; metin solda, butonlar sağda.",
+ "mobile": "Alt kenarda kart; metin üstte, butonlar altta tam genişlik.",
+ "tree": [
+  "cookie-layer",
+  "└─ cookie-bar",
+  "    ├─ cookie-text                   {cookieContent:RICH_TEXT}",
+  "    ├─ cookie-accept                 {cookieAcceptText:TEXT}; açık Button",
+  "    └─ cookie-close                  {closeAriaLabel:TEXT}"
+ ],
+ "checks": [
+  "açık hali; kabul edilince kaybolur"
+ ],
+ "anims": [
+  {
+   "layer": "cookie-bar",
+   "recipe": "M-20",
+   "trigger": "state-change",
+   "what": "Şerit alttan kayarak gelir",
+   "frm": "{ y: 100% }",
+   "to": "{ y: 0 }"
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "key": "BlogList",
+ "code": "BLOG",
+ "kind": "section",
+ "pages": "Blog",
+ "ikas": "blog-home-section",
+ "props": "`title`, `subtitle`, `allTabText`, `loadMoreText`, `emptyText` TEXT · `blogs` BLOG_LIST · `categories` BLOG_CATEGORY_LIST · `backgroundColor` COLOR",
+ "desktop": "1440. Sola yaslı SectionHeading (text-h2), altında yatay Tabs (kategoriler). İlk yazı geniş (2 sütun, görsel 16:9), diğerleri 3 sütun BlogCard, aralık 24. Altta çerçeveli daha fazla butonu.",
+ "mobile": "Tek sütun; sekmeler yatay kaydırmalı.",
+ "tree": [
+  "blog-list",
+  "├─ section-heading                   SectionHeading sola yaslı",
+  "│   ├─ section-title                 {title:TEXT} text-h2",
+  "│   └─ section-subtitle              {subtitle:TEXT} text-body muted",
+  "├─ blog-tabs                         tab-item: {allTabText:TEXT} + {data:blog.category} ×N",
+  "├─ blog-grid                         {blogs:BLOG_LIST} {categories:BLOG_CATEGORY_LIST}",
+  "│   └─ BlogCard ×7                   blog-card-title {data:blog.title} · {data:blog.date}",
+  "├─ blog-empty                        {emptyText:TEXT}",
+  "└─ blog-more-button (clip)           {loadMoreText:TEXT}; çerçeveli Button"
+ ],
+ "checks": [
+  "dolu ve kategori boş halleri"
+ ],
+ "anims": [
+  {
+   "layer": "blog-grid",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Kartlar sırayla girer",
+   "timing": "{ duration: 0.5, ease: ease-standard, stagger: 0.06 }",
+   "impl": "animejs + io-hook"
+  },
+  {
+   "layer": "tab-item",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Sekme rengi muted → metin",
+   "via": "Tabs"
+  }
+ ]
+}

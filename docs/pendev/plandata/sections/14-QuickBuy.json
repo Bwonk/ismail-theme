@@ -1,0 +1,79 @@
+{
+ "key": "QuickBuy",
+ "code": "QB",
+ "kind": "overlay",
+ "pages": "Ana sayfa · Bestsellers (satırdaki sepet düğmesi açar)",
+ "ikas": "Bestsellers sub-component, temaya özel (hızlı al: variant-selection + add-to-cart + PayWithIkas)",
+ "desktop": "1440 × 900 frame; ortada 960 × 600 pencere, `color-bg`, radius-card, clip; arkada `color-scrim`. Solda 480 × 600 ürün görseli (4:5), sol üstte rozet, altta görsel sayacı ve oklar. Sağda $space-panel boşluklu bilgi sütunu: ad (text-h3) + kapat, fiyat satırı, renk yuvarlakları (VariantSwatch) ve beden çipleri (VariantChip), adet + Sepete ekle + favori, Hızlı Öde (PayWithIkas) yuvası, en altta stok notu ve ürün detayı linki.",
+ "mobile": "390 × 844 frame; alttan açılan alt sayfa (üst köşeler radius-card) ve tutamak. Üstte 96 × 120 görsel + ad + fiyat + kapat; altında renk yuvarlakları ve beden çipleri, adet + Sepete ekle, Hızlı Öde, stok notu ve detay linki.",
+ "tree": [
+  "quickbuy-overlay",
+  "├─ scrim",
+  "└─ quickbuy-panel                    masaüstünde pencere, mobilde alt sayfa",
+  "    ├─ qb-media                      {data:product.image} 4:5; Badge + qb-media-count {code:index} + qb-prev / qb-next",
+  "    └─ qb-details",
+  "        ├─ qb-head                   {data:product.name} text-h3 + close-button {closeAriaLabel:TEXT}",
+  "        ├─ qb-price                  {data:product.price} text-h4 + {data:product.compareAtPrice} muted",
+  "        ├─ qb-variants",
+  "        │   ├─ qb-variant-group       renk: {data:variant.name} text-label mono + qb-variant-swatches → variant-swatch ×N (VariantSwatch) {data:variant.thumbnail}",
+  "        │   └─ qb-variant-group       beden: {data:variant.name} text-label mono + qb-variant-row → variant-chip ×N (VariantChip)",
+  "        │       └─ qb-variant-error  {chooseOptionText:TEXT} color-danger (yalnız seçim eksik halinde)",
+  "        ├─ qb-actions                QuantitySelector + add-to-cart-button {addText:TEXT} / {addingText:TEXT} / {soldOutText:TEXT} + FavoriteButton",
+  "        ├─ qb-pay                    PayWithIkas yuvası {showPayWithIkas:BOOLEAN}; iframe'i ikas çizer",
+  "        └─ qb-foot                   {data:variant.stockCount} mono + detail-link {detailLinkText:TEXT}"
+ ],
+ "checks": [
+  "açık (beden seçili) · seçim eksik · ekleniyor halleri iki cihazda ayrı frame",
+  "eklenince pencere kapanır, CartDrawer dolu haliyle açılır",
+  "renk VariantSwatch, beden VariantChip; renk için çip kullanılmaz",
+  "tükenen beden çipi soluk (opacity-inactive) ve seçilemez"
+ ],
+ "anims": [
+  {
+   "layer": "quickbuy-panel",
+   "recipe": "M-20",
+   "trigger": "click",
+   "what": "Masaüstünde pencere ortada %96'dan büyüyerek belirir, mobilde alt sayfa alttan kayar; scrim belirir",
+   "frm": "{ opacity: 0, scale: 0.96, mobile.y: 100% }",
+   "to": "{ opacity: 1, scale: 1, mobile.y: 0 }",
+   "timing": "{ duration: 0.35, ease: ease-out-soft }",
+   "impl": "css-transition",
+   "mobile": "alt sayfa alttan kayar (y 100% → 0)",
+   "rm": "anında açılır"
+  },
+  {
+   "layer": "qb-media",
+   "recipe": "M-02",
+   "trigger": "state-change",
+   "what": "Renk seçilince görsel yumuşakça değişir",
+   "timing": "{ duration: 0.4, ease: ease-standard }",
+   "impl": "css-transition"
+  },
+  {
+   "layer": "variant-chip",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Çerçeve ve metin koyulaşır"
+  },
+  {
+   "layer": "add-to-cart-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "detail-link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Alt çizgi uzar",
+   "via": "ArrowLink"
+  }
+ ],
+ "desktopOnly": [
+  "qb-media-nav",
+  "qb-media-count",
+  "qb-media-arrows",
+  "qb-rule",
+  "qb-spacer"
+ ]
+}

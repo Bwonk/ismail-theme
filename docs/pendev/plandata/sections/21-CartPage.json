@@ -1,0 +1,46 @@
+{
+ "key": "CartPage",
+ "code": "CRTP",
+ "kind": "section",
+ "pages": "Sepet",
+ "ikas": "cart-section + campaign adjustments, gift lines, coupon, gift card",
+ "props": "`title`, `emptyTitle`, `emptyText`, `emptyButtonText`, `couponPlaceholder`, `couponButtonText`, `couponErrorText`, `couponSuccessText`, `couponRemoveText`, `subtotalLabel`, `shippingLabel`, `totalLabel`, `checkoutText`, `checkoutLoadingText`, `removeText`, `summaryTitle`, `summaryNote`, `recommendTitle` TEXT · `recommendProducts` PRODUCT_LIST · `backgroundColor` COLOR",
+ "desktop": "1440. Başlık text-h2 + mono adet. Solda satır listesi (CartLineItem, alt çizgili, 880); sağda 420'lik `color-surface` özet paneli (radius-card, $space-panel): kupon alanı + buton, ara toplam / kargo / toplam satırları (mono tutarlar), koyu tam genişlik ödeme butonu.",
+ "mobile": "Satırlar üstte; özet altta; ödeme butonu alt kenarda sabit.",
+ "tree": [
+  "cart-page",
+  "├─ cart-title                        {title:TEXT} text-h2 + {data:cart.itemCount} mono",
+  "├─ cart-lines                        CartLineItem ×3 (biri indirimli, biri hediye) · satır silme {removeText:TEXT}",
+  "├─ cart-empty                        {emptyTitle:TEXT} text-h3 + {emptyText:TEXT} + {emptyButtonText:TEXT}",
+  "├─ cart-recommendations              {recommendTitle:TEXT} text-h4 + ProductCardSmall ×4 {recommendProducts:PRODUCT_LIST}",
+  "└─ cart-summary",
+  "    ├─ coupon-form                   FormField {couponPlaceholder:TEXT} + {couponButtonText:TEXT}",
+  "    ├─ coupon-message                {couponErrorText:TEXT} $color-danger | {couponSuccessText:TEXT} $color-success",
+  "    ├─ coupon-applied                {data:cart.couponCode} mono + {couponRemoveText:TEXT}",
+  "    ├─ summary-rows                  {subtotalLabel:TEXT} {data:cart.subtotal} · {shippingLabel:TEXT} {data:cart.shipping} · {totalLabel:TEXT} {data:cart.total}",
+  "    ├─ cart-adjustments              adjustment-row ×N {data:adjustment.name} + {data:adjustment.amount} (kampanya · kupon · hediye çeki)",
+  "    └─ checkout-button (clip)        {checkoutText:TEXT} / {checkoutLoadingText:TEXT}"
+ ],
+ "checks": [
+  "boş · dolu · satır güncelleniyor · kupon hatası halleri",
+  "dolu halde kampanya satırları, uygulanan kupon ve hediye satırı görünür; boş halde öneriler kalır",
+  "yükleniyor (iskelet) hali ayrı frame; adet üst sınırı uyarısı CartLineItem durumunda"
+ ],
+ "anims": [
+  {
+   "layer": "checkout-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "cart-recommendations",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Öneri kartları sırayla belirir",
+   "frm": "{ y: 16, opacity: 0 }",
+   "timing": "{ duration: 0.4, ease: ease-out-soft, stagger: 0.05 }",
+   "impl": "css-keyframes + io-hook"
+  }
+ ]
+}

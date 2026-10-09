@@ -1,0 +1,32 @@
+{
+ "key": "ImagePreview",
+ "code": "PREV",
+ "kind": "overlay",
+ "pages": "Ürün detay (galeri), yorum görselleri",
+ "ikas": "ProductDetail sub-component (ImagePreviewModal)",
+ "desktop": "Tam ekran koyu zemin; ortada büyük görsel, sağ/sol oklar, üstte sayaç + kapat, altta küçük resimler.",
+ "mobile": "Tam ekran, kaydırmalı; noktalar.",
+ "tree": [
+  "preview-overlay",
+  "├─ scrim",
+  "└─ preview-panel",
+  "    ├─ close-button                  {closeAriaLabel:TEXT}",
+  "    ├─ preview-image                 {data:product.image}; yakınlaştırılabilir",
+  "    ├─ preview-nav                   preview-prev / preview-next + {code:index}",
+  "    └─ preview-thumbs                küçük resim ×N"
+ ],
+ "checks": [
+  "açık hali"
+ ],
+ "anims": [
+  {
+   "layer": "preview-image",
+   "recipe": "M-02",
+   "trigger": "click",
+   "what": "Görsel büyüyerek açılır, geçişte yumuşakça değişir"
+  }
+ ],
+ "desktopOnly": [
+  "preview-nav"
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "key": "ContactForm",
+ "code": "CONT",
+ "kind": "section",
+ "pages": "İletişim (özel sayfa)",
+ "ikas": "(özel; form-handling + getContactForm / setContactForm* / submitContactForm; konu ve sipariş no mesajın başına eklenir, dosya eki yok)",
+ "props": "`title`, `intro`, `responseText`, `formTitle`, `topicLabel`, `firstNameLabel`, `lastNameLabel`, `emailLabel`, `phoneLabel`, `orderLabel`, `messageLabel`, `messagePlaceholder`, `consentText`, `submitText`, `submittingText`, `successText`, `errorText`, `socialTitle` TEXT · `topics` COMPONENT_LIST (ContactTopic: label TEXT) · `channels` COMPONENT_LIST (ContactChannel: icon SVG, value TEXT, hint TEXT, link LINK, dark BOOLEAN) · `socialLinks` COMPONENT_LIST (SocialLink) · `backgroundColor` COLOR",
+ "desktop": "1440; üst 64, alt $space-section. Üstte iki sütunlu açılış: solda iki satırlık text-display başlık (880), sağda 420'lik açıklama + yanıt süresi hapı (yeşil nokta). Altında 24 aralıkla: solda 880'lik form kartı (1px çizgi, radius-card, padding 40): text-h3 form başlığı, konu çipleri (seçili = koyu), Ad · Soyad, E-posta · Telefon, Sipariş numarası, 160'lık mesaj, altta onay + gönder butonu yan yana, sonuç mesajı. Sağda 472'lik kanal sütunu: e-posta ve telefon kartları (yüzey), WhatsApp kartı (koyu), sosyal kartı (çizgili). Kanal kartlarında değer başlık, açıklama altında; üstte etiket yok (kural 11).",
+ "mobile": "Başlık text-display mobil (3 satır), açıklama ve hap altta; form kartı tam genişlik (alanlar alt alta, konu çipleri yatay kaydırmalı `topic-track`), kanal kartları formun altında.",
+ "tree": [
+  "contact-form-section",
+  "├─ contact-hero",
+  "│   ├─ contact-title                 {title:TEXT} text-display, iki satır",
+  "│   └─ contact-intro                 {intro:TEXT} text-body muted + response-pill {responseText:TEXT}",
+  "└─ contact-body",
+  "    ├─ contact-panel                 1px çizgi, radius-card",
+  "    │   ├─ contact-form-title        {formTitle:TEXT} text-h3",
+  "    │   ├─ topic-group               {topicLabel:TEXT} + {topics:COMPONENT_LIST}",
+  "    │   │   └─ topic-chip ×6         {label:TEXT}; seçili koyu",
+  "    │   ├─ contact-row ×3            FormField {firstNameLabel:TEXT} {lastNameLabel:TEXT} {emailLabel:TEXT} {phoneLabel:TEXT} {orderLabel:TEXT}",
+  "    │   ├─ contact-message-field     FormField {messageLabel:TEXT} {messagePlaceholder:TEXT}; 160",
+  "    │   ├─ contact-submit-row        Checkbox {consentText:TEXT} + contact-button",
+  "    │   │   └─ contact-button (clip) {submitText:TEXT} / {submittingText:TEXT}; koyu Button",
+  "    │   └─ contact-message           {successText:TEXT} $color-success | {errorText:TEXT} $color-danger",
+  "    └─ contact-channels              {channels:COMPONENT_LIST}",
+  "        ├─ contact-channel ×3        {icon:SVG} + {value:TEXT} text-h4 + {hint:TEXT} text-ui-sm + {link:LINK}",
+  "        └─ contact-social            {socialTitle:TEXT} + {socialLinks:COMPONENT_LIST}"
+ ],
+ "checks": [
+  "varsayılan · gönderiliyor · başarılı · hata durum frame'leri",
+  "geniş form kartı (dar tek sütun değil)",
+  "kanal kartlarında üstte etiket yok (kural 11)"
+ ],
+ "anims": [
+  {
+   "layer": "contact-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "contact-message",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Sonuç mesajı belirir",
+   "frm": "{ y: 8, opacity: 0 }",
+   "timing": "{ duration: 0.3, ease: ease-standard }",
+   "impl": "css-transition"
+  },
+  {
+   "layer": "contact-channel",
+   "recipe": "M-28",
+   "trigger": "hover",
+   "what": "Kart zemini koyulaşır, ok sağ üste kayar",
+   "frm": "{ bg: color-surface, arrow.x: 0 }",
+   "to": "{ bg: color-line, arrow.x: 2 }"
+  },
+  {
+   "layer": "topic-chip",
+   "recipe": "M-28",
+   "trigger": "click",
+   "what": "Seçilen konu koyu dolguya geçer",
+   "frm": "{ bg: transparent, color: color-text }",
+   "to": "{ bg: color-inverse-bg, color: color-inverse-text }"
+  }
+ ]
+}

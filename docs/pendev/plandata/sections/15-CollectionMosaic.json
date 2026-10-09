@@ -1,0 +1,67 @@
+{
+ "key": "CollectionMosaic",
+ "code": "MOS",
+ "kind": "section",
+ "pages": "Ana sayfa",
+ "ikas": "category-images-section (mozaik düzenine uyarlanır)",
+ "props": "`title`, `subtitle` TEXT · `tiles` COMPONENT_LIST (CollectionTile: image IMAGE, title TEXT, text TEXT, buttonText TEXT, link LINK) · `grayscaleImages` BOOLEAN · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section. SectionHeading, 40 boşluk, 3 sütun × 442 mozaik, aralık $space-grid, toplam 860. Sütunlar: kısa 326 + uzun 510 · uzun + kısa · kısa + uzun. Karolar radius-card, siyah-beyaz; etiket text-h2 kar beyazı, sol altta (ortada değil), kenardan $space-panel. Öne çıkan karo (sütun 1 alt) ek olarak text-body + açık küçük Button.",
+ "mobile": "2 sütun, aralık 12. Öne çıkan karo tam genişlik 4:5; diğer 5 karo 1:1 (sonuncu tam genişlik 16:9). Etiket text-h3 mobil.",
+ "tree": [
+  "collection-mosaic",
+  "├─ section-heading                   SectionHeading",
+  "│   ├─ section-title                 {title:TEXT} text-h2",
+  "│   └─ section-subtitle              {subtitle:TEXT} text-body muted",
+  "└─ mosaic-grid                       {tiles:COMPONENT_LIST} 3 sütun",
+  "    └─ collection-tile ×6",
+  "        ├─ tile-media (clip)         radius-card",
+  "        │   ├─ tile-image            {image:IMAGE} renkli",
+  "        │   └─ tile-image-mono       siyah-beyaz kopya (üstte)",
+  "        ├─ tile-scrim                öne çıkanda düz $color-scrim; diğerlerinde alttan gradyan $color-transparent → $color-scrim (etiket kontrastı)",
+  "        └─ tile-content              sol alt",
+  "            ├─ tile-title            {title:TEXT} text-h2 kar beyazı",
+  "            ├─ tile-text             {text:TEXT} text-body (öne çıkan karoda ve hover'da uzayan karoda görünür)",
+  "            └─ tile-button (clip)    {buttonText:TEXT} {link:LINK}; açık küçük Button (opsiyonel)"
+ ],
+ "checks": [
+  "yükseklik deseni kısa/uzun dönüşümlü, alt kenarlar hizalı",
+  "etiketler sol altta, ortalı değil",
+  "hover hali ayrı frame: Aksesuar uzamış (600), Pantolon daralmış (236)"
+ ],
+ "anims": [
+  {
+   "layer": "section-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık grubu sırayla yukarı belirir",
+   "via": "SectionHeading"
+  },
+  {
+   "layer": "mosaic-grid",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Karolar sütun sırasıyla belirir",
+   "frm": "{ y: 24, opacity: 0 }",
+   "timing": "{ duration: 0.6, ease: ease-out-soft, stagger: 0.08 }",
+   "impl": "animejs + io-hook"
+  },
+  {
+   "layer": "tile-image-mono",
+   "recipe": "I-M-02",
+   "trigger": "hover",
+   "what": "Karo renge döner ve hafif büyür"
+  },
+  {
+   "layer": "tile-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "collection-tile",
+   "recipe": "I-M-06",
+   "trigger": "hover",
+   "what": "Karo sütun içinde uzar (326/510 → 600), komşusu daralır (236); uzayan karoda açıklama ve buton belirir"
+  }
+ ]
+}

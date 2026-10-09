@@ -1,0 +1,28 @@
+{
+ "key": "OrderTracking",
+ "code": "TRK",
+ "kind": "section",
+ "pages": "Sipariş takibi (özel sayfa)",
+ "ikas": "(özel) getOrderByEmail + order detail patterns",
+ "props": "`title`, `text`, `emailLabel`, `orderNumberLabel`, `submitText`, `submittingText`, `notFoundText`, `statusTitle` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440; solda form (e-posta + sipariş no + buton), sağda sonuç: durum adımları, kargo ve takip no, ürün satırları.",
+ "mobile": "Form üstte, sonuç altta.",
+ "tree": [
+  "order-tracking",
+  "├─ tracking-intro                    {title:TEXT} text-h2 + {text:TEXT}",
+  "├─ tracking-form                     FormField {emailLabel:TEXT} {orderNumberLabel:TEXT} + tracking-button {submitText:TEXT} / {submittingText:TEXT}",
+  "├─ tracking-result                   {statusTitle:TEXT} + adım ×4 {data:order.status} + {data:package.trackingNumber} + satır ×N",
+  "└─ tracking-not-found                {notFoundText:TEXT}"
+ ],
+ "checks": [
+  "boş · sonuç · bulunamadı halleri"
+ ],
+ "anims": [
+  {
+   "layer": "tracking-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ]
+}

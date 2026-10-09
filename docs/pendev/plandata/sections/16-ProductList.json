@@ -1,0 +1,59 @@
+{
+ "key": "ProductList",
+ "code": "PLP",
+ "kind": "section",
+ "pages": "Kategori, koleksiyon, arama, favoriler",
+ "ikas": "category-list-section + favorites",
+ "props": "`pageMode` ENUM · `columns` NUMBER · `searchTitle`, `favoritesTitle`, `resultsLabel`, `filterButtonText`, `sortLabel`, `clearFiltersText`, `loadMoreText`, `loadingMoreText`, `emptyTitle`, `emptyText`, `emptyButtonText`, `favoritesLoginText`, `favoritesLoginButtonText` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440. Başlık bloğu (üst 48): Breadcrumbs, text-h2 başlık + mono ürün sayısı. Yapışkan filtre barı 56 (üst/alt 1px çizgi): solda filtre butonu + aktif filtre çipleri, sağda sıralama. Gövde: solda 280'lik filtre kenar çubuğu (akordeonlar), sağda 3 sütun ProductCard (309), aralık 24. Altta mono ilerleme `24 / 96` + çerçeveli \"daha fazla\" butonu.",
+ "mobile": "2 sütun × 177; filtre barı yapışkan, filtre butonu FilterDrawer'ı açar; kenar çubuğu yok.",
+ "tree": [
+  "product-list",
+  "├─ list-header",
+  "│   ├─ breadcrumbs                   Breadcrumbs {data:category.path}",
+  "│   ├─ list-title                    {data:category.name} text-h2 | {searchTitle:TEXT} + {data:search.query} | {favoritesTitle:TEXT}",
+  "│   └─ list-count                    {data:category.productCount} + {resultsLabel:TEXT} text-label mono",
+  "├─ filter-bar                        yapışkan; {filterButtonText:TEXT} · filtre çipleri + filter-clear-all {clearFiltersText:TEXT} · {sortLabel:TEXT}",
+  "├─ list-body",
+  "│   ├─ filter-sidebar                AccordionItem ×6: filter-category-list (alt kategoriler) · filter-swatch-values (VariantSwatch) · filter-box-values (VariantChip) · filter-range (PriceRange) · filter-range-list (aralık çipleri) · Checkbox listesi",
+  "│   └─ list-grid                     ProductCard ×9, 3 sütun",
+  "├─ list-empty                        {emptyTitle:TEXT} text-h3 + {emptyText:TEXT} + {emptyButtonText:TEXT} · favoriler (misafir): {favoritesLoginText:TEXT} + {favoritesLoginButtonText:TEXT}",
+  "└─ list-pagination",
+  "    ├─ page-progress                 {code:pageProgress} text-label mono",
+  "    └─ load-more-button (clip)       {loadMoreText:TEXT} / {loadingMoreText:TEXT}; çerçeveli Button"
+ ],
+ "checks": [
+  "dolu · boş · yükleniyor (iskelet) · filtre uygulanmış · favoriler-giriş halleri",
+  "arama ve favori modu başlıkları ayrı frame",
+  "filtre tipleri ayrı ayrı çizili: renk swatch, beden kutusu, fiyat aralığı, aralık çipleri, alt kategori listesi; hepsi checkbox değil"
+ ],
+ "anims": [
+  {
+   "layer": "filter-bar",
+   "recipe": "M-18",
+   "trigger": "scroll",
+   "what": "Bar header altında yapışır, sekme rengi değişir"
+  },
+  {
+   "layer": "list-grid",
+   "recipe": "M-01",
+   "trigger": "state-change",
+   "what": "Filtre değişince ızgara kısa fade ile yenilenir",
+   "frm": "{ opacity: 0.4 }",
+   "to": "{ opacity: 1 }",
+   "timing": "{ duration: 0.25 }",
+   "impl": "css-transition"
+  },
+  {
+   "layer": "load-more-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  }
+ ],
+ "desktopOnly": [
+  "filter-sidebar",
+  "filter-chip",
+  "filter-clear-all"
+ ]
+}

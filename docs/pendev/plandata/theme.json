@@ -1,0 +1,778 @@
+{
+ "schema": 1,
+ "contract": 2,
+ "theme": {
+  "slug": "ismail",
+  "name": "İsmail",
+  "sector": "outdoor ekipman ve kentsel giyim",
+  "prefix": "I",
+  "title": "Plan I — Rakım: saha defteri kadar net bir outdoor mağazası",
+  "lead": "Referansın iskeleti korunur: duyuru bandı, hero üstünde şeffaf header, 4×2 ürün ızgarası, mağaza tanıtım bloğu, kısa/uzun dönüşümlü koleksiyon mozaiği, koyu footer; bülten aboneliği footer'ın görselli CTA bandına taşındı. Yeniden tasarlananlar: palet (kar beyazı zemin + tek kurtarma turuncusu), tipografi (grotesk + sıkı Inter Tight etiket katmanı), köşe dili (6'lık tek yarıçap), görsel dili, tüm metinler ve imza hareketi.",
+  "reference": {
+   "url": "",
+   "canvasImportNote": "Referans görseli canvas'a alınmaz; yalnızca `docs/referans/girdi/` altında bakmak için durur.",
+   "policy": "referans sadece ilham; görsel, metin, logo ve marka adı kullanılmaz"
+  },
+  "penFile": "/Users/yigitozen/Documents/ismail.pen",
+  "codeDir": "ismail-theme/src/",
+  "locale": "tr-TR",
+  "currency": "TRY"
+ },
+ "identity_md": [
+  "**Konsept: \"RAKIM\".** İsmail bir saha defteri gibi konuşur: kısa, ölçülü, işe yarar. Kar beyazı zemin ve grafit metin üstüne tek bir kurtarma turuncusu; başlıklar sakin bir groteskle, teknik veriler (rakım, kod, saat, fiyat) sıkı bir Inter Tight etiket katmanıyla, büyük harf ve açık aralıkla yazılır. Fotoğraf sahneyi taşır; arayüz geri çekilir.",
+  "",
+  "**İmza (tek cesaret noktası): Altimetre sayacı (`I-M-01`).** Rakamlar bir altimetre gibi hane hane yuvarlanarak yerine oturur: duyuru bandındaki geri sayım, mağaza bloğundaki dev teklif rakamı (`%30`), sepet sayacı, 404 kodu ve hero slayt sayacı. Başka hiçbir yerde gösterişli hareket yok; diğer her şey sade fade, renk ve dolgu geçişi.",
+  "",
+  "**Referanstan farklar:**",
+  "- **Palet:** saf beyaz yerine soğuk kar beyazı `#F4F4F1`; tek vurgu kurtarma turuncusu `#F2541A` (rozet, favori, geri sayım çipi, odak halkası). Referanstaki kırmızı kalp ve saf siyah-beyaz monokrom bırakılır.",
+  "- **Ters palet (`mode: dark`):** Footer (görselli CTA bandı + e-posta bildirim kartı) ve MenuOverlay (mobil); hero görsel üstü metni de koyu modun metin token'ıyla çizilir.",
+  "- **Tipografi:** başlık ve arayüz `Mona Sans` (500, dar harf aralığı); etiket, kod, fiyat ve sayaçlar `Inter Tight` (sıkı grotesk, `tabular-nums`; 2026-10-08 kullanıcı kararıyla JetBrains Mono yerine). İkinci ses mono değil: teknik ton büyük harf, açık harf aralığı ve koordinat/meta satırlarıyla taşınır. Etiketler ve rozetler BÜYÜK HARF, başlıklar cümle düzeninde.",
+  "- **Köşe dili:** referansın 12'lik kart + hap buton ikilisi yerine tek yarıçap 6 (kart, buton, alan, karo); hap biçim yalnızca çip, rozet ve geri sayımda.",
+  "- **Başlık üstü etiket yok:** bölüm başlıkları doğrudan başlıkla açılır; üstte indeks, kategori ya da `01 / …` biçiminde küçük etiket kullanılmaz (kullanıcı kararı, 2026-10-08).",
+  "- **Hero:** başlık ortadan sol alta iner, sağ altta koordinat/rakam satırı ve slayt sayacı; CTA başlığın hemen altında. Görsel üstünde düz karartma, gradyan yok.",
+  "- **Görsel dili:** soğuk gün ışığında, hafif grenli, doğal renkli saha fotoğrafları (kar, kaya, orman, şehir kenarı). Ürünler `color-surface` zeminde dekupe. Koleksiyon karoları siyah-beyaz, hover'da renge döner. Hepsi `Generate(\"ai\" | \"stock\")` ile özgün üretilir; logo `Generate(\"svg\")` ile İsmail wordmark.",
+  "- Metinler Türkçe; etiketler büyük harf (`İ Ş Ğ Ü Ö Ç` kontrolü).",
+  "",
+  "**Örnek içerik:** duyuru `KIŞ 26 SAHA SERİSİ · KARGO BİZDEN` + geri sayım `02:14:36` · hero `Rotanı kendin çiz.` / mono `41°N 29°E · 2.140 M` · buton `Koleksiyonu keşfet` · ürünler `Buzul Şişme Yelek — 3.250 TL`, `Yamaç Ripstop Rüzgârlık — 2.890 TL`, `Patika Karabina Seti — 340 TL`, `Kamp Çelik Termos 500 ml — 890 TL`, `Moren Katlanır Sandalye — 1.950 TL`, `Çığ Kamp Terliği — 1.150 TL`, `Kuzey Panel Şapka — 690 TL`, `Sırt Polar Ceket — 2.450 TL` · rozet `SINIRLI`, `YENİ`, `%20` · mağaza bloğu `Kadıköy mağazası açıldı` + `%30`."
+ ],
+ "modes": [
+  "light",
+  "dark"
+ ],
+ "devices": {
+  "desktop": {
+   "width": 1440,
+   "height": 900
+  },
+  "mobile": {
+   "width": 390,
+   "height": 844
+  }
+ },
+ "variables": {
+  "intro": "Değerler İsmail'in kimliğidir; token adları sabittir. Renkler `mode: light | dark` eksenli (ters bölümler: Footer, mobil MenuOverlay). Boyutlar `device: desktop | mobile` eksenli. Çekirdek 41'den sonra üç ek değişken: `size-hero`, `radius-card`, `radius-pill`.",
+  "colors": {
+   "color-bg": [
+    "#F4F4F1",
+    "#131514"
+   ],
+   "color-text": [
+    "#141414",
+    "#F4F4F1"
+   ],
+   "color-muted": [
+    "#5C5C57",
+    "#A6A69F"
+   ],
+   "color-line": [
+    "#8A8A84",
+    "#6E6E68"
+   ],
+   "color-surface": [
+    "#E8E8E3",
+    "#1F2120"
+   ],
+   "color-inverse-bg": [
+    "#141414",
+    "#F4F4F1"
+   ],
+   "color-inverse-text": [
+    "#F4F4F1",
+    "#141414"
+   ],
+   "color-accent": [
+    "#F2541A",
+    "#F2541A"
+   ],
+   "color-accent-text": [
+    "#141414",
+    "#141414"
+   ],
+   "color-scrim": [
+    "#13151499",
+    "#131514B3"
+   ],
+   "color-transparent": [
+    "#F4F4F100",
+    "#13151400"
+   ],
+   "color-danger": [
+    "#B3261E",
+    "#FF8A7A"
+   ],
+   "color-success": [
+    "#1E7A45",
+    "#6FD49A"
+   ]
+  },
+  "fonts": {
+   "font-display": "Mona Sans",
+   "font-ui": "Mona Sans",
+   "font-body": "Mona Sans",
+   "font-price": "Inter Tight",
+   "font-mono": "Inter Tight"
+  },
+  "type": {
+   "text-display": [
+    96,
+    48
+   ],
+   "text-h2": [
+    44,
+    30
+   ],
+   "text-h3": [
+    32,
+    24
+   ],
+   "text-h4": [
+    20,
+    18
+   ],
+   "text-title": [
+    14,
+    13
+   ],
+   "text-ui": [
+    14,
+    14
+   ],
+   "text-ui-sm": [
+    13,
+    12
+   ],
+   "text-badge": [
+    11,
+    10
+   ],
+   "text-label": [
+    12,
+    11
+   ],
+   "text-body": [
+    15,
+    14
+   ],
+   "text-price": [
+    14,
+    13
+   ]
+  },
+  "numbers": {
+   "space-page": [
+    32,
+    16
+   ],
+   "space-grid": [
+    24,
+    12
+   ],
+   "space-card": [
+    12,
+    10
+   ],
+   "space-panel": [
+    32,
+    20
+   ],
+   "space-xs": [
+    6,
+    4
+   ],
+   "space-sm": [
+    12,
+    8
+   ],
+   "space-md": [
+    24,
+    16
+   ],
+   "space-section": [
+    120,
+    64
+   ],
+   "size-header": [
+    72,
+    56
+   ],
+   "size-line": 1,
+   "opacity-inactive": 0.4,
+   "size-logo": [
+    22,
+    20
+   ],
+   "size-hero": [
+    760,
+    600
+   ],
+   "radius-card": 6,
+   "radius-pill": 999
+  }
+ },
+ "typeStyles": {
+  "map": [
+   {
+    "styles": [
+     "text-display",
+     "text-h2",
+     "text-h3",
+     "text-h4"
+    ],
+    "spec": "`$font-display` (Mona Sans) 500, satır 1.0–1.1, harf aralığı −0.02em, cümle düzeni"
+   },
+   {
+    "styles": [
+     "text-title",
+     "text-ui",
+     "text-ui-sm"
+    ],
+    "spec": "`$font-ui` (Mona Sans) 500 (`text-ui-sm` 400), satır 1.25, cümle düzeni"
+   },
+   {
+    "styles": [
+     "text-badge",
+     "text-label"
+    ],
+    "spec": "`$font-mono` (Inter Tight) 500 / 400, satır 1.2, harf aralığı +0.04em, BÜYÜK HARF; rakamlar `tabular-nums`"
+   },
+   {
+    "styles": [
+     "text-body"
+    ],
+    "spec": "`$font-body` (Mona Sans) 400, satır 1.5"
+   },
+   {
+    "styles": [
+     "text-price"
+    ],
+    "spec": "`$font-price` (Inter Tight) 500, satır 1.2, `tabular-nums` (`1.850 TL`)"
+   }
+  ],
+  "note": "`font-mono` rolü artık Inter Tight (orantılı); sayaç, fiyat ve geri sayımda kodda `font-variant-numeric: tabular-nums` zorunlu, yoksa altimetre sayacında hane genişliği oynar. Büyük harf yalnızca etiket ve rozetlerde; metnin kendisinde büyük yazılır (`lang=\"tr\"`), `text-transform` kullanılmaz."
+ },
+ "fontCheck": {
+  "valid": [
+   "Anton",
+   "Antonio",
+   "Archivo Narrow",
+   "Barlow",
+   "Barlow Condensed",
+   "Bebas Neue",
+   "Inter Tight",
+   "JetBrains Mono",
+   "Mona Sans",
+   "Oswald",
+   "Sofia Sans Extra Condensed",
+   "Space Mono"
+  ],
+  "invalid": [
+   "Mona Sans Condensed",
+   "Big Shoulders Display"
+  ]
+ },
+ "ds": {
+  "sampleText": "ZİRVEDE ŞIK ÇÖZÜM · Ğ Ü Ö Ç ı · 1.850 TL",
+  "icons": "arama, hesap, sepet (çanta), kalp (boş / dolu), menü, kapat, filtre, ok →, caret, artı, eksi, onay, konum, saat; sosyal: instagram, youtube, x, strava",
+  "imagery": "Hero: soğuk gün ışığında karlı yamaç / kaya sırtı, insan küçük ve hareket halinde, 16:9 ve mobil 4:5 · Ürün: `color-surface` zeminde dekupe, düz ışık, 4:5 · Koleksiyon karosu: siyah-beyaz yakın plan (ayakkabı, ceket, aksesuar), 1:1 ve 3:4 · Mağaza: cam cepheli şehir mağazası, sıcak iç ışık, 16:9 · Footer CTA bandı: dağ kasabası mağazası, sıcak iç ışık, karartma + zemine akan bulanık geçiş · Blog: saha günlüğü, 4:3 · Logo: `İSMAİL` wordmark (geometrik grotesk, kuyruklu İ noktası küçük bir zirve işareti) + tek harf işaret."
+ },
+ "recipes": {
+  "local": {
+   "I-M-01": {
+    "name": "Altimetre sayacı",
+    "what": "Rakamlar hane hane dikey yuvarlanarak yeni değere oturur; sağdaki hane önce, soldakiler 0.04s gecikmeyle. Markanın imza hareketi.",
+    "struct": "`counter` içinde her hane kendi `digit-mask` (clip) frame'inde; içinde `digit-reel` (o anki rakam görünür, üst/alt komşular maskenin dışında); ayraçlar (`:`, `%`, `.`) ayrı metin node'u; tabular mono font",
+    "frm": "{ reel.y: önceki rakam }",
+    "to": "{ reel.y: yeni rakam }",
+    "timing": "{ duration: 0.6, ease: ease-out-soft, stagger: 0.04, direction: sağdan-sola }",
+    "impl": "animejs + io-hook",
+    "mobile": "aynı",
+    "rm": "anında son değer",
+    "stateHint": "hane: eski rakam → yarı kaymış (iki rakam görünür) → yeni rakam"
+   },
+   "I-M-02": {
+    "name": "Karo renk + yakınlaşma",
+    "what": "Koleksiyon karosunda görsel hafif büyür ve siyah-beyazdan renge döner.",
+    "struct": "`tile-media` (clip) içinde `tile-image` (renkli) + `tile-image-mono` (siyah-beyaz kopya, üstte)",
+    "frm": "{ image.scale: 1, mono.opacity: 1 }",
+    "to": "{ image.scale: 1.05, mono.opacity: 0 }",
+    "timing": "{ duration: 0.8, ease: ease-out-soft }",
+    "impl": "css-transition",
+    "mobile": "kapalı (renkli değil, siyah-beyaz kalır)",
+    "rm": "yalnızca renk, büyüme yok",
+    "stateHint": "karo: siyah-beyaz → renkli + %5 büyük"
+   },
+   "I-M-03": {
+    "name": "Favori pop",
+    "what": "Kalp dolarken bir kez büyüyüp oturur, renk turuncuya döner.",
+    "struct": "`fav-button` içinde `fav-icon-outline` + `fav-icon-filled` üst üste",
+    "frm": "{ filled.scale: 0.6, filled.opacity: 0 }",
+    "to": "{ filled.scale: 1, filled.opacity: 1 }",
+    "timing": "{ spring: spring-soft, overshoot: 1.25 }",
+    "impl": "css-keyframes",
+    "mobile": "aynı",
+    "rm": "anında renk değişimi",
+    "stateHint": "kalp: boş → %125 dolu → dolu"
+   },
+   "I-M-04": {
+    "name": "Perde girişi",
+    "what": "Kartlar soldan sağa sırayla alttan açılan perdeyle girer; perde yükselirken dört köşe de radius-card yuvarlak kalır, kesik kenar yok.",
+    "struct": "`activity-row` içinde her kart kendi `activity-card` (clip, radius-card) frame'inde; görsel, karartma ve metin kartın içinde, perde kartın kendisine uygulanır",
+    "frm": "{ clipPath: inset(100% 0 0 0 round 6px), image.scale: 1.1 }",
+    "to": "{ clipPath: inset(0 0 0 0 round 6px), image.scale: 1 }",
+    "timing": "{ duration: 0.7, ease: ease-out-soft, stagger: 0.08, threshold: 0.4, once: true }",
+    "impl": "animejs + io-hook",
+    "mobile": "aynı (yalnız ekranda görünen kartlar)",
+    "rm": "anında görünür",
+    "stateHint": "kartlar: hepsi kapalı → ilk ikisi açık, üçüncüsü yolda → hepsi açık"
+   },
+   "I-M-05": {
+    "name": "Genişleyen kart",
+    "what": "Üzerine gelinen kart genişler, diğerleri daralır; açılan kartta açıklama ve 'Keşfet →' belirir. Giriş bitince ilk kart kendiliğinden açılır; imleç bölümden çıkınca son açılan kart açık kalır.",
+    "struct": "`activity-row` yatay flex; her `activity-card` flex-grow ile boyutlanır; `activity-text` ve `activity-link` yalnız açık kartta görünür (kapalıda opacity 0)",
+    "frm": "{ card.flexGrow: 1, text.opacity: 0 }",
+    "to": "{ card.flexGrow: 2.6, text.opacity: 1 }",
+    "timing": "{ duration: 0.5, ease: ease-out-soft, text.delay: 0.15, autoOpen.delay: 0.2 }",
+    "impl": "css-transition",
+    "mobile": "scroll-snap şerit; ortaya oturan kart açık (240), diğerleri 88",
+    "rm": "anında genişlik değişimi",
+    "stateHint": "şerit: eşit kartlar → ilk kart açık → imlecin altındaki kart açık"
+   },
+   "I-M-06": {
+    "name": "Dikey akordeon",
+    "what": "İmlecin geldiği koleksiyon karosu sütun içinde uzar, aynı sütundaki komşu karo daralır; sütun yüksekliği sabit, alt kenarlar hizalı kalır. Uzayan karoda açıklama ve buton belirir, daralan karoda yalnız başlık kalır. İmleç bölümden çıkınca kısa/uzun düzen geri gelir.",
+    "struct": "`mosaic-column` dikey flex; her `collection-tile` flex-grow ile boyutlanır (kısa 326 / uzun 510 → uzayan 600 / daralan 236); `tile-text` ve `tile-actions` yalnız uzayan karoda görünür",
+    "frm": "{ tile.flexGrow: 1, sibling.flexGrow: 1, text.opacity: 0 }",
+    "to": "{ tile.flexGrow: 2.6, sibling.flexGrow: 1, text.opacity: 1 }",
+    "timing": "{ duration: 0.6, ease: ease-out-soft, text.delay: 0.15 }",
+    "impl": "css-transition",
+    "mobile": "kapalı (mozaik sabit)",
+    "rm": "anında yükseklik değişimi",
+    "stateHint": "sütun: kısa/uzun → üst karo uzadı, alt daraldı → alt karo uzadı, üst daraldı"
+   }
+  }
+ },
+ "via": {
+  "link": "ArrowLink",
+  "image-back": "ProductCard",
+  "card-cart": "ProductCard",
+  "fav-icon-filled": "FavoriteButton",
+  "digit-reel": "Counter",
+  "accordion-body": "AccordionItem",
+  "section-title": "SectionHeading",
+  "variant-chip": "VariantChip",
+  "tab-item": "Tabs"
+ },
+ "viaRules": [
+  {
+   "recipe": "M-11",
+   "layerContains": "button",
+   "via": "Button"
+  }
+ ],
+ "utils": {
+  "viaComponents": [
+   "Button",
+   "ArrowLink",
+   "Counter",
+   "FavoriteButton",
+   "AccordionItem",
+   "Drawer"
+  ],
+  "extra": [
+   {
+    "part": "`useInView(ref, opts)`",
+    "path": "`src/utils/motion/useInView.ts`",
+    "targets": "M-01, M-03, I-M-01"
+   },
+   {
+    "part": "`rollDigits(el, from, to)`",
+    "path": "`src/utils/motion/rollDigits.ts`",
+    "targets": "I-M-01"
+   },
+   {
+    "part": "`useCountdown(target)`",
+    "path": "`src/utils/useCountdown.ts`",
+    "targets": "geri sayım metni (Header)"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "ProductCard",
+   "structure": "`card-media` (clip, 4:5, `color-surface`, radius-card): `image-front` + `image-back` · sol üstte `card-badges` (Badge) · sağ üstte `fav-button` (FavoriteButton) · `card-info` satırı: solda `card-title` (text-title) + `card-price` (text-price, mono) + `card-price-compare` (muted, üstü çizili), sağda `card-cart` (32'lik 1px halka + çanta ikonu) · `card-swatches`: renk noktaları (12) + {code:moreColors} (+2)",
+   "states": "varsayılan · hover (arka görsel + dolu sepet halkası) · stok yok (görsel soluk, rozet) · indirimli (eski fiyat) · favoride · genişlikler: 326 (4 sütun) / 309 (ProductList 3 sütun + filtre) / 177 (mobil 2 sütun)",
+   "anims": [
+    {
+     "layer": "image-back",
+     "recipe": "M-09",
+     "trigger": "hover",
+     "what": "Ön görsel arka görsele geçer"
+    },
+    {
+     "layer": "card-cart",
+     "recipe": "M-28",
+     "trigger": "hover",
+     "what": "Sepet halkası grafit dolguya döner, ikon kar beyazı olur",
+     "frm": "{ ring.fill: transparent, icon: color-text }",
+     "to": "{ ring.fill: color-inverse-bg, icon: color-inverse-text }",
+     "timing": "{ duration: 0.2 }"
+    }
+   ]
+  },
+  {
+   "name": "ProductCardSmall",
+   "structure": "`card-small`: 72×88 `card-small-media` (color-surface, radius-card) · `card-small-info`: `card-small-title` (text-title) + `card-small-price` (text-price)",
+   "states": "varsayılan · hover",
+   "anims": [
+    {
+     "layer": "card-small-title",
+     "recipe": "M-28",
+     "trigger": "hover",
+     "what": "Ad muted'dan metin rengine geçer"
+    }
+   ]
+  },
+  {
+   "name": "BlogCard",
+   "structure": "`blog-card`: `blog-card-media` (clip, 4:3, radius-card) → `blog-card-image` · `blog-card-meta` (text-label mono: kategori · tarih) · `blog-card-title` (text-h4) · `link` (ArrowLink)",
+   "states": "varsayılan · hover",
+   "anims": [
+    {
+     "layer": "blog-card-image",
+     "recipe": "M-09",
+     "trigger": "hover",
+     "what": "Görsel hafif büyür",
+     "frm": "{ scale: 1 }",
+     "to": "{ scale: 1.04 }",
+     "timing": "{ duration: 0.6, ease: ease-out-soft }"
+    }
+   ]
+  },
+  {
+   "name": "Button",
+   "structure": "`button` (clip, radius-card) içinde `top` + `bottom` kopya; yükseklik 48 (küçük 40); text-ui; türler: koyu (`color-inverse-bg`), açık (`color-bg`, görsel üstü), çerçeveli (1px `color-line`); yükleniyor halinde `Spinner` + `…ingText`",
+   "states": "varsayılan · hover · pasif · yükleniyor · eklendi (onay ikonu + `color-success` metin) · stok yok (pasif, üstü çizili değil, metin değişir)",
+   "anims": [
+    {
+     "layer": "button",
+     "recipe": "M-11",
+     "trigger": "hover",
+     "what": "Ters dolgu alttan kayar, etiket yukarı yuvarlanır"
+    }
+   ]
+  },
+  {
+   "name": "ArrowLink",
+   "structure": "`link`: etiket text-ui + `link-arrow` (→, clip: `arrow-top` + `arrow-bottom`) + `link-line` (1px)",
+   "states": "varsayılan · hover",
+   "anims": [
+    {
+     "layer": "link",
+     "recipe": "M-10",
+     "trigger": "hover",
+     "what": "Alt çizgi soldan uzar, ok sağa kayıp yenisi gelir"
+    }
+   ]
+  },
+  {
+   "name": "Badge",
+   "structure": "`badge`: hap (radius-pill), iç boşluk 8×3, text-badge mono BÜYÜK HARF; türler: `badge-limited` (color-bg zemin), `badge-new` (color-inverse-bg), `badge-sale` (color-accent + color-accent-text), `badge-soldout` (color-surface + muted)",
+   "states": "SINIRLI · YENİ · %20 (indirim) · TÜKENDİ",
+   "anims": []
+  },
+  {
+   "name": "FavoriteButton",
+   "structure": "`fav-button`: 28'lik `color-bg` daire; içinde `fav-icon-outline` (14, color-text) + `fav-icon-filled` (14, color-accent) üst üste",
+   "states": "boş · dolu · hover",
+   "anims": [
+    {
+     "layer": "fav-icon-filled",
+     "recipe": "I-M-03",
+     "trigger": "click",
+     "what": "Kalp dolarken bir kez büyüyüp oturur"
+    }
+   ]
+  },
+  {
+   "name": "Counter",
+   "structure": "`counter`: her hane bir `digit-mask` (clip, sabit genişlik) → `digit-reel`; ayraçlar ayrı metin; font-mono tabular; boyut kullanım yerinden gelir (text-label / text-display / text-badge)",
+   "states": "durgun · yuvarlanırken",
+   "anims": [
+    {
+     "layer": "digit-reel",
+     "recipe": "I-M-01",
+     "trigger": "state-change",
+     "what": "Rakam değişince hane yuvarlanır"
+    }
+   ]
+  },
+  {
+   "name": "Breadcrumbs",
+   "structure": "`breadcrumbs`: text-label mono muted, ayraç `/`, son öğe color-text",
+   "states": "—",
+   "anims": []
+  },
+  {
+   "name": "Tabs",
+   "structure": "`tabs`: yatay (sekme altı 1px çizgi; aktif = 2px color-text alt çizgi) ve dikey (Account); `tab-item` text-ui",
+   "states": "aktif · hover · dikey",
+   "anims": [
+    {
+     "layer": "tab-item",
+     "recipe": "M-28",
+     "trigger": "hover",
+     "what": "Sekme rengi muted → metin"
+    }
+   ]
+  },
+  {
+   "name": "VariantChip",
+   "structure": "`variant-chip`: 40 yükseklik, min 48 genişlik, radius-card, 1px color-line; seçili = color-inverse-bg dolgu",
+   "states": "varsayılan · seçili · hover · stok yok (üstü çizili, opacity-inactive)",
+   "anims": [
+    {
+     "layer": "variant-chip",
+     "recipe": "M-28",
+     "trigger": "hover",
+     "what": "Çerçeve ve metin koyulaşır"
+    }
+   ]
+  },
+  {
+   "name": "FormField",
+   "structure": "`form-field`: `field-label` (text-label mono) · `field-input` 48 yükseklik, radius-card, 1px color-line, text-ui · `field-message` (text-label; hata = color-danger)",
+   "states": "boş · dolu · odak (2px color-accent halka) · hata (+ mesaj, `$color-danger`) · pasif",
+   "anims": []
+  },
+  {
+   "name": "Checkbox",
+   "structure": "`checkbox`: 18 kare, radius 3, 1px color-line; işaretli = color-inverse-bg + onay ikonu · `checkbox-label` text-ui-sm",
+   "states": "boş · işaretli",
+   "anims": []
+  },
+  {
+   "name": "AccordionItem",
+   "structure": "`accordion-item`: `accordion-head` (text-ui + artı ikonu, alt 1px çizgi) · `accordion-body` (text-body muted)",
+   "states": "açık · kapalı",
+   "anims": [
+    {
+     "layer": "accordion-body",
+     "recipe": "M-22",
+     "trigger": "click",
+     "what": "Gövde açılır, artı 45° döner"
+    }
+   ]
+  },
+  {
+   "name": "QuantitySelector",
+   "structure": "`quantity`: 40 yükseklik, radius-card, 1px color-line; `qty-minus` · `qty-value` (mono) · `qty-plus`",
+   "states": "varsayılan · alt sınır (eksi pasif) · üst sınır (artı pasif)",
+   "anims": []
+  },
+  {
+   "name": "SectionHeading",
+   "structure": "`section-heading` (ortalı): `section-title` (text-h2) · `section-subtitle` (text-body muted); başlık üstü etiket yok",
+   "states": "açıklamalı · açıklamasız · sola yaslı",
+   "anims": [
+    {
+     "layer": "section-title",
+     "recipe": "M-01",
+     "trigger": "inview",
+     "what": "Başlık ve alt metin sırayla yukarı belirir",
+     "timing": "{ duration: 0.5, ease: ease-standard, stagger: 0.08 }",
+     "impl": "css-keyframes + io-hook"
+    }
+   ]
+  },
+  {
+   "name": "IconButton",
+   "structure": "`icon-button`: 40 dokunma alanı, 18'lik çizgi ikon, isteğe bağlı etiket text-ui",
+   "states": "varsayılan · hover",
+   "anims": []
+  },
+  {
+   "name": "Spinner",
+   "structure": "`spinner`: 16 / 20 çizgi daire, 1.5px, çeyrek yay color-accent",
+   "states": "—",
+   "anims": []
+  },
+  {
+   "name": "CartLineItem",
+   "structure": "`cart-line`: 88×110 `cart-line-media` (color-surface, radius-card) · `cart-line-info`: ad (text-title) · varyant (text-label muted) · `cart-line-badge` (HEDİYE rozeti, yalnız hediye satırında) · `cart-line-options` (kişiselleştirme değerleri + Düzenle) · `cart-line-bundle` (set içeriği alt listesi) · QuantitySelector ya da sabit `cart-line-qty-static` ×N · `cart-line-price` (text-price) + `cart-line-compare` (üstü çizili, indirimde) · `cart-line-remove` (text-ui-sm, alt çizgili; hediyede yok)",
+   "states": "varsayılan · güncelleniyor (soluk + Spinner) · indirimli (eski fiyat üstü çizili) · hediye (HEDİYE rozeti, adet sabit, kaldır yok) · set (içerik alt listesi) · kişiselleştirilmiş (seçenek satırları + Düzenle) · adet sınırı (artı pasif + uyarı)",
+   "anims": []
+  },
+  {
+   "name": "OfferCard",
+   "structure": "`offer-card` (1px color-line, radius-card, iç boşluk 12): 20'lik `offer-toggle` (seçili = color-inverse-bg + onay) · 64×80 `offer-media` · `offer-info`: ad (text-title) + küçük varyant çipleri + fiyat (indirimli + eski, mono) · sağ üstte `offer-badge` (Badge, indirim yüzdesi)",
+   "states": "seçili değil · seçili · sepette (seçim kilitli, Sepette etiketi) · tükendi (soluk metin, Tükendi)",
+   "anims": [
+    {
+     "layer": "offer-card",
+     "recipe": "M-28",
+     "trigger": "click",
+     "what": "Seçilince çerçeve ve onay kutusu koyulaşır"
+    }
+   ]
+  },
+  {
+   "name": "BundleItem",
+   "structure": "`bundle-item`: 64×80 `bundle-media` · `bundle-info`: ad (text-title) + küçük varyant çipleri · sağda adet (QuantitySelector ya da sabit `bundle-qty-static` ×N) + `bundle-price` (+ ek fiyat, mono)",
+   "states": "adet düzenlenebilir (varsayılan) · adet sabit (×N, Sete dahil) · tükendi (soluk metin, Tükendi)",
+   "anims": []
+  },
+  {
+   "name": "RatingStars",
+   "structure": "`rating`: 5 × 14 `rating-star` (dolu color-text, boş color-line) + `rating-score` (mono) + `rating-count` (muted)",
+   "states": "puanlı · yorumsuz",
+   "anims": []
+  },
+  {
+   "name": "ReviewCard",
+   "structure": "`review-card` (alt 1px çizgi, dikey boşluk 24): RatingStars · `review-title` (text-title) · `review-text` (text-body) · `review-meta` (mono: ad · tarih) + `review-verified` (onay ikonu + doğrulanmış alıcı) · `review-images` (56'lık görseller) · `merchant-reply` (color-surface kutu: mağaza yanıtı)",
+   "states": "doğrulanmış alıcı (varsayılan) · doğrulanmamış · görselli · mağaza yanıtlı",
+   "anims": []
+  },
+  {
+   "name": "VariantSwatch",
+   "structure": "`variant-swatch`: 28'lik daire, renk ya da görsel dolgu (`swatch-fill`), seçili = 2px dış halka color-text, stok yok = çapraz çizgi",
+   "states": "varsayılan · seçili · hover · stok yok",
+   "anims": [
+    {
+     "layer": "variant-swatch",
+     "recipe": "M-28",
+     "trigger": "hover",
+     "what": "Dış halka belirir"
+    }
+   ]
+  },
+  {
+   "name": "PriceRange",
+   "structure": "`price-range`: iki alan (en az · en çok) + `range-track` (2px color-line) + `range-fill` (color-text) + iki `range-thumb`",
+   "states": "varsayılan · değer girilmiş",
+   "anims": []
+  },
+  {
+   "name": "SocialLoginButton",
+   "structure": "`social-button`: 48 yükseklik, 1px color-line, radius-card; marka ikonu + etiket",
+   "states": "Google · Facebook · hover",
+   "anims": []
+  },
+  {
+   "name": "Skeleton",
+   "structure": "`skeleton`: color-surface bloklar (görsel, satır, buton) radius-card; yükleniyor hallerinde gerçek düzenin yerine",
+   "states": "—",
+   "anims": []
+  }
+ ],
+ "pages": [
+  {
+   "name": "Home",
+   "sections": "Header · HeroSlider · ProductGrid · ActivityGrid · StoreSpotlight · Bestsellers · CollectionMosaic · Footer (koyu, bülten CTA'sı içinde; sıra dönüşümlü: ürün → görsel şerit → teklif → sıralı liste → mozaik)",
+   "pageType": "INDEX"
+  },
+  {
+   "name": "Category",
+   "sections": "Header · ProductList · Footer",
+   "pageType": "CATEGORY"
+  },
+  {
+   "name": "Collection",
+   "sections": "Header · CollectionHero · ProductList · Footer",
+   "pageType": "COLLECTION"
+  },
+  {
+   "name": "Product",
+   "sections": "Header · ProductDetail · ProductReviews · ProductGrid (birlikte alınanlar) · ProductGrid (son baktıkların) · Footer",
+   "pageType": "PRODUCT_DETAIL"
+  },
+  {
+   "name": "Cart",
+   "sections": "Header · CartPage · Footer",
+   "pageType": "CART"
+  },
+  {
+   "name": "Account",
+   "sections": "Header · Account · Footer",
+   "pageType": "ACCOUNT"
+  },
+  {
+   "name": "Auth (×4)",
+   "sections": "Header · AuthForms · Footer",
+   "pageType": "LOGIN",
+   "expand": [
+    {
+     "name": "Login",
+     "pageType": "LOGIN"
+    },
+    {
+     "name": "Register",
+     "pageType": "REGISTER"
+    },
+    {
+     "name": "ForgotPassword",
+     "pageType": "FORGOT_PASSWORD"
+    },
+    {
+     "name": "RecoverPassword",
+     "pageType": "RECOVER_PASSWORD"
+    }
+   ]
+  },
+  {
+   "name": "NotFound",
+   "sections": "Header · NotFound · ProductGrid (öneriler) · Footer",
+   "pageType": "NOT_FOUND"
+  },
+  {
+   "name": "Search",
+   "sections": "Header · ProductList (arama modu) · Footer",
+   "pageType": "SEARCH"
+  },
+  {
+   "name": "Favorites",
+   "sections": "Header · ProductList (favori modu) · Footer",
+   "pageType": "FAVORITES"
+  },
+  {
+   "name": "Blog",
+   "sections": "Header · BlogList · Footer",
+   "pageType": "BLOG"
+  },
+  {
+   "name": "BlogPost",
+   "sections": "Header · BlogPost · BlogRelated · Footer",
+   "pageType": "BLOG_POST"
+  },
+  {
+   "name": "EmailVerification",
+   "sections": "Header · EmailVerification · Footer",
+   "pageType": "CUSTOMER_EMAIL_VERIFICATION"
+  },
+  {
+   "name": "Stores",
+   "sections": "Header · StoreSpotlight · StoreList · Footer",
+   "pageType": "CUSTOM"
+  },
+  {
+   "name": "Contact",
+   "sections": "Header · ContactForm · StoreLocator · FaqList · Footer",
+   "pageType": "CUSTOM"
+  },
+  {
+   "name": "Policy",
+   "sections": "Header · RichText · Footer",
+   "pageType": "CUSTOM"
+  },
+  {
+   "name": "OrderTracking",
+   "sections": "Header · OrderTracking · Footer",
+   "pageType": "CUSTOM"
+  },
+  {
+   "name": "OrderDetail",
+   "sections": "Header · Account · Footer (sipariş detayı hali)",
+   "pageType": "ORDER_DETAIL"
+  }
+ ]
+}

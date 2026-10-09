@@ -1,0 +1,41 @@
+{
+ "key": "FilterDrawer",
+ "code": "FILT",
+ "kind": "overlay",
+ "devices": [
+  "mobile"
+ ],
+ "pages": "ProductList (mobil)",
+ "ikas": "ProductList sub-component",
+ "desktop": "Masaüstü karşılığı yok (filtreler kenar çubuğunda).",
+ "mobile": "390 × 844 tam ekran çekmece, soldan; başlık + kapat, akordeon filtre grupları, altta yapışkan iki buton (temizle · sonuçları göster).",
+ "tree": [
+  "filter-overlay",
+  "├─ scrim",
+  "└─ filter-drawer",
+  "    ├─ filter-header                 {filterTitle:TEXT} text-h4 + close-button {closeAriaLabel:TEXT}",
+  "    ├─ filter-group ×5               AccordionItem; filter-swatch-values · filter-box-values · filter-range · Checkbox",
+  "    └─ filter-actions",
+  "        ├─ clear-button (clip)       {clearFiltersText:TEXT}; çerçeveli Button",
+  "        └─ apply-button (clip)       {applyFiltersText:TEXT}; koyu Button"
+ ],
+ "checks": [
+  "açık hali, bir grup açık ve seçimli"
+ ],
+ "anims": [
+  {
+   "layer": "filter-drawer",
+   "recipe": "M-20",
+   "trigger": "click",
+   "what": "Çekmece soldan kayar, scrim belirir",
+   "frm": "{ x: -100%, scrim.opacity: 0 }"
+  },
+  {
+   "layer": "filter-group",
+   "recipe": "M-22",
+   "trigger": "click",
+   "what": "Filtre grubu akordeon açılır",
+   "via": "AccordionItem"
+  }
+ ]
+}

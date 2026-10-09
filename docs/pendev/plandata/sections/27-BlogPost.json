@@ -1,0 +1,36 @@
+{
+ "key": "BlogPost",
+ "code": "BLP",
+ "kind": "section",
+ "pages": "Blog yazısı",
+ "ikas": "blog-post-section",
+ "props": "`backLinkText`, `shareText` TEXT · `backgroundColor` COLOR",
+ "desktop": "1440. Ortalı 720'lik okuma sütunu: geri linki, mono meta (kategori · tarih · yazar), text-h2 başlık; kapak görseli 1376 × 640 (radius-card); gövde 720, text-body 1.6 satır, ara başlıklar text-h4.",
+ "mobile": "Sütun tam genişlik; kapak 4:3.",
+ "tree": [
+  "blog-post",
+  "├─ link                              {backLinkText:TEXT}",
+  "├─ post-meta                         {data:blog.category} · {data:blog.date} · {data:blog.author} text-label mono",
+  "├─ post-title                        {data:blog.title} text-h2",
+  "├─ post-cover                        blog kapak görseli, radius-card",
+  "├─ post-body                         blog içeriği (zengin metin)",
+  "└─ post-share                        {shareText:TEXT} + ikonlar"
+ ],
+ "checks": [
+  "uzun Türkçe başlık 3 satıra kadar taşmadan kırılıyor"
+ ],
+ "anims": [
+  {
+   "layer": "post-title",
+   "recipe": "M-01",
+   "trigger": "load",
+   "what": "Başlık ve meta yukarı belirir"
+  },
+  {
+   "layer": "link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Ok kayar, alt çizgi uzar"
+  }
+ ]
+}

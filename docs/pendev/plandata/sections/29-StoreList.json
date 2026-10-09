@@ -1,0 +1,42 @@
+{
+ "key": "StoreList",
+ "code": "STOR",
+ "kind": "section",
+ "pages": "Mağazalar",
+ "ikas": "(özel)",
+ "props": "`title`, `subtitle`, `mapLinkText`, `hoursLabel` TEXT · `stores` COMPONENT_LIST (StoreItem: image IMAGE, name TEXT, address TEXT, hours TEXT, mapLink LINK) · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section. SectionHeading ortalı; 3 sütun mağaza kartı (442): görsel 4:3 radius-card, text-h4 ad, adres, saatler, ArrowLink. Kartlar arasında 1px dikey çizgi yok; aralık 24.",
+ "mobile": "Tek sütun.",
+ "tree": [
+  "store-list",
+  "├─ section-heading                   SectionHeading",
+  "│   ├─ section-title                 {title:TEXT} text-h2",
+  "│   └─ section-subtitle              {subtitle:TEXT} text-body muted",
+  "└─ store-grid                        {stores:COMPONENT_LIST}",
+  "    └─ store-card ×3",
+  "        ├─ store-media               {image:IMAGE} radius-card",
+  "        ├─ store-name                {name:TEXT} text-h4",
+  "        ├─ store-address             {address:TEXT} text-body muted",
+  "        ├─ store-hours               {hoursLabel:TEXT} + {hours:TEXT} text-ui-sm",
+  "        └─ link                      {mapLinkText:TEXT} {mapLink:LINK}"
+ ],
+ "checks": [
+  "adres ve saat satırları aynı hizada"
+ ],
+ "anims": [
+  {
+   "layer": "store-grid",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Kartlar sırayla girer",
+   "timing": "{ duration: 0.5, ease: ease-standard, stagger: 0.08 }",
+   "impl": "animejs + io-hook"
+  },
+  {
+   "layer": "link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Ok kayar, alt çizgi uzar"
+  }
+ ]
+}

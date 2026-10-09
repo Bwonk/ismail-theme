@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.ikas-dev-state.json
+asd
+# ikas-pendev referans girdileri (look-only)
+docs/referans/girdi/

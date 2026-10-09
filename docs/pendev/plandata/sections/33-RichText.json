@@ -1,0 +1,31 @@
+{
+ "key": "RichText",
+ "code": "TXT",
+ "kind": "section",
+ "pages": "Hakkımızda, KVKK, iade politikası (özel sayfa)",
+ "ikas": "rich-text-section",
+ "props": "`title`, `updatedText` TEXT · `content` RICH_TEXT · `showToc` BOOLEAN · `backgroundColor` COLOR",
+ "desktop": "1440; üst $space-section. Solda 280 içindekiler listesi (başlıklar), sağda 760 metin sütunu: text-h2 başlık, mono güncelleme tarihi, h3 ara başlıklar, paragraf, liste, link.",
+ "mobile": "İçindekiler üstte açılır liste, metin tek sütun.",
+ "tree": [
+  "rich-text",
+  "├─ rich-toc                          {code:headings} başlık listesi",
+  "├─ rich-title                        {title:TEXT} text-h2",
+  "├─ rich-meta                         {updatedText:TEXT} text-label mono",
+  "└─ rich-body                         {content:RICH_TEXT}: h3 · paragraf · liste · link"
+ ],
+ "checks": [
+  "uzun metin okunurluğu: satır 760, satır aralığı 1.6"
+ ],
+ "anims": [
+  {
+   "layer": "rich-title",
+   "recipe": "M-01",
+   "trigger": "inview",
+   "what": "Başlık yukarı belirir"
+  }
+ ],
+ "desktopOnly": [
+  "rich-toc-item"
+ ]
+}

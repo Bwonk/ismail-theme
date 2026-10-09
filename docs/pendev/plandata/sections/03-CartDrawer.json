@@ -1,0 +1,61 @@
+{
+ "key": "CartDrawer",
+ "code": "CART",
+ "kind": "overlay",
+ "pages": "Header",
+ "ikas": "Header sub-component (cart patterns)",
+ "desktop": "Sağdan 440 × 900 çekmece, `color-bg`, sol 1px çizgi; arkada `color-scrim`. Başlık 72, gövde kaydırmalı, alt bölüm üst çizgili.",
+ "mobile": "390 tam genişlik çekmece.",
+ "tree": [
+  "cart-overlay",
+  "├─ scrim",
+  "└─ cart-drawer",
+  "    ├─ drawer-header                 {cartTitleText:TEXT} text-h4 + {data:cart.itemCount} mono + close-button {closeAriaLabel:TEXT}",
+  "    ├─ drawer-body",
+  "    │   ├─ cart-empty                {cartEmptyTitle:TEXT} text-h4 + {cartEmptyText:TEXT} text-body muted + {cartEmptyButtonText:TEXT}",
+  "    │   ├─ cart-line ×N              CartLineItem (biri hediye)",
+  "    │   └─ drawer-recommend          {drawerRecommendTitle:TEXT} + ProductCardSmall ×2",
+  "    └─ drawer-footer                 üst çizgi, boşluk $space-panel",
+  "        ├─ coupon-toggle             {couponToggleText:TEXT} + FormField {couponPlaceholder:TEXT} + {couponButtonText:TEXT}",
+  "        ├─ drawer-adjustments        adjustment-row ×N {data:adjustment.name} + {data:adjustment.amount}",
+  "        ├─ subtotal-row              {cartSubtotalLabel:TEXT} + {data:cart.subtotal} text-price",
+  "        ├─ shipping-note             {cartShippingNote:TEXT} text-label muted",
+  "        ├─ checkout-button           {checkoutButtonText:TEXT} / {checkoutLoadingText:TEXT}",
+  "        └─ view-cart-link            {cartViewButtonText:TEXT}"
+ ],
+ "checks": [
+  "boş · dolu (2 ürün + hediye satırı, kampanya satırı) · yükleniyor halleri ayrı frame",
+  "ödeme butonu boşken gizli"
+ ],
+ "anims": [
+  {
+   "layer": "cart-drawer",
+   "recipe": "M-20",
+   "trigger": "click",
+   "what": "Çekmece sağdan kayar, scrim belirir"
+  },
+  {
+   "layer": "cart-line",
+   "recipe": "M-20",
+   "trigger": "state-change",
+   "what": "Satırlar gecikmeli girer",
+   "frm": "{ opacity: 0, y: 16 }",
+   "to": "{ opacity: 1, y: 0 }",
+   "timing": "{ duration: 0.4, ease: ease-out-soft, stagger: [0.15, 0.2, 0.25] }",
+   "impl": "animejs"
+  },
+  {
+   "layer": "checkout-button",
+   "recipe": "M-11",
+   "trigger": "hover",
+   "what": "Buton dolgusu ters döner"
+  },
+  {
+   "layer": "view-cart-link",
+   "recipe": "M-10",
+   "trigger": "hover",
+   "what": "Alt çizgi uzar",
+   "via": "ArrowLink"
+  }
+ ]
+}
