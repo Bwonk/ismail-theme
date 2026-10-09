@@ -153,6 +153,7 @@ export function ProductDetail(props: Props) {
     careTitle = "Malzeme ve bakım",
     shippingText,
     careAttribute,
+    careText: careFallbackText = "<p>Malzeme bilgisi ve bakım talimatı ürünün etiketinde yer alır. Yıkamadan önce etiketi kontrol et; yumuşatıcı ve çamaşır suyu kullanma, düşük ısıda kurut.</p>",
     closeAriaLabel = "Kapat",
     prevAriaLabel = "Önceki görsel",
     nextAriaLabel = "Sonraki görsel",
@@ -300,13 +301,14 @@ export function ProductDetail(props: Props) {
   const editMode = mounted && !!getEditLineId();
   const soldOut = isSoldOut(product, variant);
   const price = getPriceInfo(variant);
-  // Per-product care text from the product custom field picked in careAttribute.
-  const careText = careAttribute?.attributePropValue?.attributeId
-    ? getAttributeDetailValues(careAttribute)
-        .map((v) => v.value ?? "")
-        .filter(Boolean)
-        .join("")
-    : "";
+  // Care text: the product's own custom field (careAttribute) when set, otherwise the shared careText.
+  const careText =
+    (careAttribute?.attributePropValue?.attributeId
+      ? getAttributeDetailValues(careAttribute)
+          .map((v) => v.value ?? "")
+          .filter(Boolean)
+          .join("")
+      : "") || careFallbackText;
   const isFavorite = isFavoriteIkasProduct(product);
   const loggedIn = hasCustomer(customerStore);
 

@@ -77,4 +77,5 @@ export interface Props {
   backgroundColor?: string;
   noReviewsText?: string;
   careAttribute?: IkasProductAttributeDetail | null;
+  careText?: string;
 }

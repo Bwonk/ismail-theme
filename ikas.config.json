@@ -6167,6 +6167,14 @@
           "type": "PRODUCT_ATTRIBUTE",
           "required": false,
           "groupId": "content"
+        },
+        {
+          "name": "careText",
+          "displayName": "Malzeme ve bakım metni (genel)",
+          "type": "RICH_TEXT",
+          "required": false,
+          "defaultValue": "<p>Malzeme bilgisi ve bakım talimatı ürünün etiketinde yer alır. Yıkamadan önce etiketi kontrol et; yumuşatıcı ve çamaşır suyu kullanma, düşük ısıda kurut.</p>",
+          "groupId": "texts-accordion"
         }
       ],
       "propGroups": [
