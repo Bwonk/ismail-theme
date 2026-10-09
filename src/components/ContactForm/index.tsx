@@ -77,6 +77,8 @@ export function ContactForm(props: Props) {
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
   const [consentError, setConsentError] = useState(false);
+  // Required fields left empty while consent is missing (submitContactForm is not called then, so ikas sets no errors).
+  const [missing, setMissing] = useState<Set<string>>(new Set());
   const [status, setStatus] = useState<Status>("idle");
 
   useEffect(() => {
@@ -89,9 +91,13 @@ export function ContactForm(props: Props) {
     return onScoped<{ label: string | null }>(scope, SCOPED_EVENT.contactTopic, (d) => setTopic(d?.label ?? null));
   }, []);
 
-  const touch = () => status !== "idle" && status !== "invalid" && setStatus("idle");
+  const touch = (key?: string) => {
+    if (key && missing.has(key)) setMissing((m) => new Set([...m].filter((k) => k !== key)));
+    if (status !== "idle" && status !== "invalid") setStatus("idle");
+  };
 
-  const fieldError = (item?: IkasFormItem, isEmail?: boolean) => {
+  const fieldError = (item?: IkasFormItem, isEmail?: boolean, key?: string) => {
+    if (key && missing.has(key)) return requiredErrorText;
     if (!item?.hasError) return undefined;
     return isEmail && item.value ? emailErrorText : requiredErrorText;
   };
@@ -103,6 +109,8 @@ export function ContactForm(props: Props) {
     const prefix = [topic && `${topicPrefix}: ${topic}`, order.trim() && `${orderPrefix}: ${order.trim()}`].filter(Boolean).join("\n");
     setContactFormMessage(form, body ? (prefix ? `${prefix}\n\n${body}` : body) : "");
     if (!consent) {
+      const empty = (["firstName", "lastName", "email"] as const).filter((k) => !String((form as any)[k]?.value ?? "").trim());
+      setMissing(new Set(body ? empty : [...empty, "message"]));
       setConsentError(true);
       setStatus("invalid");
       return;
@@ -165,9 +173,9 @@ export function ContactForm(props: Props) {
               autoComplete="given-name"
               value={form.firstName?.value ?? ""}
               placeholder={firstNamePlaceholder}
-              error={fieldError(form.firstName)}
+              error={fieldError(form.firstName, false, "firstName")}
               disabled={submitting}
-              onInput={(v) => (setContactFormFirstName(form, v), touch())}
+              onInput={(v) => (setContactFormFirstName(form, v), touch("firstName"))}
             />
             <FormField
               label={lastNameLabel}
@@ -175,9 +183,9 @@ export function ContactForm(props: Props) {
               autoComplete="family-name"
               value={form.lastName?.value ?? ""}
               placeholder={lastNamePlaceholder}
-              error={fieldError(form.lastName)}
+              error={fieldError(form.lastName, false, "lastName")}
               disabled={submitting}
-              onInput={(v) => (setContactFormLastName(form, v), touch())}
+              onInput={(v) => (setContactFormLastName(form, v), touch("lastName"))}
             />
           </div>
           <div className="cform__row">
@@ -189,9 +197,9 @@ export function ContactForm(props: Props) {
               inputMode="email"
               value={form.email?.value ?? ""}
               placeholder={emailPlaceholder}
-              error={fieldError(form.email, true)}
+              error={fieldError(form.email, true, "email")}
               disabled={submitting}
-              onInput={(v) => (setContactFormEmail(form, v), touch())}
+              onInput={(v) => (setContactFormEmail(form, v), touch("email"))}
             />
             <FormField
               label={phoneLabel}
@@ -222,12 +230,12 @@ export function ContactForm(props: Props) {
             rows={6}
             value={message}
             placeholder={messagePlaceholder}
-            error={form.message?.hasError ? requiredErrorText : undefined}
+            error={missing.has("message") || form.message?.hasError ? requiredErrorText : undefined}
             disabled={submitting}
             onInput={(v) => {
               setMessage(v);
               setContactFormMessage(form, v);
-              touch();
+              touch("message");
             }}
           />
 

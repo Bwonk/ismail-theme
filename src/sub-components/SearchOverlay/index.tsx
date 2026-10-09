@@ -100,7 +100,7 @@ export default function SearchOverlay({
   const goSearch = () => {
     if (!q) return;
     onClose();
-    Router.navigateToPage("SEARCH", undefined, { q });
+    Router.navigateToPage("SEARCH", undefined, { s: q });
   };
 
   const state: "empty" | "results" | "none" = !q ? "empty" : results.length ? "results" : searched === q && !loading ? "none" : "empty";
@@ -166,7 +166,7 @@ export default function SearchOverlay({
                 <ArrowLink
                   className="srch__all"
                   label={searchAllResultsText}
-                  href={withRoutePrefix(`/search?q=${encodeURIComponent(q)}`)}
+                  href={withRoutePrefix(`/search?s=${encodeURIComponent(q)}`)}
                   onClick={(e) => {
                     e.preventDefault();
                     goSearch();

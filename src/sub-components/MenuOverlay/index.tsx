@@ -21,6 +21,7 @@ import ArrowLink from "../ArrowLink";
 import Button from "../Button";
 import Icon from "../Icon";
 import IconButton from "../IconButton";
+import { hasLocaleAlternatives } from "../LocaleSwitcher";
 
 export interface MenuFeature {
   image?: IkasImage | null;
@@ -330,7 +331,8 @@ export const MenuPanel = observer(function MenuPanel({
                 {favoritesLabel}
               </a>
             </div>
-            {localeText && (
+            {/* Same rule as the Footer: no switcher when the store has a single locale and language. */}
+            {localeText && hasLocaleAlternatives() && (
               <button
                 type="button"
                 className={cx("mpanel__locale", TEXT.label)}
