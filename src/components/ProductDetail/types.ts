@@ -78,4 +78,14 @@ export interface Props {
   noReviewsText?: string;
   careAttribute?: IkasProductAttributeDetail | null;
   careText?: string;
+  /** Tablo tipindeki ürün özel alanı. İlk sütun bedendir; seçili bedenin satırı vurgulanır. */
+  sizeGuideAttribute?: IkasProductAttributeDetail | null;
+  /** Ürünün beden tablosu yoksa çekmecede bu metin gösterilir. */
+  sizeGuideFallbackText?: string;
+  sizeGuideTitle?: string;
+  sizeGuideNote?: string;
+  howToMeasureTitle?: string;
+  howToMeasureText?: string;
+  /** Beden tablosunda satır başlıklarının (bedenlerin) sütun başlığı. */
+  sizeColumnLabel?: string;
 }

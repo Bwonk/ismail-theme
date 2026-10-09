@@ -5664,7 +5664,7 @@
           "type": "TEXT",
           "required": false,
           "defaultValue": "Beden rehberi",
-          "groupId": "texts-info"
+          "groupId": "texts-size-guide"
         },
         {
           "name": "addToCartText",
@@ -6175,6 +6175,64 @@
           "required": false,
           "defaultValue": "<p>Malzeme bilgisi ve bakım talimatı ürünün etiketinde yer alır. Yıkamadan önce etiketi kontrol et; yumuşatıcı ve çamaşır suyu kullanma, düşük ısıda kurut.</p>",
           "groupId": "texts-accordion"
+        },
+        {
+          "name": "sizeGuideAttribute",
+          "displayName": "Beden tablosu özel alanı",
+          "type": "PRODUCT_ATTRIBUTE",
+          "required": false,
+          "description": "Tablo tipindeki ürün özel alanı. İlk sütun bedendir; seçili bedenin satırı vurgulanır.",
+          "groupId": "content"
+        },
+        {
+          "name": "sizeGuideFallbackText",
+          "displayName": "Beden rehberi metni (genel)",
+          "type": "RICH_TEXT",
+          "required": false,
+          "description": "Ürünün beden tablosu yoksa çekmecede bu metin gösterilir.",
+          "defaultValue": "<table><thead><tr><th>Beden</th><th>Göğüs</th><th>Bel</th><th>Boy</th></tr></thead><tbody><tr><td>S</td><td>92–96</td><td>78–82</td><td>68</td></tr><tr><td>M</td><td>97–101</td><td>83–87</td><td>70</td></tr><tr><td>L</td><td>102–106</td><td>88–92</td><td>72</td></tr><tr><td>XL</td><td>107–111</td><td>93–97</td><td>74</td></tr></tbody></table>",
+          "groupId": "texts-size-guide"
+        },
+        {
+          "name": "sizeGuideTitle",
+          "displayName": "Beden rehberi başlığı",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Beden rehberi",
+          "groupId": "texts-size-guide"
+        },
+        {
+          "name": "sizeGuideNote",
+          "displayName": "Beden rehberi notu",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Ölçüler santimetredir. İki beden arasındaysan büyüğü seç.",
+          "groupId": "texts-size-guide"
+        },
+        {
+          "name": "howToMeasureTitle",
+          "displayName": "Nasıl ölçülür başlığı",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Nasıl ölçülür?",
+          "groupId": "texts-size-guide"
+        },
+        {
+          "name": "howToMeasureText",
+          "displayName": "Nasıl ölçülür metni",
+          "type": "RICH_TEXT",
+          "required": false,
+          "defaultValue": "<p><strong>Göğüs</strong> Kolların altından, göğsün en geniş yerinden ölç.</p><p><strong>Bel</strong> Belin en ince yerinden ölç.</p><p><strong>Boy</strong> Omuzdan etek ucuna kadar ölç.</p>",
+          "groupId": "texts-size-guide"
+        },
+        {
+          "name": "sizeColumnLabel",
+          "displayName": "Beden sütunu başlığı",
+          "type": "TEXT",
+          "required": false,
+          "description": "Beden tablosunda satır başlıklarının (bedenlerin) sütun başlığı.",
+          "defaultValue": "Beden",
+          "groupId": "texts-size-guide"
         }
       ],
       "propGroups": [
@@ -6213,6 +6271,10 @@
             {
               "id": "texts-gallery",
               "name": "Galeri ve önizleme"
+            },
+            {
+              "id": "texts-size-guide",
+              "name": "Beden rehberi"
             }
           ]
         },

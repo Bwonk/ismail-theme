@@ -29,6 +29,8 @@ export interface VariantPickerProps {
   /** "Beden rehberi" link next to the first text-type group label. */
   sizeGuideText?: string;
   sizeGuideHref?: string;
+  /** Opens the size guide sheet; when set the link becomes a button (href is the fallback). */
+  onSizeGuide?: () => void;
   onSelect?: (type: IkasDisplayedVariantType, value: IkasDisplayedVariantValue) => void;
   className?: string;
 }
@@ -45,6 +47,7 @@ const VariantPicker = observer(function VariantPicker({
   missingText,
   sizeGuideText,
   sizeGuideHref,
+  onSizeGuide,
   onSelect,
   className,
 }: VariantPickerProps) {
@@ -60,7 +63,7 @@ const VariantPicker = observer(function VariantPicker({
         const isChosen = !chosen || chosen.has(typeId);
         const selected = isChosen ? dvt.displayedVariantValues.find((v) => v.isSelected) : undefined;
         const label = upperTr(selected ? `${dvt.variantType.name} · ${selected.variantValue.name}` : dvt.variantType.name);
-        const showGuide = !!sizeGuideText && !!sizeGuideHref && dvt === firstTextType;
+        const showGuide = !!sizeGuideText && (!!onSizeGuide || !!sizeGuideHref) && dvt === firstTextType;
         const missing = missingTypeId === typeId;
         const labelId = `vpick-${typeId}`;
         const pick = (dvv: IkasDisplayedVariantValue) => {
@@ -73,7 +76,12 @@ const VariantPicker = observer(function VariantPicker({
               <span id={labelId} className={cx("vpick__label", TEXT.label)}>
                 {label}
               </span>
-              {showGuide && <ArrowLink className="vpick__guide" size="uiSm" label={sizeGuideText!} href={sizeGuideHref} />}
+              {showGuide &&
+                (onSizeGuide ? (
+                  <ArrowLink className="vpick__guide" size="uiSm" label={sizeGuideText!} onClick={() => onSizeGuide()} />
+                ) : (
+                  <ArrowLink className="vpick__guide" size="uiSm" label={sizeGuideText!} href={sizeGuideHref} />
+                ))}
             </div>
             <div className={cx("vpick__row", isColor && "vpick__row--swatch")} role="radiogroup" aria-labelledby={labelId}>
               {dvt.displayedVariantValues.map((dvv) =>

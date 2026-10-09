@@ -38,6 +38,8 @@ import {
   saveProductVariantBackInStockReminder,
   withRoutePrefix,
   getAttributeDetailValues,
+  getDisplayedProductVariantTypes,
+  isIkasVariantTypeColorSelection,
 } from "@ikas/bp-storefront";
 import AccordionItem from "../../sub-components/AccordionItem";
 import ArrowLink from "../../sub-components/ArrowLink";
@@ -53,6 +55,7 @@ import OfferCard from "../../sub-components/OfferCard";
 import ProductOptions from "../../sub-components/ProductOptions";
 import QuantitySelector from "../../sub-components/QuantitySelector";
 import RatingStars from "../../sub-components/RatingStars";
+import SizeGuide, { getAttributeSizeTable } from "../../sub-components/SizeGuide";
 import Skeleton from "../../sub-components/Skeleton";
 import VariantPicker from "../../sub-components/VariantPicker";
 import { cx } from "../../utils/cx";
@@ -161,6 +164,13 @@ export function ProductDetail(props: Props) {
     playVideoAriaLabel = "Videoyu oynat",
     galleryDotAriaLabel = "{n}. görsele git",
     sizeGuideLink,
+    sizeGuideAttribute,
+    sizeGuideFallbackText = "<table><thead><tr><th>Beden</th><th>Göğüs</th><th>Bel</th><th>Boy</th></tr></thead><tbody><tr><td>S</td><td>92–96</td><td>78–82</td><td>68</td></tr><tr><td>M</td><td>97–101</td><td>83–87</td><td>70</td></tr><tr><td>L</td><td>102–106</td><td>88–92</td><td>72</td></tr><tr><td>XL</td><td>107–111</td><td>93–97</td><td>74</td></tr></tbody></table>",
+    sizeGuideTitle = "Beden rehberi",
+    sizeGuideNote = "Ölçüler santimetredir. İki beden arasındaysan büyüğü seç.",
+    sizeColumnLabel = "Beden",
+    howToMeasureTitle = "Nasıl ölçülür?",
+    howToMeasureText = "<p><strong>Göğüs</strong> Kolların altından, göğsün en geniş yerinden ölç.</p><p><strong>Bel</strong> Belin en ince yerinden ölç.</p><p><strong>Boy</strong> Omuzdan etek ucuna kadar ölç.</p>",
     showPayWithIkas = true,
     preselectOffers = false,
     lowStockThreshold = 5,
@@ -180,6 +190,7 @@ export function ProductDetail(props: Props) {
   const [, setTick] = useState(0);
   const [bisEmail, setBisEmail] = useState("");
   const [bisStatus, setBisStatus] = useState<"idle" | "sending" | "saved" | "error">("idle");
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
 
@@ -309,6 +320,15 @@ export function ProductDetail(props: Props) {
           .filter(Boolean)
           .join("")
       : "") || careFallbackText;
+  // Size guide: the product's TABLE custom field, else the shared rich text, else the sizeGuideLink page.
+  const sizeTable = getAttributeSizeTable(sizeGuideAttribute, sizeColumnLabel);
+  const sizeGuideHtml = sizeGuideFallbackText?.replace(/<[^>]*>|&nbsp;/g, "").trim() ? sizeGuideFallbackText : "";
+  const hasSizeGuide = !!sizeTable || !!sizeGuideHtml;
+  // Selected size = selected value of the first non-colour variant type (the row the guide link sits on).
+  const sizeType = getDisplayedProductVariantTypes(product).find(
+    (t) => t.displayedVariantValues.length > 0 && !isIkasVariantTypeColorSelection(t.variantType),
+  );
+  const selectedSize = sizeType?.displayedVariantValues.find((v) => v.isSelected)?.variantValue.name ?? null;
   const isFavorite = isFavoriteIkasProduct(product);
   const loggedIn = hasCustomer(customerStore);
 
@@ -657,7 +677,12 @@ export function ProductDetail(props: Props) {
           })}
 
           {/* I-PDP-03 · M-28 via VariantChip / VariantSwatch */}
-          <VariantPicker product={product} sizeGuideText={sizeGuideText} sizeGuideHref={sizeGuideLink?.href} />
+          <VariantPicker
+            product={product}
+            sizeGuideText={sizeGuideText}
+            sizeGuideHref={sizeGuideLink?.href}
+            onSizeGuide={hasSizeGuide ? () => setSizeGuideOpen(true) : undefined}
+          />
 
           <div ref={optionsRef} className="pdp__options-anchor">
             <ProductOptions product={product} showError={showOptionErrors} texts={optionTexts} />
@@ -847,6 +872,18 @@ export function ProductDetail(props: Props) {
         </div>
         <Button label={buttonLabel} state={buttonState} fullWidth className="pdp__buybar-btn" onClick={onAdd} />
       </div>
+
+      {/* I/Overlay/SizeGuide · M-20 */}
+      {hasSizeGuide && (
+        <SizeGuide
+          open={sizeGuideOpen}
+          onClose={() => setSizeGuideOpen(false)}
+          table={sizeTable}
+          fallbackHtml={sizeGuideHtml}
+          selectedSize={selectedSize}
+          texts={{ title: sizeGuideTitle, note: sizeGuideNote, closeAriaLabel, howToMeasureTitle, howToMeasureText }}
+        />
+      )}
 
       <ImagePreview
         open={preview !== null}

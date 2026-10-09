@@ -53,7 +53,9 @@
   line-height: 1.5;
 }
 
+/* appearance:none selects start the text at the top of the box; match line-height to the 46px control */
 .ffield__control--select {
+  line-height: 46px;
   padding-right: 40px;
   cursor: pointer;
 }

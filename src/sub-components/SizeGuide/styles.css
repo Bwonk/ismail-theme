@@ -1,0 +1,246 @@
+.sg {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sg__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--c-scrim);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+
+/* I-SG-01 · M-20: sheet slides up from the bottom edge, scrim fades in */
+.sg__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(720px, 100%);
+  max-height: 80vh;
+  padding-top: var(--space-md);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: var(--c-bg);
+  color: var(--c-text);
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.sg.is-open .sg__scrim {
+  opacity: 1;
+}
+
+.sg.is-open .sg__panel {
+  transform: none;
+}
+
+.sg__grabber {
+  display: none;
+}
+
+/* sg-header: title + note, 40px close */
+.sg__head {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px 0 var(--space-panel);
+}
+
+.sg__head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.sg__title {
+  margin: 0;
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+.sg__note {
+  margin: 0;
+  color: var(--c-muted);
+}
+
+.sg__close {
+  flex: none;
+}
+
+/* sg-body: scrolls inside the sheet */
+.sg__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-height: 0;
+  padding: 0 var(--space-panel) calc(var(--space-panel) + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* sg-table: equal columns, 2px between rows, hairline under the head */
+.sg__table {
+  width: 100%;
+  margin: -2px 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+
+.sg__th {
+  padding: 8px 10px;
+  border-bottom: var(--size-line) solid var(--c-line);
+  color: var(--c-muted);
+  font-weight: 400;
+  text-align: left;
+}
+
+.sg__td {
+  padding: 12px 10px;
+  color: var(--c-text);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* sg-row — seçili: surface fill, radius-card, size in 600 */
+.sg__row--on .sg__td {
+  background: var(--c-surface);
+}
+
+.sg__row--on .sg__td:first-child {
+  border-radius: var(--radius-card) 0 0 var(--radius-card);
+}
+
+.sg__row--on .sg__td:last-child {
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+}
+
+.sg__row--on .sg__td:only-child {
+  border-radius: var(--radius-card);
+}
+
+.sg__row--on .sg__td--size {
+  font-weight: 600;
+}
+
+/* merchant rich text (fallback without a parsable table) */
+.sg__rich {
+  color: var(--c-muted);
+}
+
+.sg__rich > :first-child {
+  margin-top: 0;
+}
+
+.sg__rich > :last-child {
+  margin-bottom: 0;
+}
+
+.sg__rich strong,
+.sg__rich b,
+.sg__rich a {
+  color: var(--c-text);
+}
+
+.sg__rich table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sg__rich th,
+.sg__rich td {
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.sg__rich th {
+  border-bottom: var(--size-line) solid var(--c-line);
+  font-weight: 400;
+}
+
+/* sg-howto: hairline, bold title, term (56) + muted text lines */
+.sg__howto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: var(--space-md);
+  border-top: var(--size-line) solid var(--c-line);
+}
+
+.sg__howto-title {
+  margin: 0;
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+.sg__howto-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--c-muted);
+}
+
+.sg__howto-text p {
+  margin: 0;
+}
+
+.sg__howto-text strong,
+.sg__howto-text b {
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+/* "<p><strong>Göğüs</strong> …</p>" → 56px term column, wrapped lines hang under the text */
+.sg__howto-text p:has(> strong:first-child) {
+  padding-left: 68px;
+  text-indent: -68px;
+}
+
+.sg__howto-text p:has(> strong:first-child) > strong:first-child {
+  display: inline-block;
+  width: 56px;
+  margin-right: 12px;
+  text-indent: 0;
+  vertical-align: top;
+}
+
+/* mobile: full-width sheet with grab handle */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .sg__panel {
+    width: 100%;
+    padding-top: 12px;
+  }
+
+  .sg__grabber {
+    display: block;
+    flex: none;
+    width: 36px;
+    height: 4px;
+    margin: 0 auto;
+    border-radius: var(--radius-pill);
+    background: var(--c-line);
+  }
+
+  .sg__head {
+    padding-right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg__scrim,
+  .sg__panel {
+    transition: none;
+  }
+}
