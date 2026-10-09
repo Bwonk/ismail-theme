@@ -12,6 +12,7 @@ import {
   getProductListFilterCategories,
   getProductListInitialData,
   handleFilterValueClick,
+  isStockFilter,
   handleNumberRangeOptionClick,
   onFilterCategoryClick,
   onNumberRangeFilterChange,
@@ -31,6 +32,17 @@ export interface FilterPanelTexts {
   priceMaxAriaLabel: string;
   /** "ÜRÜN" — appended to the swatch value count ("SİYAH · 24 ÜRÜN"). */
   resultsLabel: string;
+  /** Labels for the stock filter's raw values ("in-stock" / "out-of-stock"). */
+  inStockText: string;
+  outOfStockText: string;
+}
+
+/** Readable label of a filter value; the stock filter's values arrive as raw keys. */
+export function filterValueLabel(filter: IkasProductFilter, name: string, texts: Pick<FilterPanelTexts, "inStockText" | "outOfStockText">) {
+  if (!isStockFilter(filter)) return name;
+  if (name === "in-stock") return texts.inStockText;
+  if (name === "out-of-stock") return texts.outOfStockText;
+  return name;
 }
 
 interface Props {
@@ -181,7 +193,7 @@ const FilterGroup = observer(function FilterGroup({
             {values.map((fv) => (
               <VariantChip
                 key={fv.id || fv.name}
-                label={fv.name}
+                label={filterValueLabel(filter, fv.name, texts)}
                 selected={fv.isSelected === true}
                 soldOut={fv.resultCount === 0}
                 onSelect={() => {
@@ -226,7 +238,7 @@ const FilterGroup = observer(function FilterGroup({
                 disabled={fv.resultCount === 0 && !fv.isSelected}
                 label={
                   <span className="fpanel__check-label">
-                    <span>{fv.name}</span>
+                    <span>{filterValueLabel(filter, fv.name, texts)}</span>
                     {fv.resultCount != null && <span className={cx("fpanel__count", TEXT.label, "tabular")}>{fv.resultCount}</span>}
                   </span>
                 }

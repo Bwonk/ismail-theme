@@ -30,7 +30,7 @@ import {
 import Breadcrumbs, { type BreadcrumbItem } from "../../sub-components/Breadcrumbs";
 import Button from "../../sub-components/Button";
 import FilterDrawer from "../../sub-components/FilterDrawer";
-import FilterPanel, { currencyFormatter, formatRange, type FilterPanelTexts } from "../../sub-components/FilterPanel";
+import FilterPanel, { currencyFormatter, filterValueLabel, formatRange, type FilterPanelTexts } from "../../sub-components/FilterPanel";
 import Icon from "../../sub-components/Icon";
 import ProductCard from "../../sub-components/ProductCard";
 import Skeleton from "../../sub-components/Skeleton";
@@ -44,7 +44,7 @@ type Mode = "category" | "search" | "favorites";
 type Chip = { key: string; label: string; remove: () => void };
 
 /** Active filter chips (desktop/tablet filter bar) — one per selected value / range / sub-category. */
-function activeChips(list: IkasProductList): Chip[] {
+function activeChips(list: IkasProductList, texts: Pick<FilterPanelTexts, "inStockText" | "outOfStockText">): Chip[] {
   const chips: Chip[] = [];
   if (list.pageType !== "CATEGORY") {
     for (const cat of getProductListFilterCategories(list)) {
@@ -74,7 +74,7 @@ function activeChips(list: IkasProductList): Chip[] {
         if (v.isSelected)
           chips.push({
             key: `val-${f.id}-${v.id || v.name}`,
-            label: f.displayType === "SWATCH" ? v.name : `${f.name}: ${v.name}`,
+            label: f.displayType === "SWATCH" ? v.name : `${f.name}: ${filterValueLabel(f, v.name, texts)}`,
             remove: () => handleFilterValueClick(list, f, v),
           });
       }
@@ -106,6 +106,8 @@ export function ProductList(props: Props) {
     pageMode = "category",
     columns = 3,
     showTitle = true,
+    inStockText = "Stokta var",
+    outOfStockText = "Stokta yok",
     breadcrumbHomeText = "Mağaza",
     breadcrumbAriaLabel = "Sayfa konumu",
     allProductsTitle = "Tüm ürünler",
@@ -238,7 +240,7 @@ export function ProductList(props: Props) {
   const refreshing = !isFav && !!list?.isLoading && !loadingMore;
   const showFilters = !isFav && !!list && hasVisibleFilters(list);
   const applied = !isFav && !!list && hasProductListAppliedFilters(list);
-  const chips = !isFav && list ? activeChips(list) : [];
+  const chips = !isFav && list ? activeChips(list, { inStockText, outOfStockText }) : [];
   const sortOptions = !isFav && list ? getProductListSortOptions(list) : [];
   const selectedSort = sortOptions.find((o) => o.isSelected) ?? sortOptions[0];
   const cols = Math.min(Math.max(Math.round(columns || 3), 2), 4);
@@ -262,7 +264,7 @@ export function ProductList(props: Props) {
     crumbs = [home, ...trail];
   }
 
-  const panelTexts: FilterPanelTexts = { categoryFilterTitle, priceMinAriaLabel, priceMaxAriaLabel, resultsLabel };
+  const panelTexts: FilterPanelTexts = { categoryFilterTitle, priceMinAriaLabel, priceMaxAriaLabel, resultsLabel, inStockText, outOfStockText };
 
   // ---- empty states ---------------------------------------------------------------------------
   const isEmpty = !initialLoading && !refreshing && items.length === 0;

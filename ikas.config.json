@@ -1982,6 +1982,22 @@
           "required": false,
           "defaultValue": true,
           "groupId": "settings"
+        },
+        {
+          "name": "inStockText",
+          "displayName": "Stok filtresi: stokta var",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Stokta var",
+          "groupId": "texts"
+        },
+        {
+          "name": "outOfStockText",
+          "displayName": "Stok filtresi: stokta yok",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Stokta yok",
+          "groupId": "texts"
         }
       ],
       "propGroups": [

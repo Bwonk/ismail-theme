@@ -44,4 +44,6 @@ export interface Props {
   backgroundColor?: string;
   allProductsTitle?: string;
   showTitle?: boolean;
+  inStockText?: string;
+  outOfStockText?: string;
 }
