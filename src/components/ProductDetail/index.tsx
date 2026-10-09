@@ -599,6 +599,17 @@ export function ProductDetail(props: Props) {
             <div className="pdp__tiers">
               {tiersTitle && <span className={cx("pdp__block-title", TEXT.label)}>{tiersTitle}</span>}
               <div className="pdp__tiers-table">
+                {/* tier-row (canvas): the table opens with the single-unit price when the first tier starts above 1 */}
+                {tiers[0].lineItemQuantityRange.min > 1 && (
+                  <div className="pdp__tier">
+                    <span className={cx("pdp__tier-range", TEXT.ui)}>
+                      {fill(tierQuantityText, {
+                        range: tiers[0].lineItemQuantityRange.min === 2 ? "1" : `1–${tiers[0].lineItemQuantityRange.min - 1}`,
+                      })}
+                    </span>
+                    <span className={cx("pdp__tier-price", TEXT.price, "tabular")}>{price.price}</span>
+                  </div>
+                )}
                 {tiers.map((t, i) => {
                   const { min, max } = t.lineItemQuantityRange;
                   const range = max === 0 ? `${min}+` : min === max ? `${min}` : `${min}–${max}`;
