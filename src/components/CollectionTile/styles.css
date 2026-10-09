@@ -46,10 +46,11 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, var(--c-transparent) 45%, var(--c-scrim) 100%);
+  opacity: calc(1 - var(--ctile-featured, 0));
   pointer-events: none;
 }
 
-/* the featured tile carries a flat scrim for its paragraph */
+/* the featured tile carries a flat scrim (instead of the gradient) for its paragraph */
 .ctile__scrim--flat {
   background: var(--c-scrim);
   opacity: var(--ctile-featured, 0);
@@ -70,6 +71,7 @@
 .ctile__title {
   margin: 0;
   color: var(--c-text);
+  line-height: 1.05; /* tile-title: H2 drawn at 1.05 */
 }
 
 .ctile__label {

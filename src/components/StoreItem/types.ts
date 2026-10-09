@@ -11,4 +11,5 @@ export interface Props {
   hoursLabel?: string;
   mapLinkText?: string;
   mapLink?: IkasNavigationLink | null;
+  shortAddress?: string;
 }

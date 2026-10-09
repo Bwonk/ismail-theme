@@ -18,6 +18,11 @@ export function hasLocaleAlternatives() {
   return (baseStore.localeOptions?.length ?? 0) > 1 || (baseStore.languageOptions?.length ?? 0) > 1;
 }
 
+/** True when the switcher has anything to list (at least the current country/currency). */
+export function hasLocaleOptions() {
+  return (baseStore.localeOptions?.length ?? 0) > 0 || (baseStore.languageOptions?.length ?? 0) > 1;
+}
+
 /** "TRY · ₺ · Türkçe"-style label of the current routing, or null before options load. */
 export function currentLocaleLabel() {
   const routing = IkasStorefrontConfig.getCurrentRouting?.();
@@ -94,7 +99,8 @@ const LocaleSwitcher = observer(function LocaleSwitcher({ open, mode, onClose, l
         aria-hidden={!open}
         onKeyDown={onKeyDown as any}
       >
-        {locales.length > 1 && (
+        {/* Country / currency list — drawn even for a single routing (current one, checked). */}
+        {locales.length > 0 && (
           <div className="lcl__group">
             {localeTitle && <p className={cx("lcl__title", TEXT.label)}>{localeTitle}</p>}
             {locales.map((o) => {

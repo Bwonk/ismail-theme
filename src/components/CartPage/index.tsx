@@ -104,7 +104,6 @@ const CouponBox = observer(function CouponBox({
           placeholder={couponPlaceholder}
           autoComplete="off"
           invalid={isError}
-          disabled={disabled}
           onInput={(v) => {
             setCouponCodeFormCouponCode(form, v);
             if (message) setMessage(null);
@@ -116,7 +115,6 @@ const CouponBox = observer(function CouponBox({
           variant="outline"
           label={submitting ? couponApplyingText : couponButtonText}
           state={submitting ? "loading" : "idle"}
-          disabled={disabled}
         />
       </form>
       {message && (
@@ -156,7 +154,6 @@ interface SummaryProps extends SummaryTexts {
   loading: boolean;
   checkingOut: boolean;
   onCheckout: () => void;
-  checkoutRef: { current: HTMLDivElement | null };
 }
 
 /** cart-summary — coupon, summary rows (+ cart-adjustments, gift cards), total, checkout (I-CRTP-01 via Button), note. */
@@ -164,7 +161,6 @@ const CartSummary = observer(function CartSummary({
   loading,
   checkingOut,
   onCheckout,
-  checkoutRef,
   summaryTitle,
   subtotalLabel,
   shippingLabel,
@@ -188,12 +184,9 @@ const CartSummary = observer(function CartSummary({
     else shipping = shippingPendingText;
   }
 
-  const value = (text: string, big?: boolean) =>
-    ready ? (
-      <span className={cx("cartp__sum-value", big ? TEXT.h4 : TEXT.price, "tabular")}>{text}</span>
-    ) : (
-      <Skeleton width={big ? 96 : 72} height={big ? 22 : 16} />
-    );
+  const value = (text: string, big?: boolean) => (
+    <span className={cx("cartp__sum-value", big ? TEXT.h4 : TEXT.price, "tabular")}>{ready ? text : ""}</span>
+  );
 
   return (
     <aside className="cartp__summary" aria-labelledby="cartp-summary-title" aria-busy={loading}>
@@ -232,7 +225,7 @@ const CartSummary = observer(function CartSummary({
           <dd>{value(cart ? formattedAmountDue(cart) : "", true)}</dd>
         </div>
       </dl>
-      <div ref={checkoutRef} className="cartp__checkout">
+      <div className={cx("cartp__checkout", !ready && "cartp__checkout--pending")}>
         <Button
           fullWidth
           label={checkingOut ? checkoutLoadingText : checkoutText}
@@ -246,46 +239,11 @@ const CartSummary = observer(function CartSummary({
   );
 });
 
-/** Mobile sticky checkout bar — visible while the summary's checkout button is off-screen (mobile only, CSS). */
-const StickyCheckout = observer(function StickyCheckout({
-  visible,
-  totalLabel,
-  checkoutText,
-  checkoutLoadingText,
-  checkingOut,
-  onCheckout,
-}: {
-  visible: boolean;
-  totalLabel: string;
-  checkoutText: string;
-  checkoutLoadingText: string;
-  checkingOut: boolean;
-  onCheckout: () => void;
-}) {
-  const cart = cartStore.cart;
-  if (!cart) return null;
-  return (
-    <div className={cx("cartp__bar", visible && "cartp__bar--visible")} aria-hidden={!visible}>
-      <div className="cartp__bar-total">
-        <span className={cx("cartp__bar-label", TEXT.uiSm)}>{totalLabel}</span>
-        <span className={cx("cartp__bar-value", TEXT.price, "tabular")}>{formattedAmountDue(cart)}</span>
-      </div>
-      <Button
-        className="cartp__bar-btn"
-        label={checkingOut ? checkoutLoadingText : checkoutText}
-        state={checkingOut ? "loading" : "idle"}
-        disabled={!visible}
-        onClick={onCheckout}
-      />
-    </div>
-  );
-});
-
 /**
  * I/Section/CartPage — title + count, CartLineItem list (indirimli · hediye · set · kişiselleştirilmiş ·
  * güncelleniyor · adet sınırı states live in CartLineItem), 452 summary (380 laptop, full width below
- * on tablet/mobile), ProductCardSmall recommendations, empty / loading (skeleton) states, mobile
- * sticky checkout bar. Anims: I-CRTP-01 (checkout Button, M-11) · I-CRTP-02 (recommendations, M-01).
+ * on tablet/mobile), ProductCardSmall recommendations (4 desktop · 3 mobile), empty / loading
+ * (skeleton) states. Anims: I-CRTP-01 (checkout Button, M-11) · I-CRTP-02 (recommendations, M-01).
  */
 export function CartPage({
   title = "Sepetin",
@@ -324,10 +282,8 @@ export function CartPage({
   backgroundColor,
 }: Props) {
   const recsRef = useRef<HTMLDivElement>(null);
-  const checkoutRef = useRef<HTMLDivElement>(null);
   const recsReveal = useReveal(recsRef);
   const [checkingOut, setCheckingOut] = useState(false);
-  const [barVisible, setBarVisible] = useState(false);
 
   const cart = cartStore.cart;
   const loading = !cartStore.isCartInitialLoadFinished;
@@ -335,7 +291,6 @@ export function CartPage({
   const isEmpty = !loading && lines.length === 0;
   const count = cart && !loading ? getIkasOrderTotalItemCount(cart) : 0;
   const recs = (recommendProducts?.data ?? []).slice(0, 4);
-  const showBar = !loading && !isEmpty;
 
   // bfcache: coming back from checkout restores the page with the button still loading.
   useEffect(() => {
@@ -343,17 +298,6 @@ export function CartPage({
     window.addEventListener("pageshow", reset);
     return () => window.removeEventListener("pageshow", reset);
   }, []);
-
-  useEffect(() => {
-    const el = checkoutRef.current;
-    if (!showBar || !el || typeof IntersectionObserver === "undefined") {
-      setBarVisible(false);
-      return;
-    }
-    const io = new IntersectionObserver(([entry]) => setBarVisible(!entry.isIntersecting), { threshold: 0 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [showBar]);
 
   const onCheckout = () => {
     if (checkingOut) return;
@@ -426,7 +370,6 @@ export function CartPage({
             loading={loading}
             checkingOut={checkingOut}
             onCheckout={onCheckout}
-            checkoutRef={checkoutRef}
             summaryTitle={summaryTitle}
             subtotalLabel={subtotalLabel}
             shippingLabel={shippingLabel}
@@ -462,16 +405,6 @@ export function CartPage({
         )}
       </div>
 
-      {showBar && (
-        <StickyCheckout
-          visible={barVisible}
-          totalLabel={totalLabel}
-          checkoutText={checkoutText}
-          checkoutLoadingText={checkoutLoadingText}
-          checkingOut={checkingOut}
-          onCheckout={onCheckout}
-        />
-      )}
     </section>
   );
 }

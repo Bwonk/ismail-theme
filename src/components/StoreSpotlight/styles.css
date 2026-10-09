@@ -74,8 +74,15 @@
   color: var(--c-text);
 }
 
+/* offer-value: display line-height 1 (Counter masks default to 1.2em) */
 .spot__value .counter {
   line-height: 1;
+}
+
+.spot__value .counter__mask,
+.spot__value .counter__digit {
+  height: 1em;
+  line-height: 1em;
 }
 
 /* I-SPOT-02 · I-M-01: 1.1s reels, 0.06s stagger left to right */

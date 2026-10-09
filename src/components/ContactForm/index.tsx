@@ -16,7 +16,6 @@ import Button from "../../sub-components/Button";
 import Checkbox from "../../sub-components/Checkbox";
 import FormField from "../../sub-components/FormField";
 import { cx } from "../../utils/cx";
-import { useReveal } from "../../utils/hooks";
 import { TEXT } from "../../utils/tokens";
 import { SCOPED_EVENT, onScoped } from "../../utils/ui";
 import { Props } from "./types";
@@ -53,6 +52,7 @@ export function ContactForm(props: Props) {
     consentText = "Aydınlatma metnini okudum, kabul ediyorum.",
     consentErrorText = "Devam etmek için onay vermelisin.",
     requiredErrorText = "Bu alan boş bırakılamaz.",
+    messageErrorText = "Mesaj alanı boş bırakılamaz.",
     emailErrorText = "Geçerli bir e-posta adresi gir.",
     submitText = "Mesajı gönder",
     submittingText = "Gönderiliyor…",
@@ -69,9 +69,7 @@ export function ContactForm(props: Props) {
   } = props;
 
   const form = getContactForm(customerStore);
-  const heroRef = useRef<HTMLDivElement>(null);
   const topicsRef = useRef<HTMLDivElement>(null);
-  const reveal = useReveal(heroRef);
   const [topic, setTopic] = useState<string | null>(null);
   const [order, setOrder] = useState("");
   const [message, setMessage] = useState("");
@@ -137,7 +135,7 @@ export function ContactForm(props: Props) {
 
   return (
     <section className="cform" style={backgroundColor ? { backgroundColor } : undefined}>
-      <div ref={heroRef} className={cx("cform__hero", reveal)}>
+      <div className="cform__hero">
         {title && <h1 className={cx("cform__title", TEXT.display)}>{title}</h1>}
         {(intro || responseText) && (
           <div className="cform__intro">
@@ -174,7 +172,7 @@ export function ContactForm(props: Props) {
               value={form.firstName?.value ?? ""}
               placeholder={firstNamePlaceholder}
               error={fieldError(form.firstName, false, "firstName")}
-              disabled={submitting}
+              readOnly={submitting}
               onInput={(v) => (setContactFormFirstName(form, v), touch("firstName"))}
             />
             <FormField
@@ -184,7 +182,7 @@ export function ContactForm(props: Props) {
               value={form.lastName?.value ?? ""}
               placeholder={lastNamePlaceholder}
               error={fieldError(form.lastName, false, "lastName")}
-              disabled={submitting}
+              readOnly={submitting}
               onInput={(v) => (setContactFormLastName(form, v), touch("lastName"))}
             />
           </div>
@@ -198,7 +196,7 @@ export function ContactForm(props: Props) {
               value={form.email?.value ?? ""}
               placeholder={emailPlaceholder}
               error={fieldError(form.email, true, "email")}
-              disabled={submitting}
+              readOnly={submitting}
               onInput={(v) => (setContactFormEmail(form, v), touch("email"))}
             />
             <FormField
@@ -210,7 +208,7 @@ export function ContactForm(props: Props) {
               value={form.phone?.value ?? ""}
               placeholder={phonePlaceholder}
               error={fieldError(form.phone)}
-              disabled={submitting}
+              readOnly={submitting}
               onInput={(v) => (setContactFormPhone(form, v), touch())}
             />
           </div>
@@ -219,7 +217,7 @@ export function ContactForm(props: Props) {
             name="orderNumber"
             value={order}
             placeholder={orderPlaceholder}
-            disabled={submitting}
+            readOnly={submitting}
             onInput={(v) => (setOrder(v), touch())}
           />
           <FormField
@@ -230,8 +228,8 @@ export function ContactForm(props: Props) {
             rows={6}
             value={message}
             placeholder={messagePlaceholder}
-            error={missing.has("message") || form.message?.hasError ? requiredErrorText : undefined}
-            disabled={submitting}
+            error={missing.has("message") || form.message?.hasError ? messageErrorText : undefined}
+            readOnly={submitting}
             onInput={(v) => {
               setMessage(v);
               setContactFormMessage(form, v);
@@ -244,8 +242,8 @@ export function ContactForm(props: Props) {
               checked={consent}
               label={consentText}
               error={consentError && !consent ? consentErrorText : undefined}
-              disabled={submitting}
               onChange={(c) => {
+                if (submitting) return;
                 setConsent(c);
                 if (c) setConsentError(false);
               }}

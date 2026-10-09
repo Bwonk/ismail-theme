@@ -2,7 +2,7 @@
   display: inline-block;
   flex-shrink: 0;
   border-radius: 50%;
-  border: 2px solid var(--c-line);
+  border: 1.5px solid var(--c-line);
   border-top-color: var(--c-accent);
   animation: spinner-rotate 0.8s linear infinite;
 }

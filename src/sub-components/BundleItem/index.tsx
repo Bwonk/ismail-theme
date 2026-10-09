@@ -94,6 +94,8 @@ const BundleItem = observer(function BundleItem({
         {!inStock && <span className={cx("bitem__status", TEXT.label)}>{upperTr(outOfStockText)}</span>}
       </div>
 
+      {/* bundle-side keeps its 104px column; tükendi hides the stepper and the price */}
+      {!inStock && <div className="bitem__side" aria-hidden="true" />}
       {inStock && (
         <div className="bitem__side">
           {editable ? (

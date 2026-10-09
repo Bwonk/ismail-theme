@@ -46,4 +46,7 @@ export interface Props {
   showTitle?: boolean;
   inStockText?: string;
   outOfStockText?: string;
+  favoritesSortDefaultText?: string;
+  favoritesSortPriceAscText?: string;
+  favoritesSortPriceDescText?: string;
 }

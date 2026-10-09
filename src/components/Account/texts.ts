@@ -33,7 +33,6 @@ export const ACCOUNT_DEFAULTS = {
   billingAddressLabel: "FATURA ADRESİ",
   paymentLabel: "Ödeme",
   installmentText: "{count} taksit",
-  invoiceLabel: "Fatura",
   subtotalLabel: "Ara toplam",
   shippingLabel: "Kargo",
   freeShippingText: "Ücretsiz",

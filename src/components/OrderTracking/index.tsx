@@ -149,14 +149,21 @@ export function OrderTracking({
             {info.trackingNumber && (
               <div className="trk__row">
                 <span className={cx("trk__row-label", TEXT.uiSm)}>{trackingNumberLabel}</span>
-                <span className={cx("trk__row-value", TEXT.label, "tabular")}>{info.trackingNumber}</span>
+                {/* canvas draws no separate link: the tracking number itself opens the carrier page when ikas has one */}
+                {info.trackingLink ? (
+                  <a
+                    className={cx("trk__row-value", "trk__row-link", TEXT.label, "tabular")}
+                    href={info.trackingLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={trackingLinkText || undefined}
+                  >
+                    {info.trackingNumber}
+                  </a>
+                ) : (
+                  <span className={cx("trk__row-value", TEXT.label, "tabular")}>{info.trackingNumber}</span>
+                )}
               </div>
-            )}
-            {info.trackingLink && trackingLinkText && (
-              <a className={cx("trk__track-link", TEXT.uiSm)} href={info.trackingLink} target="_blank" rel="noopener noreferrer">
-                {trackingLinkText}
-                <Icon name="arrow-up-right" size={14} />
-              </a>
             )}
           </div>
         )}

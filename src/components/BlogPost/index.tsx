@@ -28,7 +28,7 @@ function readingMinutes(html: string) {
 }
 
 /**
- * I/Section/BlogPost — centred reading column (760 · 640 tablet · full mobile): ArrowLink back link
+ * I/Section/BlogPost — centred reading column (720 · 640 tablet · full mobile): ArrowLink back link
  * (I-BLP-02 · M-10), mono meta (category · date · author), H2 title (I-BLP-01 · M-01 on load),
  * full-width cover (16:9 tablet, 4:3 mobile), rich-text body, share row (copy link · X · Facebook).
  */
@@ -90,7 +90,7 @@ export function BlogPost({
     <article className="bpost" style={backgroundColor ? { backgroundColor } : undefined}>
       {/* I-BLP-01 · M-01: meta + title rise on load (y 40, 0.5s ease-standard, delay 0.2) */}
       <header ref={headRef} className={cx("bpost__head", reveal)}>
-        {backLinkText && <ArrowLink className="bpost__back" label={backLinkText} href={backHref} />}
+        {backLinkText && <ArrowLink className="bpost__back" size="uiSm" label={backLinkText} href={backHref} />}
         {meta.length > 0 && (
           <div className={cx("bpost__meta", TEXT.label, "tabular")}>
             {meta.map((m, i) => (

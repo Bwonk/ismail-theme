@@ -32,7 +32,6 @@ export interface Props {
   billingAddressLabel?: string;
   paymentLabel?: string;
   installmentText?: string;
-  invoiceLabel?: string;
   subtotalLabel?: string;
   shippingLabel?: string;
   freeShippingText?: string;

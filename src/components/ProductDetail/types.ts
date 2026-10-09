@@ -76,4 +76,5 @@ export interface Props {
   lowStockThreshold?: number;
   highlights?: any;
   backgroundColor?: string;
+  noReviewsText?: string;
 }

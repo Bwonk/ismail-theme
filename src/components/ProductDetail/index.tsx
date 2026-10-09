@@ -31,6 +31,7 @@ import {
   hasCustomer,
   initBundleProducts,
   isAcceptedProductOffer,
+  isCustomerReviewEnabled,
   isFavoriteIkasProduct,
   rejectProductOffer,
   removeIkasProductFromFavorites,
@@ -94,6 +95,7 @@ export function ProductDetail(props: Props) {
     skuLabel = "ÜRÜN KODU",
     reviewsLinkText = "Değerlendirmeleri gör",
     ratingAriaLabel = "5 üzerinden {n} puan",
+    noReviewsText = "Henüz yorum yok",
     soldOutBadgeText = "Tükendi",
     tiersTitle = "ÇOK AL, AZ ÖDE",
     tierQuantityText = "{range} adet",
@@ -276,16 +278,18 @@ export function ProductDetail(props: Props) {
   if (!product || !variant) {
     return (
       <section className="pdp pdp--loading" style={backgroundColor ? { backgroundColor } : undefined} aria-busy="true">
+        <div className="pdp__crumbs">
+          <Breadcrumbs items={[{ label: homeText, href: withRoutePrefix("/") }]} ariaLabel={breadcrumbAriaLabel} />
+        </div>
+        {/* pdp-skeleton: 876×700 gallery block + I/Sub/Skeleton (media 120 · title 260×24 · 2 lines · button 48) */}
         <div className="pdp__main">
           <div className="pdp__skel-gallery" />
           <div className="pdp__details pdp__skel">
-            <Skeleton width={64} height={20} />
-            <Skeleton width="80%" height={32} />
-            <Skeleton width={120} height={12} />
-            <Skeleton width={140} height={24} />
-            <Skeleton height={40} />
+            <Skeleton height={120} className="pdp__skel-media" />
+            <Skeleton width={260} height={24} />
+            <Skeleton height={12} />
+            <Skeleton height={12} />
             <Skeleton height={48} />
-            <Skeleton height={120} />
           </div>
         </div>
       </section>
@@ -334,7 +338,7 @@ export function ProductDetail(props: Props) {
   );
   const tracked = !variant.sellIfOutOfStock && !variant.bundleSettings;
   let stockNote: { text: string; tone: "low" | "out" | "in" } | null = null;
-  if (soldOut) stockNote = outOfStockNoteText ? { text: outOfStockNoteText, tone: "out" } : null;
+  if (soldOut) stockNote = outOfStockNoteText ? { text: outOfStockNoteText, tone: "low" } : null;
   else if (tracked && variant.stock > 0 && variant.stock <= lowStockThreshold && lowStockText)
     stockNote = { text: fill(lowStockText, { n: variant.stock }), tone: "low" };
   else if (inStockText) stockNote = { text: inStockText, tone: "in" };
@@ -552,12 +556,14 @@ export function ProductDetail(props: Props) {
             )}
           </div>
 
-          {(product.reviewCount ?? 0) > 0 && (
+          {((product.reviewCount ?? 0) > 0 || isCustomerReviewEnabled(product)) && (
             <div className="pdp__rating">
+              {/* RatingStars — yorumsuz: line stars + noReviewsText */}
               <RatingStars
                 rating={product.averageRating}
-                count={product.reviewCount}
-                ariaLabel={fill(ratingAriaLabel, { n: (product.averageRating ?? 0).toFixed(1).replace(".", ",") })}
+                count={product.reviewCount ?? 0}
+                emptyText={noReviewsText}
+                ariaLabel={(product.reviewCount ?? 0) > 0 ? fill(ratingAriaLabel, { n: (product.averageRating ?? 0).toFixed(1).replace(".", ",") }) : undefined}
               />
               {reviewsLinkText && (
                 <a className={cx("pdp__rating-link", TEXT.uiSm)} href="#product-reviews">
@@ -586,11 +592,13 @@ export function ProductDetail(props: Props) {
                 {tiers.map((t, i) => {
                   const { min, max } = t.lineItemQuantityRange;
                   const range = max === 0 ? `${min}+` : min === max ? `${min}` : `${min}–${max}`;
-                  const on = quantity >= min && (max === 0 || quantity <= max);
+                  const single = min === 1 && max === 1;
                   return (
-                    <div key={i} className={cx("pdp__tier", on && "pdp__tier--on")}>
-                      <span className={TEXT.ui}>{fill(tierQuantityText, { range })}</span>
-                      <span className={cx(TEXT.price, "tabular")}>{fill(tierUnitPriceText, { price: t.formattedFinalPrice })}</span>
+                    <div key={i} className="pdp__tier">
+                      <span className={cx("pdp__tier-range", TEXT.ui)}>{fill(tierQuantityText, { range })}</span>
+                      <span className={cx("pdp__tier-price", TEXT.price, "tabular")}>
+                        {single ? t.formattedFinalPrice : fill(tierUnitPriceText, { price: t.formattedFinalPrice })}
+                      </span>
                     </div>
                   );
                 })}
@@ -652,19 +660,17 @@ export function ProductDetail(props: Props) {
             </div>
           )}
 
-          {!soldOut && (
-            <div className="pdp__quantity">
-              <QuantitySelector
-                value={quantity}
-                min={limits.min}
-                max={limits.max}
-                onChange={setQuantity}
-                valueAriaLabel={quantityAriaLabel}
-                decreaseAriaLabel={decreaseAriaLabel}
-                increaseAriaLabel={increaseAriaLabel}
-              />
-            </div>
-          )}
+          <div className="pdp__quantity">
+            <QuantitySelector
+              value={quantity}
+              min={limits.min}
+              max={limits.max}
+              onChange={setQuantity}
+              valueAriaLabel={quantityAriaLabel}
+              decreaseAriaLabel={decreaseAriaLabel}
+              increaseAriaLabel={increaseAriaLabel}
+            />
+          </div>
 
           {/* I-PDP-04 · M-11 via Button */}
           <div className="pdp__actions">
@@ -687,6 +693,7 @@ export function ProductDetail(props: Props) {
 
           {bisEnabled && (
             <div className="pdp__bis">
+              {backInStockTitle && <p className={cx("pdp__bis-title", TEXT.ui)}>{backInStockTitle}</p>}
               {bisStatus === "saved" ? (
                 <p className={cx("pdp__bis-success", TEXT.uiSm)} role="status">
                   <Icon name="circle-check" size={16} className="pdp__bis-icon" />
@@ -698,32 +705,29 @@ export function ProductDetail(props: Props) {
                   <ArrowLink label={backInStockLoginLinkText} onClick={() => Router.navigateToPage("LOGIN")} />
                 </div>
               ) : (
-                <>
-                  {backInStockTitle && <p className={cx("pdp__bis-title", TEXT.ui)}>{backInStockTitle}</p>}
-                  <form className="pdp__bis-form" onSubmit={onBackInStock as any} noValidate>
-                    <FormField
-                      className="pdp__bis-field"
-                      type="email"
-                      name="email"
-                      autoComplete="email"
-                      inputMode="email"
-                      ariaLabel={backInStockPlaceholder}
-                      placeholder={backInStockPlaceholder}
-                      value={bisEmail || customerStore.customer?.email || ""}
-                      error={bisStatus === "error" ? backInStockErrorText : null}
-                      onInput={(v) => {
-                        setBisEmail(v);
-                        if (bisStatus === "error") setBisStatus("idle");
-                      }}
-                    />
-                    <Button
-                      type="submit"
-                      className="pdp__bis-btn"
-                      label={bisStatus === "sending" ? backInStockSendingText : backInStockButtonText}
-                      state={bisStatus === "sending" ? "loading" : "idle"}
-                    />
-                  </form>
-                </>
+                <form className="pdp__bis-form" onSubmit={onBackInStock as any} noValidate>
+                  <FormField
+                    className="pdp__bis-field"
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    ariaLabel={backInStockPlaceholder}
+                    placeholder={backInStockPlaceholder}
+                    value={bisEmail || customerStore.customer?.email || ""}
+                    error={bisStatus === "error" ? backInStockErrorText : null}
+                    onInput={(v) => {
+                      setBisEmail(v);
+                      if (bisStatus === "error") setBisStatus("idle");
+                    }}
+                  />
+                  <Button
+                    type="submit"
+                    className="pdp__bis-btn"
+                    label={bisStatus === "sending" ? backInStockSendingText : backInStockButtonText}
+                    state={bisStatus === "sending" ? "loading" : "idle"}
+                  />
+                </form>
               )}
             </div>
           )}
@@ -780,7 +784,7 @@ export function ProductDetail(props: Props) {
                 <div className="pdp__offers-total-row">
                   <div className="pdp__offers-total">
                     {offersCompare && <s className={cx("pdp__offers-compare", TEXT.uiSm, "tabular")}>{offersCompare}</s>}
-                    <span className={cx(TEXT.h4, "tabular")}>{offersTotal}</span>
+                    <span className={cx("pdp__offers-total-value", TEXT.h4, "tabular")}>{offersTotal}</span>
                   </div>
                   {offersSaving > 0 && offersSavingText && (
                     <span className={cx("pdp__offers-saving", TEXT.badge, "tabular")}>

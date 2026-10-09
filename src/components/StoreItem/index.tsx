@@ -34,7 +34,8 @@ function isOpenNow(hours?: string): boolean | null {
 /**
  * Store child shared by StoreList (card: image 4:3, name, address, hours, ArrowLink — I-STOR-02) and
  * StoreLocator (row: name + district, address, computed status, arrow — I-LOC-01). Both markups are
- * rendered; the parent's CSS shows one. In a locator the row announces itself with SCOPED_EVENT.storeSelect
+ * rendered; the parent's CSS shows one. The row shows `shortAddress` (falls back to `address`); the
+ * locator's feature card shows the full `address`. In a locator the row announces itself with SCOPED_EVENT.storeSelect
  * and the status ("storeStatus") is computed from `hours` on the client (statusNote overrides).
  */
 export function StoreItem({
@@ -42,6 +43,7 @@ export function StoreItem({
   name = "Kadıköy",
   district = "Moda",
   address = "Caferağa Mah. Moda Cad. No: 12, Kadıköy / İstanbul",
+  shortAddress,
   hours = "10:00–21:00",
   statusNote,
   hoursLabel = "SAAT",
@@ -131,13 +133,13 @@ export function StoreItem({
             {name && <span className={cx("sitem__row-title", TEXT.h4)}>{name}</span>}
             {district && <span className={cx("sitem__row-district", TEXT.uiSm)}>{district}</span>}
           </span>
-          {address && <span className={cx("sitem__row-address", TEXT.uiSm)}>{address}</span>}
+          {(shortAddress || address) && <span className={cx("sitem__row-address", TEXT.uiSm)}>{shortAddress || address}</span>}
         </span>
         {status && status.text && (
           <span className={cx("sitem__row-status", TEXT.uiSm, `sitem__row-status--${status.kind}`)}>{status.text}</span>
         )}
         <span className="sitem__row-arrow" aria-hidden="true">
-          <Icon name="arrow-right" size={16} />
+          <Icon name="arrow-up-right" size={16} />
         </span>
       </button>
     </div>

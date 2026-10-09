@@ -9,6 +9,10 @@
 }
 
 .acc__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0 10px;
   margin: 0;
   color: var(--c-text);
 }
@@ -40,6 +44,7 @@
   border: 0;
   background: var(--c-transparent);
   color: var(--c-muted);
+  font-weight: 400;
   text-align: left;
   cursor: pointer;
   /* I-ACC-01 · M-28 */

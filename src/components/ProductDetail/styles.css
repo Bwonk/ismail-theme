@@ -151,6 +151,7 @@
   border-color: var(--c-text);
 }
 
+/* pdp-dots: 6px dots, 6px apart, 12px under the track */
 .pdp__dots {
   display: none;
   justify-content: center;
@@ -162,7 +163,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
+  width: 12px;
   height: 18px;
   padding: 0;
   border: 0;
@@ -234,7 +235,7 @@
 
 .pdp__price {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -246,6 +247,7 @@
 
 .pdp__price-compare {
   color: var(--c-muted);
+  font-weight: 400;
 }
 
 .pdp__campaign {
@@ -296,8 +298,14 @@
   border-bottom: 0;
 }
 
-.pdp__tier--on {
+/* tier-row: every second row on surface */
+.pdp__tier:nth-child(even) {
   background: var(--c-surface);
+}
+
+.pdp__tier-range,
+.pdp__tier-price {
+  font-weight: 400;
 }
 
 .pdp__group {
@@ -357,6 +365,10 @@
   padding-bottom: 4px;
 }
 
+.pdp__bundle > :last-child {
+  border-bottom: 0;
+}
+
 .pdp__quantity {
   display: flex;
 }
@@ -412,6 +424,7 @@
 
 .pdp__bis-title {
   margin: 0;
+  font-weight: 400;
 }
 
 .pdp__bis-form {
@@ -468,14 +481,6 @@
 
 .pdp__stock--low .pdp__stock-dot {
   background: var(--c-accent);
-}
-
-.pdp__stock--out {
-  color: var(--c-muted);
-}
-
-.pdp__stock--out .pdp__stock-dot {
-  background: var(--c-muted);
 }
 
 /* stock locations */
@@ -568,7 +573,12 @@
   color: var(--c-muted);
 }
 
+.pdp__offers-total-value {
+  font-weight: 400;
+}
+
 .pdp__offers-saving {
+  font-weight: 400;
   padding: 3px 8px;
   border-radius: var(--radius-pill);
   background: var(--c-accent);
@@ -612,7 +622,7 @@
 
 .pdp__skel {
   position: static;
-  gap: 16px;
+  gap: 12px;
 }
 
 /* ---------- laptop 992–1199: single-column gallery + thumb rail, 400 info ---------- */
@@ -716,7 +726,7 @@
 /* ---------- mobile ---------- */
 @media (max-width: bp(KUQjO8W6p9)) {
   .pdp {
-    padding: 24px 0 0;
+    padding: 24px 0;
   }
 
   .pdp__crumbs {
@@ -733,8 +743,9 @@
     scroll-padding-inline: var(--space-page);
   }
 
+  /* pdp-gallery-track: 320×400 cards on a 390 frame */
   .pdp__media {
-    flex-basis: 82%;
+    flex-basis: min(82vw, 400px);
   }
 
   .pdp__details {
@@ -801,5 +812,9 @@
   .pdp__skel-gallery {
     height: 400px;
     margin: 0 var(--space-page);
+  }
+
+  .pdp__skel-media {
+    display: none;
   }
 }

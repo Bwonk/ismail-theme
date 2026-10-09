@@ -88,7 +88,7 @@
 .sitem__row-name {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 4px 8px;
 }
 
@@ -141,22 +141,6 @@
 
   .sitem--on .sitem__row:hover {
     border-color: var(--c-surface);
-  }
-}
-
-@media (max-width: bp(KUQjO8W6p9)) {
-  .sitem__row {
-    flex-wrap: wrap;
-  }
-
-  .sitem__row-text {
-    flex-basis: calc(100% - 52px);
-  }
-
-  .sitem__row-status {
-    order: 3;
-    flex-basis: 100%;
-    text-align: left;
   }
 }
 

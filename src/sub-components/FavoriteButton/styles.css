@@ -11,7 +11,7 @@
   background: var(--c-bg);
   color: var(--c-text);
   cursor: pointer;
-  transition: color var(--dur-fast) var(--ease-standard);
+  transition: background-color var(--dur-fast) var(--ease-standard);
 }
 
 .fav--md {
@@ -44,8 +44,9 @@
 }
 
 @media (hover: hover) {
+  /* FavoriteButton — hover: zemin surface olur, ikon değişmez */
   .fav:hover {
-    color: var(--c-accent);
+    background: var(--c-surface);
   }
 }
 

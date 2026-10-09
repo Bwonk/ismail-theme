@@ -13,7 +13,7 @@ import {
 import Button from "../../sub-components/Button";
 import FormField from "../../sub-components/FormField";
 import Icon from "../../sub-components/Icon";
-import LocaleSwitcher, { currentLocaleLabel, hasLocaleAlternatives } from "../../sub-components/LocaleSwitcher";
+import LocaleSwitcher, { currentLocaleLabel, hasLocaleAlternatives, hasLocaleOptions } from "../../sub-components/LocaleSwitcher";
 import { cx } from "../../utils/cx";
 import { useMounted } from "../../utils/hooks";
 import { TEXT, forceScheme } from "../../utils/tokens";
@@ -101,8 +101,10 @@ export function Footer(props: Props) {
     status === "success" ? notifySuccessText : status === "invalid" ? notifyErrorText : status === "failure" ? notifyFailureText : "";
   const columnList = toList(columns);
   const socialList = toList(socialLinks);
-  const showLocale = mounted && hasLocaleAlternatives();
-  const localeLabel = (mounted && currentLocaleLabel()) || localeText;
+  // locale-button: always in the bottom row (canvas). Opens the switcher once the store's options are known;
+  // the label follows the live routing only when the shopper can actually switch.
+  const canSwitch = mounted && hasLocaleOptions();
+  const localeLabel = (mounted && hasLocaleAlternatives() && currentLocaleLabel()) || localeText;
   const submitting = !!form.isSubmitting;
 
   return (
@@ -210,7 +212,7 @@ export function Footer(props: Props) {
               ) : (
                 <p className={cx("ftr__contact", TEXT.uiSm)}>{contactText}</p>
               ))}
-            {showLocale && (
+            {localeLabel && (
               <div className="ftr__locale">
                 <button
                   ref={localeBtnRef}
@@ -219,6 +221,7 @@ export function Footer(props: Props) {
                   aria-haspopup="dialog"
                   aria-expanded={localeOpen}
                   aria-controls="footer-locale-panel"
+                  disabled={!canSwitch}
                   onClick={() => {
                     setLocaleMode("anchored");
                     setLocaleOpen((o) => !o);
@@ -228,14 +231,14 @@ export function Footer(props: Props) {
                   <span className={TEXT.uiSm}>{localeLabel}</span>
                   <Icon name="chevron-up" size={14} className="ftr__locale-caret" />
                 </button>
-                <LocaleSwitcher
+                {canSwitch && <LocaleSwitcher
                   id="footer-locale-panel"
                   open={localeOpen}
                   mode={localeMode}
                   onClose={closeLocale}
                   localeTitle={localeTitle}
                   languageTitle={languageTitle}
-                />
+                />}
               </div>
             )}
           </div>

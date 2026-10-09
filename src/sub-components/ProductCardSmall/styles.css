@@ -34,10 +34,6 @@
   object-fit: cover;
 }
 
-.pcsm__placeholder {
-  color: var(--c-muted);
-}
-
 .pcsm__info {
   display: flex;
   flex: 1;
@@ -56,21 +52,8 @@
   transition: color 0.3s var(--ease-standard);
 }
 
-.pcsm__prices {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  column-gap: 8px;
-}
-
 .pcsm__price {
   color: var(--c-text);
-}
-
-.pcsm__compare {
-  color: var(--c-muted);
-  font-weight: 400;
-  text-decoration-thickness: 1px;
 }
 
 .pcsm:focus-visible {

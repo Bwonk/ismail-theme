@@ -23,7 +23,6 @@
   overflow: hidden;
   border-radius: var(--radius-pill);
   background: var(--c-inverse-bg);
-  box-shadow: inset 0 0 0 var(--size-line) color-mix(in srgb, var(--c-text) 12%, transparent);
 }
 
 .vswatch__img {
@@ -42,14 +41,13 @@
   opacity: var(--opacity-inactive);
 }
 
-/* 20px diagonal strike in the background colour */
+/* swatch-strike — 20×20 box, bottom-left → top-right, 1.5px stroke in the background colour */
 .vswatch__strike {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px;
+  width: 28.28px;
   height: 1.5px;
-  border-radius: var(--radius-pill);
   background: var(--c-bg);
   transform: translate(-50%, -50%) rotate(-45deg);
   pointer-events: none;

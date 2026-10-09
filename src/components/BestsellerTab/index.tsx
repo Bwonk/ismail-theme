@@ -71,7 +71,7 @@ export function BestsellerTab({
               onFocusCapture={() => setActive(i)}
             >
               <a className="btab__link" href={getProductHref(product)}>
-                <span className={cx("btab__rank", TEXT.h4, "tabular")}>{pad(i + 1)}</span>
+                <span className={cx("btab__rank", TEXT.label, "tabular")}>{pad(i + 1)}</span>
                 <span className="btab__media">
                   {image ? (
                     <img

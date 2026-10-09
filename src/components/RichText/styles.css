@@ -116,23 +116,34 @@
   scroll-margin-top: calc(var(--size-header) + 24px);
 }
 
-.rtxt__body > * + .rtxt__h {
-  margin-top: 28px;
+/* rich-list-item: "•  " prefix, no indent, 16px apart (same rhythm as the body) */
+.rtxt__body ul {
+  padding-left: 0;
+  list-style: none;
 }
 
-.rtxt__body ul,
+.rtxt__body ul > li::before {
+  content: "\2022\00a0\00a0";
+}
+
 .rtxt__body ol {
   padding-left: 20px;
 }
 
 .rtxt__body li + li {
-  margin-top: 6px;
+  margin-top: 16px;
 }
 
 .rtxt__body a {
   color: var(--c-text);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+}
+
+/* rich-link */
+.rtxt__body .rtxt__link {
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-standard);
 }
 
 @media (hover: hover) {

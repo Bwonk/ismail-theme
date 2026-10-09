@@ -1,6 +1,7 @@
 .counter {
   display: inline-flex;
   align-items: center;
+  font-weight: 500; /* I/Sub/Counter: digits and separators 500 */
   line-height: 1.2;
 }
 

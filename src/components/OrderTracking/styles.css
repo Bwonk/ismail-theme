@@ -32,6 +32,7 @@
 
 .trk__title {
   color: var(--c-text);
+  font-weight: 400;
   text-wrap: balance;
 }
 
@@ -172,17 +173,11 @@
   text-align: right;
 }
 
-.trk__track-link {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-end;
-  gap: 4px;
-  color: var(--c-text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.trk__row-link {
+  text-decoration: none;
 }
 
-.trk__track-link:focus-visible {
+.trk__row-link:focus-visible {
   outline: 2px solid var(--c-accent);
   outline-offset: 2px;
 }
@@ -285,8 +280,9 @@
 }
 
 @media (hover: hover) {
-  .trk__track-link:hover {
-    color: var(--c-muted);
+  .trk__row-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 

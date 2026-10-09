@@ -138,6 +138,10 @@
   white-space: nowrap;
 }
 
+.hdr__pager-count--m {
+  display: none;
+}
+
 /* ---------- Main bar ---------- */
 
 .hdr__slot {
@@ -439,6 +443,19 @@
   .hdr__pager-btn {
     width: 20px;
     height: 20px;
+  }
+
+  .hdr__pager-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hdr__pager-count--d {
+    display: none;
+  }
+
+  .hdr__pager-count--m {
+    display: inline;
   }
 
   .hdr__main {

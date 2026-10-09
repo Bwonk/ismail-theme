@@ -99,8 +99,18 @@
 }
 
 .aodet__link {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .aodet__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.aodet__copied {
+  font-weight: 400;
 }
 
 .aodet__tracking {
@@ -153,13 +163,16 @@
   min-width: 0;
 }
 
+/* od-item-title / od-item-price — title & price sizes at 400 */
 .aodet__item-title {
   color: var(--c-text);
+  font-weight: 400;
 }
 
 .aodet__item-price {
   flex-shrink: 0;
   color: var(--c-text);
+  font-weight: 400;
 }
 
 .aodet__addresses {
@@ -219,10 +232,6 @@
 }
 
 @media (max-width: bp(KUQjO8W6p9)) {
-  .aodet__head {
-    align-items: flex-start;
-  }
-
   .aodet__addresses {
     grid-template-columns: minmax(0, 1fr);
   }

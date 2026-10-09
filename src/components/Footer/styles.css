@@ -253,6 +253,10 @@
   cursor: pointer;
 }
 
+.ftr__locale-btn:disabled {
+  cursor: default;
+}
+
 .ftr__locale-btn:focus-visible,
 .ftr__contact:focus-visible {
   outline: 2px solid var(--c-accent);
@@ -374,7 +378,6 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    border-top: 1px solid var(--c-line);
   }
 
   .ftr__bottom {

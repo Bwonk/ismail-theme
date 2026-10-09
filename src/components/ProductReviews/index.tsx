@@ -19,7 +19,6 @@ import {
   setCustomerReviewFormTitle,
   submitCustomerReviewForm,
 } from "@ikas/bp-storefront";
-import ArrowLink from "../../sub-components/ArrowLink";
 import Button from "../../sub-components/Button";
 import FormField from "../../sub-components/FormField";
 import Icon from "../../sub-components/Icon";
@@ -79,9 +78,7 @@ export function ProductReviews({
   successText = "Yorumun onaylandıktan sonra yayınlanır.",
   starRequiredText = "Bir puan seç.",
   formErrorText = "Yorum gönderilemedi, tekrar dene.",
-  cancelText = "Vazgeç",
   loginRequiredText = "Yorum yazmak için giriş yapmalısın.",
-  loginLinkText = "Giriş yap",
   reviewsPerPage = 3,
   backgroundColor,
 }: Props) {
@@ -135,6 +132,10 @@ export function ProductReviews({
   };
 
   const openForm = () => {
+    if (formOpen) {
+      closeForm();
+      return;
+    }
     setSent(false);
     setFailed(false);
     setFormOpen(true);
@@ -200,8 +201,8 @@ export function ProductReviews({
               </div>
             ))}
           </div>
-          {/* I-REV-02 · M-11 via Button */}
-          {enabled && !formOpen && writeReviewText && (
+          {/* I-REV-02 · M-11 via Button — stays visible in the yorum formu state; toggles the form */}
+          {enabled && writeReviewText && (
             <div className="rev__write">
               <Button label={writeReviewText} variant="outline" onClick={openForm} />
             </div>
@@ -220,25 +221,18 @@ export function ProductReviews({
             <form className="rev__form" onSubmit={onSubmit as any} noValidate>
               {formTitle && <h3 className={cx("rev__form-title", TEXT.h4)}>{formTitle}</h3>}
               {needsLogin ? (
-                <div className="rev__login">
-                  <span className="rev__login-text">
-                    <Icon name="lock" size={16} />
-                    <span className={TEXT.uiSm}>{loginRequiredText}</span>
-                  </span>
-                  <span className="rev__login-actions">
-                    <ArrowLink label={loginLinkText} onClick={() => Router.navigateToPage("LOGIN")} />
-                    <button type="button" className={cx("rev__cancel", TEXT.uiSm)} onClick={closeForm}>
-                      {cancelText}
-                    </button>
-                  </span>
-                </div>
+                /* review-form-login: lock + text; the row itself leads to the login page */
+                <button type="button" className="rev__login" onClick={() => Router.navigateToPage("LOGIN")}>
+                  <Icon name="lock" size={16} />
+                  <span className={TEXT.uiSm}>{loginRequiredText}</span>
+                </button>
               ) : (
                 <>
                   <div className="rev__form-rating">
                     <span className={cx("rev__form-label", TEXT.label)}>{ratingLabel}</span>
                     <RatingStars
                       interactive
-                      size={24}
+                      size={14}
                       value={starValue}
                       onChange={(v) => setCustomerReviewFormStar(form, String(v))}
                       groupAriaLabel={ratingLabel}
@@ -280,16 +274,11 @@ export function ProductReviews({
                     </p>
                   )}
                   <div className="rev__form-actions">
-                    <div className="rev__form-buttons">
-                      <Button
-                        type="submit"
-                        label={form.isSubmitting ? submittingText : submitText}
-                        state={form.isSubmitting ? "loading" : "idle"}
-                      />
-                      <button type="button" className={cx("rev__cancel", TEXT.uiSm)} onClick={closeForm}>
-                        {cancelText}
-                      </button>
-                    </div>
+                    <Button
+                      type="submit"
+                      label={form.isSubmitting ? submittingText : submitText}
+                      state={form.isSubmitting ? "loading" : "idle"}
+                    />
                     {successText && <p className={cx("rev__form-note", TEXT.uiSm)}>{successText}</p>}
                   </div>
                 </>

@@ -5,7 +5,7 @@
   --acard-title-closed: 0.625; /* text-h4 / text-h3 */
   position: relative;
   display: block;
-  flex-grow: calc(1 + 1.6 * var(--o));
+  flex-grow: calc(1 + 1.607 * var(--o)); /* 524 : 201 */
   flex-shrink: 1;
   flex-basis: 0;
   min-width: 0;
@@ -15,7 +15,7 @@
   background: var(--c-surface);
   color: inherit;
   text-decoration: none;
-  /* I-ACT-04 · I-M-05: flex-grow 1 → 2.6, 0.5s ease-out-soft */
+  /* I-ACT-04 · I-M-05: flex-grow 1 → 2.6 (524 / 201), 0.5s ease-out-soft */
   transition: flex-grow 0.5s var(--ease-out-soft), flex-basis 0.5s var(--ease-out-soft);
 }
 
@@ -95,7 +95,6 @@
 }
 
 .acard__text {
-  width: 300px;
   margin: 0;
 }
 
@@ -122,9 +121,6 @@
     scroll-snap-align: start;
   }
 
-  .acard__text {
-    width: auto;
-  }
 }
 
 /* Mobile: scroll-snap strip, the centred card is open (240), the others 88. */
@@ -143,10 +139,6 @@
 
   .acard__content {
     padding: 16px;
-  }
-
-  .acard__text {
-    width: 208px;
   }
 }
 

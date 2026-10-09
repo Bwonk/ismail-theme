@@ -51,7 +51,12 @@ function processContent(html: string): { html: string; headings: Heading[] } {
     headings.push({ id, label });
     return `<h${lvl} id="${id}" class="${cls}"${rest}>${inner}</h${lvl}>`;
   });
-  return { html: out, headings };
+  // rich-link: a paragraph holding only a link is drawn as a UI-style line (font-ui, no underline).
+  const linked = out.replace(/<p(\s[^>]*)?>\s*<a(\s[^>]*)?>([^<]*(?:<(?!\/a>|\/?p[\s>]|a[\s>])[^<]*)*)<\/a>\s*<\/p>/gi, (_m, pAttrs = "", aAttrs = "", inner: string) => {
+    const rest = aAttrs.replace(/\sclass\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "");
+    return `<p${pAttrs}><a class="rtxt__link ${TEXT.ui}"${rest}>${inner}</a></p>`;
+  });
+  return { html: linked, headings };
 }
 
 /** I/Section/RichText — policy/text page: 280 TOC (dropdown ≤991) + 760 text column. I-TXT-01 on the title. */

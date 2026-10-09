@@ -84,4 +84,5 @@ export interface Props {
   qbIncreaseAriaLabel?: string;
   quickBuyPayWithIkas?: boolean;
   countdownDaysText?: string;
+  searchPlaceholderMobile?: string;
 }

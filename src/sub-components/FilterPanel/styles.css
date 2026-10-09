@@ -19,9 +19,19 @@
   padding: 0 0 16px;
 }
 
-.fpanel--sidebar > .fpanel__group:first-child .acc__head,
-.fpanel--sidebar > .fpanel__item:first-child .acc__head {
-  padding-top: 0;
+/* open group: the plus reads as a minus (filter-group-icon = minus); vertical stroke folds away */
+.fpanel__group.acc--open .acc__icon {
+  transform: none;
+}
+
+.fpanel__group .acc__icon path:nth-child(2) {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.fpanel__group.acc--open .acc__icon path:nth-child(2) {
+  transform: scaleY(0);
 }
 
 .fpanel__chips {
@@ -30,8 +40,14 @@
   gap: 6px;
 }
 
-.fpanel--drawer .fpanel__chips {
+.fpanel--drawer .fpanel__chips,
+.fpanel__chips--range {
   gap: 8px;
+}
+
+/* the drawer keeps the 280 PriceRange width */
+.fpanel--drawer .prange {
+  max-width: 280px;
 }
 
 .fpanel__swatches {
@@ -55,18 +71,6 @@
   color: var(--c-muted);
 }
 
-.fpanel__checks {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fpanel__check-label {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
 .fpanel__cats {
   display: flex;
   flex-direction: column;
@@ -86,19 +90,18 @@
   padding: 0;
   border: 0;
   background: var(--c-transparent);
-  color: var(--c-muted);
+  color: var(--c-text);
   text-align: left;
   cursor: pointer;
-  /* M-28 */
-  transition: color var(--dur-fast) var(--ease-standard);
-}
-
-.fpanel__cat--on {
-  color: var(--c-text);
 }
 
 .fpanel__cat--on .fpanel__cat-name {
   font-weight: 600;
+}
+
+.fpanel__cat:disabled {
+  opacity: var(--opacity-inactive);
+  cursor: not-allowed;
 }
 
 .fpanel__cat:focus-visible {
@@ -106,8 +109,8 @@
   outline-offset: 2px;
 }
 
-@media (hover: hover) {
-  .fpanel__cat:hover {
-    color: var(--c-text);
+@media (prefers-reduced-motion: reduce) {
+  .fpanel__group .acc__icon path:nth-child(2) {
+    transition: none;
   }
 }

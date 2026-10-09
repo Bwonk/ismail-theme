@@ -7,7 +7,10 @@
   padding: 0;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--c-inverse-bg);
+  box-sizing: border-box;
+  /* canvas: no stroke on the filled button, so the hover face (accent) covers the whole
+     48/40 box; only the outline variant (Button — çerçeveli) draws a 1px line */
+  border: 0 solid var(--c-transparent);
   border-radius: var(--radius-card);
   background: var(--c-inverse-bg);
   color: var(--c-inverse-text);
@@ -55,20 +58,19 @@
 
 .btn--outline {
   background: var(--c-transparent);
+  border-width: 1px;
   border-color: var(--c-line);
   color: var(--c-text);
 }
 
 .btn--light {
   background: var(--c-bg);
-  border-color: var(--c-bg);
   color: var(--c-text);
 }
 
 .btn--added,
 .btn--soldout {
   background: var(--c-surface);
-  border-color: var(--c-surface);
   color: var(--c-muted);
 }
 
@@ -80,9 +82,13 @@
   color: var(--c-success);
 }
 
-.btn--disabled,
-.btn--loading {
+/* Button — pasif: opacity-inactive. Button — yükleniyor: spinner + label at full opacity. */
+.btn--disabled {
   opacity: var(--opacity-inactive);
+  cursor: default;
+}
+
+.btn--loading {
   cursor: default;
 }
 

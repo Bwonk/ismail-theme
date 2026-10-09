@@ -28,16 +28,8 @@
   transition: opacity var(--dur-base) var(--ease-standard), transform var(--dur-slow) var(--ease-out-soft);
 }
 
-.pcard__placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--c-muted);
-}
-
-.pcard--soldout .pcard__media > * {
+/* stok yok — only the image dims (image-front 0.4); badge, favourite and cart stay as drawn */
+.pcard--soldout .pcard__img {
   opacity: var(--opacity-inactive);
 }
 
@@ -92,6 +84,7 @@
 
 .pcard__compare {
   color: var(--c-muted);
+  font-weight: 400;
   text-decoration-thickness: 1px;
 }
 
@@ -107,10 +100,6 @@
   height: 12px;
   border: 1px solid var(--c-line);
   border-radius: 50%;
-}
-
-.pcard__swatch--on {
-  box-shadow: 0 0 0 2px var(--c-bg), 0 0 0 3px var(--c-text);
 }
 
 .pcard__swatch-more {
@@ -135,7 +124,6 @@
 }
 
 .pcard__cart:disabled {
-  opacity: var(--opacity-inactive);
   cursor: not-allowed;
 }
 
@@ -157,11 +145,8 @@
   }
 }
 
+/* ProductCard — 177 mobil: badges / favourite sit 10px from the edge; gaps unchanged */
 @media (max-width: bp(KUQjO8W6p9)) {
-  .pcard {
-    gap: 10px;
-  }
-
   .pcard__badges {
     top: 10px;
     left: 10px;
@@ -170,10 +155,6 @@
   .pcard__fav {
     top: 10px;
     right: 10px;
-  }
-
-  .pcard__info {
-    gap: 8px;
   }
 }
 

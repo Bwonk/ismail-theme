@@ -73,7 +73,7 @@ const VariantPicker = observer(function VariantPicker({
               <span id={labelId} className={cx("vpick__label", TEXT.label)}>
                 {label}
               </span>
-              {showGuide && <ArrowLink className="vpick__guide" label={sizeGuideText!} href={sizeGuideHref} />}
+              {showGuide && <ArrowLink className="vpick__guide" size="uiSm" label={sizeGuideText!} href={sizeGuideHref} />}
             </div>
             <div className={cx("vpick__row", isColor && "vpick__row--swatch")} role="radiogroup" aria-labelledby={labelId}>
               {dvt.displayedVariantValues.map((dvv) =>

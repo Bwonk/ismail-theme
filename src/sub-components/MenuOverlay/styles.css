@@ -348,11 +348,6 @@
 .mpanel__caret {
   flex-shrink: 0;
   color: var(--c-muted);
-  transition: transform var(--dur-base) var(--ease-out-soft);
-}
-
-.mpanel__caret.is-open {
-  transform: rotate(180deg);
 }
 
 /* M-22 accordion */
@@ -439,12 +434,17 @@
 
 .mpanel__locale {
   align-self: flex-start;
+  margin: 0;
   padding: 0;
   border: 0;
   background: none;
   color: var(--c-muted);
   letter-spacing: 0.4px;
   cursor: pointer;
+}
+
+p.mpanel__locale {
+  cursor: default;
 }
 
 .mpanel__link:focus-visible,
@@ -472,8 +472,7 @@
   .mpanel__panel,
   .mpanel__scrim,
   .mpanel__row,
-  .mpanel__acc,
-  .mpanel__caret {
+  .mpanel__acc {
     transition: none;
   }
 }

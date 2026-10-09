@@ -119,6 +119,28 @@
     aspect-ratio: 16 / 9;
   }
 
+  /* CollectionMosaic@mobile order (the drawn six-tile set): featured · Ceket, Terlik ·
+     Aksesuar, Çanta · Pantolon, i.e. tiles 2 · 3, 1 · 5, 4 · 6. Other counts keep list order. */
+  .mos__renderer:has(> div:nth-of-type(6):last-of-type) > div:nth-of-type(3) .ctile {
+    order: 1;
+  }
+
+  .mos__renderer:has(> div:nth-of-type(6):last-of-type) > div:nth-of-type(1) .ctile {
+    order: 2;
+  }
+
+  .mos__renderer:has(> div:nth-of-type(6):last-of-type) > div:nth-of-type(5) .ctile {
+    order: 3;
+  }
+
+  .mos__renderer:has(> div:nth-of-type(6):last-of-type) > div:nth-of-type(4) .ctile {
+    order: 4;
+  }
+
+  .mos__renderer:has(> div:nth-of-type(6):last-of-type) > div:nth-of-type(6) .ctile {
+    order: 5;
+  }
+
   /* small tiles draw the label at text-h4 size (h4 / h2 = 0.6), wrapping as h4 would */
   .mos__renderer > div:not(:nth-of-type(2)) .ctile__label {
     width: calc(100% / 0.6);

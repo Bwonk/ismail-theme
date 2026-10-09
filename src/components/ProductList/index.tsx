@@ -15,6 +15,8 @@ import {
   getProductListNextPage,
   getProductListPrevPage,
   getProductListSortOptions,
+  getProductVariantFinalPrice,
+  getSelectedProductVariant,
   handleFilterValueClick,
   handleNumberRangeOptionClick,
   hasCustomer,
@@ -33,7 +35,6 @@ import FilterDrawer from "../../sub-components/FilterDrawer";
 import FilterPanel, { currencyFormatter, filterValueLabel, formatRange, type FilterPanelTexts } from "../../sub-components/FilterPanel";
 import Icon from "../../sub-components/Icon";
 import ProductCard from "../../sub-components/ProductCard";
-import Skeleton from "../../sub-components/Skeleton";
 import { cx } from "../../utils/cx";
 import { prefersReducedMotion } from "../../utils/hooks";
 import { BREAKPOINT, TEXT } from "../../utils/tokens";
@@ -42,6 +43,13 @@ import { Props } from "./types";
 
 type Mode = "category" | "search" | "favorites";
 type Chip = { key: string; label: string; remove: () => void };
+type FavSort = "default" | "price-asc" | "price-desc";
+type SortOption = { value: string; label: string; isSelected: boolean };
+
+const finalPrice = (p: IkasProduct) => {
+  const v = getSelectedProductVariant(p);
+  return v ? (getProductVariantFinalPrice(v) as unknown as number) : 0;
+};
 
 /** Active filter chips (desktop/tablet filter bar) — one per selected value / range / sub-category. */
 function activeChips(list: IkasProductList, texts: Pick<FilterPanelTexts, "inStockText" | "outOfStockText">): Chip[] {
@@ -143,6 +151,9 @@ export function ProductList(props: Props) {
     closeAriaLabel = "Kapat",
     drawerClearText = "Temizle",
     applyFiltersText = "{count} ürünü göster",
+    favoritesSortDefaultText = "Önerilen",
+    favoritesSortPriceAscText = "Fiyat: Düşükten yükseğe",
+    favoritesSortPriceDescText = "Fiyat: Yüksekten düşüğe",
     emptyButtonLink,
     backgroundColor,
   } = props;
@@ -158,6 +169,7 @@ export function ProductList(props: Props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [stuck, setStuck] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [favSort, setFavSort] = useState<FavSort>("default");
   const [fav, setFav] = useState<{ status: "loading" | "guest" | "ready"; items: IkasProduct[] }>({ status: "loading", items: [] });
 
   // Favourites: a fetched snapshot (no store field); re-fetched when the customer changes.
@@ -231,18 +243,38 @@ export function ProductList(props: Props) {
 
   // ---- data -----------------------------------------------------------------------------------
   const isFav = mode === "favorites";
-  const items: IkasProduct[] = isFav ? fav.items : list?.data ?? [];
+  const favItems =
+    favSort === "default"
+      ? fav.items
+      : fav.items.slice().sort((a, b) => (favSort === "price-asc" ? 1 : -1) * (finalPrice(a) - finalPrice(b)));
+  const items: IkasProduct[] = isFav ? favItems : list?.data ?? [];
   const keyword = list?.searchKeyword ?? "";
   const category = list?.category ?? null;
   const brand = list?.brand ?? null;
   const total = isFav ? (fav.status === "ready" ? fav.items.length : 0) : list?.count ?? 0;
   const initialLoading = isFav ? fav.status === "loading" : !!list && !list.isInitialized;
-  const refreshing = !isFav && !!list?.isLoading && !loadingMore;
+  // yükleniyor: the grid dims to 0.4 for any refetch, "load more" included.
+  const refreshing = !isFav && !!list?.isLoading;
   const showFilters = !isFav && !!list && hasVisibleFilters(list);
   const applied = !isFav && !!list && hasProductListAppliedFilters(list);
   const chips = !isFav && list ? activeChips(list, { inStockText, outOfStockText }) : [];
-  const sortOptions = !isFav && list ? getProductListSortOptions(list) : [];
+  // Favourites get no ikas list (no filters, no sort) — the canvas bar's sort is done client-side.
+  const sortOptions: SortOption[] = isFav
+    ? ([
+        ["default", favoritesSortDefaultText],
+        ["price-asc", favoritesSortPriceAscText],
+        ["price-desc", favoritesSortPriceDescText],
+      ] as const)
+        .filter(([, label]) => !!label)
+        .map(([value, label]) => ({ value, label, isSelected: value === favSort }))
+    : list
+      ? getProductListSortOptions(list)
+      : [];
   const selectedSort = sortOptions.find((o) => o.isSelected) ?? sortOptions[0];
+  const onSort = (value: string) => {
+    if (isFav) setFavSort(value as FavSort);
+    else if (list) setSortType(list, value as IkasProductListSortType);
+  };
   const cols = Math.min(Math.max(Math.round(columns || 3), 2), 4);
 
   const title =
@@ -307,7 +339,7 @@ export function ProductList(props: Props) {
       </header>
 
       {/* filter-bar · I-PLP-01 · M-18 */}
-      {!isFav && list && (showFilters || sortOptions.length > 1) && (
+      {(isFav || (list && (showFilters || sortOptions.length > 1))) && (
         <div ref={barRef} className={cx("plp__bar", stuck && "is-stuck")}>
           <div className="plp__bar-left">
             {showFilters && (
@@ -359,7 +391,7 @@ export function ProductList(props: Props) {
                 className="plp__sort-select"
                 aria-label={sortLabel}
                 value={selectedSort?.value}
-                onChange={(e) => list && setSortType(list, (e.currentTarget as HTMLSelectElement).value as IkasProductListSortType)}
+                onChange={(e) => onSort((e.currentTarget as HTMLSelectElement).value)}
               >
                 {sortOptions.map((o) => (
                   <option key={o.value} value={o.value}>
@@ -394,15 +426,8 @@ export function ProductList(props: Props) {
           )}
 
           {initialLoading ? (
-            <div className="plp__grid plp__grid--skeleton" aria-busy="true" aria-label={loadingMoreText}>
-              {Array.from({ length: cols * 2 }).map((_, i) => (
-                <div key={i} className="plp__skel">
-                  <Skeleton height="auto" className="plp__skel-media" />
-                  <Skeleton width="70%" height={14} />
-                  <Skeleton width="35%" height={12} />
-                </div>
-              ))}
-            </div>
+            /* no skeleton on the canvas: the grid area stays empty until the first page arrives */
+            <div className="plp__grid is-refreshing" aria-busy="true" aria-label={loadingMoreText} />
           ) : empty ? (
             /* list-empty */
             <div className="plp__empty">

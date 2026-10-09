@@ -56,9 +56,11 @@ export interface Props {
   forgotSwitchText?: string;
   loginLinkText?: string;
   newLinkText?: string;
-  orderTrackingText?: string;
   agreementLink?: IkasNavigationLink | null;
   marketingLink?: IkasNavigationLink | null;
-  orderTrackingLink?: IkasNavigationLink | null;
   backgroundColor?: string;
+  firstNamePlaceholder?: string;
+  lastNamePlaceholder?: string;
+  passwordPlaceholder?: string;
+  codePlaceholder?: string;
 }

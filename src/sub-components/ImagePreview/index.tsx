@@ -181,10 +181,10 @@ export default function ImagePreview({
         {count > 1 && (
           <div className="iprev__nav">
             <button type="button" className="iprev__arrow" aria-label={prevAriaLabel} onClick={() => go(current - 1)}>
-              <Icon name="arrow-left" size={20} />
+              <Icon name="chevron-left" size={20} />
             </button>
             <button type="button" className="iprev__arrow" aria-label={nextAriaLabel} onClick={() => go(current + 1)}>
-              <Icon name="arrow-right" size={20} />
+              <Icon name="chevron-right" size={20} />
             </button>
           </div>
         )}

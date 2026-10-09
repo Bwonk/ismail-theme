@@ -44,6 +44,19 @@
   font-weight: 500;
 }
 
+/* address-default-badge — p 3·8, inverse fill, pill, no stroke, badge size at 400 */
+.aaddr__badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 .aaddr__text {
   display: flex;
   flex-direction: column;

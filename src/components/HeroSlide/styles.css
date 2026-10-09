@@ -5,7 +5,6 @@
   inset: 0;
   overflow: hidden;
   background: var(--c-transparent);
-  color: var(--c-text);
 }
 
 /* I-HERO-05 · M-07: crossfade — the incoming slide fades in over the outgoing one */
@@ -87,6 +86,8 @@
   gap: 32px;
   padding: 0 var(--space-page) 64px;
   box-sizing: border-box;
+  background: var(--c-transparent);
+  color: var(--c-text);
 }
 
 .hslide__text {

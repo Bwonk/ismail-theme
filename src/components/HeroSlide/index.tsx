@@ -9,7 +9,8 @@ import { Props } from "./types";
  * I/Section/HeroSlider › hero-slide — one slide of the HeroSlider COMPONENT_LIST.
  * The parent (HeroSlider) drives `data-state="active|prev|idle"` on `.hslide` and the
  * `--hero-parallax` / `--hero-scrim-opacity` custom properties; everything below reacts in CSS.
- * Content is drawn with the Şeffaf scheme (light text over image + scrim).
+ * The scrim takes the section scheme's --c-scrim (canvas: hero-scrim sits outside the dark
+ * hero-content); only the content layer is drawn with the Şeffaf scheme (light text).
  */
 export function HeroSlide({
   image,
@@ -24,7 +25,7 @@ export function HeroSlide({
   const words = (title ?? "").split(/\s+/).filter(Boolean);
 
   return (
-    <div className={cx("hslide", forceScheme("clear"))}>
+    <div className="hslide">
       {/* I-HERO-01 · M-02 load fade · I-HERO-05 · M-07 image scale · I-HERO-07 · M-27 parallax */}
       <div className="hslide__mask">
         <div className="hslide__bg">
@@ -48,7 +49,7 @@ export function HeroSlide({
       </div>
       <div className="hslide__scrim" aria-hidden="true" />
 
-      <div className="hslide__content">
+      <div className={cx("hslide__content", forceScheme("clear"))}>
         <div className="hslide__text">
           {words.length > 0 && (
             <h2 className={cx("hslide__title", TEXT.display)}>

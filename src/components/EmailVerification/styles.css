@@ -28,6 +28,20 @@
   color: var(--c-danger);
 }
 
+.emv__icon--busy {
+  color: var(--c-accent);
+}
+
+.emv__loader {
+  animation: emv-spin 0.9s linear infinite;
+}
+
+@keyframes emv-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .emv__title,
 .emv__text,
 .emv__resend-title,
@@ -42,7 +56,8 @@
 }
 
 .emv__text {
-  max-width: 440px;
+  width: 440px;
+  max-width: 100%;
   color: var(--c-muted);
 }
 
@@ -112,5 +127,9 @@
   .emv__icon,
   .emv__msg--success {
     animation: none;
+  }
+
+  .emv__loader {
+    animation-duration: 2.4s;
   }
 }

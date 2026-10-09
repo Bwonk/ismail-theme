@@ -69,7 +69,8 @@ function maskPhone(value: string) {
 
 /**
  * I/Section/AuthForms — login · register · forgot password · recover password (variant ENUM),
- * with SMS login (phone → code → profile) and Google/Facebook login. Image half is desktop-only.
+ * with SMS login (phone → code → profile) and Google/Facebook login. Image half is desktop-only
+ * and drawn as-is (the canvas applies no filter; the black-and-white look comes from the photo).
  */
 export function AuthForms({
   variant = "login",
@@ -125,10 +126,12 @@ export function AuthForms({
   forgotSwitchText = "Hatırladın mı?",
   loginLinkText = "Giriş yap",
   newLinkText = "Yeni bağlantı iste",
-  orderTrackingText = "Üye olmadan sipariş verdin mi? Siparişini takip et",
+  firstNamePlaceholder = "Deniz",
+  lastNamePlaceholder = "Aksoy",
+  passwordPlaceholder = "••••••••",
+  codePlaceholder = "• • • • • •",
   agreementLink,
   marketingLink,
-  orderTrackingLink,
   backgroundColor,
 }: Props) {
   const isAccountVariant = variant === "login" || variant === "register";
@@ -316,8 +319,8 @@ export function AuthForms({
 
   const nameStage = (first: Field | undefined, last: Field | undefined, onFirst: (v: string) => void, onLast: (v: string) => void) => (
     <div className="auth__names">
-      <FormField label={firstNameLabel} name="given-name" autoComplete="given-name" value={first?.value ?? ""} error={fieldError(first)} onInput={onFirst} />
-      <FormField label={lastNameLabel} name="family-name" autoComplete="family-name" value={last?.value ?? ""} error={fieldError(last)} onInput={onLast} />
+      <FormField label={firstNameLabel} name="given-name" autoComplete="given-name" placeholder={firstNamePlaceholder} value={first?.value ?? ""} error={fieldError(first)} onInput={onFirst} />
+      <FormField label={lastNameLabel} name="family-name" autoComplete="family-name" placeholder={lastNamePlaceholder} value={last?.value ?? ""} error={fieldError(last)} onInput={onLast} />
     </div>
   );
 
@@ -348,6 +351,7 @@ export function AuthForms({
             autoComplete="one-time-code"
             inputMode="numeric"
             maxLength={6}
+            placeholder={codePlaceholder}
             value={smsForm.code?.value ?? ""}
             error={fieldError(smsForm.code)}
             onInput={(v) => setSmsLoginFormCode(smsForm, v)}
@@ -396,11 +400,12 @@ export function AuthForms({
           type="password"
           name="current-password"
           autoComplete="current-password"
+          placeholder={passwordPlaceholder}
           value={loginForm.password?.value ?? ""}
           error={fieldError(loginForm.password)}
           onInput={(v) => setLoginFormPassword(loginForm, v)}
         />
-        {forgotLinkText && <ArrowLink label={forgotLinkText} className="auth__forgot" onClick={go("FORGOT_PASSWORD")} />}
+        {forgotLinkText && <ArrowLink label={forgotLinkText} className="auth__forgot" size="uiSm" onClick={go("FORGOT_PASSWORD")} />}
       </>
     );
   } else if (registerForm) {
@@ -418,6 +423,7 @@ export function AuthForms({
           type="password"
           name="new-password"
           autoComplete="new-password"
+          placeholder={passwordPlaceholder}
           value={registerForm.password?.value ?? ""}
           error={fieldError(registerForm.password)}
           onInput={(v) => setRegisterFormPassword(registerForm, v)}
@@ -440,6 +446,7 @@ export function AuthForms({
           type="password"
           name="new-password"
           autoComplete="new-password"
+          placeholder={passwordPlaceholder}
           value={recoverForm.password?.value ?? ""}
           error={fieldError(recoverForm.password)}
           disabled={recoverDone}
@@ -450,6 +457,7 @@ export function AuthForms({
           type="password"
           name="new-password-again"
           autoComplete="new-password"
+          placeholder={passwordPlaceholder}
           value={recoverForm.passwordAgain?.value ?? ""}
           error={fieldError(recoverForm.passwordAgain)}
           disabled={recoverDone}
@@ -580,12 +588,6 @@ export function AuthForms({
           )}
 
           {switchRow && <div className="auth__switch">{switchRow}</div>}
-
-          {variant === "login" && orderTrackingText && orderTrackingLink?.href && (
-            <a className={cx("auth__guest", TEXT.uiSm)} href={orderTrackingLink.href}>
-              {orderTrackingText}
-            </a>
-          )}
         </div>
       </div>
     </section>

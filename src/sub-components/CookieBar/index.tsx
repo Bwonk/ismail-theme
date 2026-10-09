@@ -29,7 +29,7 @@ function write(store: "local" | "session", value: string) {
 }
 
 /**
- * I/Overlay/CookieBar — bottom strip (desktop) / floating card (mobile) in the Mürekkep palette.
+ * I/Overlay/CookieBar — bottom strip (desktop) / floating card (mobile) in the Mürekkep palette, over a page scrim.
  * Client only: renders after hydration when no consent is stored. Accept persists in
  * localStorage; close hides it for the session. I-CKE-01 (M-20): slides up from the bottom.
  */
@@ -53,12 +53,16 @@ export default function CookieBar({ content, acceptText, closeAriaLabel }: Props
   };
 
   return (
-    <aside className={cx("ckbar", forceScheme("ink"), shown && "is-open")}>
-      <div className={cx("ckbar__text", TEXT.uiSm)} dangerouslySetInnerHTML={{ __html: content ?? "" }} />
-      <div className="ckbar__actions">
-        <Button className="ckbar__accept" label={acceptText} onClick={() => hide("local", "accepted")} />
-        <IconButton icon="x" iconSize={18} ariaLabel={closeAriaLabel} onClick={() => hide("session", "dismissed")} />
-      </div>
-    </aside>
+    <>
+      {/* scrim (page scheme): fades in with the bar; a click dismisses for the session like the close button */}
+      <div className={cx("ckbar-scrim", shown && "is-open")} aria-hidden="true" onClick={() => hide("session", "dismissed")} />
+      <aside className={cx("ckbar", forceScheme("ink"), shown && "is-open")}>
+        <div className={cx("ckbar__text", TEXT.uiSm)} dangerouslySetInnerHTML={{ __html: content ?? "" }} />
+        <div className="ckbar__actions">
+          <Button className="ckbar__accept" label={acceptText} onClick={() => hide("local", "accepted")} />
+          <IconButton icon="x" iconSize={18} ariaLabel={closeAriaLabel} onClick={() => hide("session", "dismissed")} />
+        </div>
+      </aside>
+    </>
   );
 }

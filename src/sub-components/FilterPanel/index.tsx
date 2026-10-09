@@ -21,7 +21,6 @@ import { observer } from "@ikas/component-utils";
 import { cx } from "../../utils/cx";
 import { TEXT, upperTr } from "../../utils/tokens";
 import AccordionItem from "../AccordionItem";
-import Checkbox from "../Checkbox";
 import PriceRange from "../PriceRange";
 import VariantChip from "../VariantChip";
 import VariantSwatch from "../VariantSwatch";
@@ -208,7 +207,7 @@ const FilterGroup = observer(function FilterGroup({
     case "NUMBER_RANGE_LIST":
       if (rangeOptions.length)
         body = (
-          <div className="fpanel__chips">
+          <div className="fpanel__chips fpanel__chips--range">
             {rangeOptions.map((opt) => (
               <VariantChip
                 key={opt.key || `${opt.from}-${opt.to}`}
@@ -227,28 +226,28 @@ const FilterGroup = observer(function FilterGroup({
       body = <RangeValues list={list} filter={filter} texts={texts} idPrefix={`${idPrefix}-${filter.id}`} fmt={fmt} onChange={onChange} />;
       break;
     case "LIST":
+      // No LIST group on the canvas: drawn like filter-category-list (name + mono count, selected = 600).
       if (values.length)
         body = (
-          <div className="fpanel__checks">
+          <ul className="fpanel__cats">
             {values.map((fv) => (
-              <Checkbox
-                key={fv.id || fv.name}
-                id={`${idPrefix}-${filter.id}-${fv.id || fv.name}`}
-                checked={fv.isSelected === true}
-                disabled={fv.resultCount === 0 && !fv.isSelected}
-                label={
-                  <span className="fpanel__check-label">
-                    <span>{filterValueLabel(filter, fv.name, texts)}</span>
-                    {fv.resultCount != null && <span className={cx("fpanel__count", TEXT.label, "tabular")}>{fv.resultCount}</span>}
-                  </span>
-                }
-                onChange={() => {
-                  handleFilterValueClick(list, filter, fv);
-                  onChange?.();
-                }}
-              />
+              <li key={fv.id || fv.name}>
+                <button
+                  type="button"
+                  className={cx("fpanel__cat", fv.isSelected && "fpanel__cat--on")}
+                  aria-pressed={fv.isSelected === true}
+                  disabled={fv.resultCount === 0 && !fv.isSelected}
+                  onClick={() => {
+                    handleFilterValueClick(list, filter, fv);
+                    onChange?.();
+                  }}
+                >
+                  <span className={cx("fpanel__cat-name", TEXT.uiSm)}>{filterValueLabel(filter, fv.name, texts)}</span>
+                  {fv.resultCount != null && <span className={cx("fpanel__count", TEXT.label, "tabular")}>{fv.resultCount}</span>}
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
         );
       break;
     default:
@@ -308,7 +307,7 @@ const CategoryGroup = observer(function CategoryGroup({
 /**
  * Filter groups shared by the ProductList sidebar and FilterDrawer. Every ikas display type is
  * drawn separately: SWATCH → VariantSwatch, BOX → VariantChip, NUMBER_RANGE → PriceRange,
- * NUMBER_RANGE_LIST → range chips, LIST → Checkbox, plus the sub-category list.
+ * NUMBER_RANGE_LIST → range chips, LIST → name/count rows (category-list style), plus the sub-category list.
  */
 const FilterPanel = observer(function FilterPanel({ productList, texts, variant, idPrefix, onChange, className }: Props) {
   const categories = getProductListFilterCategories(productList);

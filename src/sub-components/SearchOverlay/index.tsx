@@ -3,7 +3,7 @@ import { IkasNavigationLink, IkasProduct, Router, apiSearchProducts, withRoutePr
 import { cx } from "../../utils/cx";
 import { useEscape, useScrollLock } from "../../utils/hooks";
 import { fillText, useFocusTrap, usePresence } from "../../utils/overlay";
-import { TEXT } from "../../utils/tokens";
+import { BREAKPOINT, TEXT } from "../../utils/tokens";
 import ArrowLink from "../ArrowLink";
 import Icon from "../Icon";
 import IconButton from "../IconButton";
@@ -12,6 +12,8 @@ import Spinner from "../Spinner";
 
 export interface SearchOverlayTexts {
   searchPlaceholder: string;
+  /** Mobile frame placeholder ("Ne arıyorsun?"); falls back to searchPlaceholder. */
+  searchPlaceholderMobile?: string;
   closeAriaLabel: string;
   searchEmptyTitle: string;
   searchResultCountText: string;
@@ -44,6 +46,7 @@ export default function SearchOverlay({
   top = 0,
   suggestions,
   searchPlaceholder,
+  searchPlaceholderMobile,
   closeAriaLabel,
   searchEmptyTitle,
   searchResultCountText,
@@ -60,11 +63,22 @@ export default function SearchOverlay({
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   useScrollLock(open);
   useEscape(open, onClose);
   useFocusTrap(panelRef, open && mounted, inputRef);
 
   const q = query.trim();
+
+  useEffect(() => {
+    if (!open) return;
+    const mq = window.matchMedia(`(max-width: ${BREAKPOINT.mobile}px)`);
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener?.("change", sync);
+    return () => mq.removeEventListener?.("change", sync);
+  }, [open]);
+  const placeholder = (isMobile && searchPlaceholderMobile) || searchPlaceholder;
 
   useEffect(() => {
     if (!q) {
@@ -142,8 +156,8 @@ export default function SearchOverlay({
               type="search"
               name="q"
               value={query}
-              placeholder={searchPlaceholder}
-              aria-label={searchPlaceholder}
+              placeholder={placeholder}
+              aria-label={placeholder}
               autoComplete="off"
               enterKeyHint="search"
               onInput={(e) => setQuery((e.currentTarget as HTMLInputElement).value)}
@@ -162,18 +176,20 @@ export default function SearchOverlay({
                   </li>
                 ))}
               </ul>
-              {searchAllResultsText && (
-                <ArrowLink
-                  className="srch__all"
-                  label={searchAllResultsText}
-                  href={withRoutePrefix(`/search?s=${encodeURIComponent(q)}`)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goSearch();
-                  }}
-                />
-              )}
             </div>
+          )}
+
+          {/* link: sibling of search-results in the panel (gap 32 / mobile 24) */}
+          {state === "results" && searchAllResultsText && (
+            <ArrowLink
+              className="srch__all"
+              label={searchAllResultsText}
+              href={withRoutePrefix(`/search?s=${encodeURIComponent(q)}`)}
+              onClick={(e) => {
+                e.preventDefault();
+                goSearch();
+              }}
+            />
           )}
 
           {state === "none" && (

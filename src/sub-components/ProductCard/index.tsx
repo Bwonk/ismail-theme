@@ -125,7 +125,7 @@ const ProductCard = observer(function ProductCard({
   return (
     <article className={cx("pcard", !inStock && "pcard--soldout", back && "pcard--has-back", className)}>
       <a className="pcard__media" href={href} aria-label={product.name}>
-        {front ? (
+        {front && (
           <>
             {back && !back.isVideo && (
               <img
@@ -148,10 +148,6 @@ const ProductCard = observer(function ProductCard({
               decoding={priority ? "sync" : "async"}
             />
           </>
-        ) : (
-          <span className="pcard__placeholder" aria-hidden="true">
-            <Icon name="mountain" size={32} />
-          </span>
         )}
       </a>
       {badge && (
@@ -174,7 +170,7 @@ const ProductCard = observer(function ProductCard({
               {swatches.slice(0, maxSwatches).map((dvv) => (
                 <span
                   key={dvv.variantValue.id}
-                  className={cx("pcard__swatch", dvv.isSelected && "pcard__swatch--on")}
+                  className="pcard__swatch"
                   style={{ background: dvv.variantValue.colorCode ?? undefined }}
                 />
               ))}

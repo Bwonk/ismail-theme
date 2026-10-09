@@ -56,7 +56,7 @@
 
 .aset__toggle--on .aset__knob {
   background: var(--c-inverse-text);
-  transform: translateX(18px);
+  transform: translateX(17px);
 }
 
 .aset__marketing-text {

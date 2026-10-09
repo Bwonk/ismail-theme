@@ -14,4 +14,6 @@ export interface Props {
   mobileMaxItems?: number;
   columns?: number;
   backgroundColor?: string;
+  showSubtitle?: boolean;
+  showButton?: boolean;
 }

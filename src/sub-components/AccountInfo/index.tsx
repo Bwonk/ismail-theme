@@ -77,7 +77,7 @@ const AccountInfo = observer(function AccountInfo({ texts: t }: Props) {
         )}
       </div>
       <div className="ainfo__row">
-        <FormField label={t.emailLabel} type="email" name="email" value={customerStore.customer?.email ?? ""} disabled readOnly />
+        <FormField label={t.emailLabel} type="email" name="email" value={customerStore.customer?.email ?? ""} readOnly />
         {form.phone && (
           <FormField
             label={t.phoneLabel}

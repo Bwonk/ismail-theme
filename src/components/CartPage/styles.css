@@ -119,10 +119,6 @@
   color: var(--c-muted);
 }
 
-.cartp__empty-btn {
-  margin-top: 4px;
-}
-
 /* cart-summary */
 .cartp__summary {
   grid-area: summary;
@@ -146,7 +142,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 20px;
 }
 
 .cartp__coupon-form {
@@ -256,6 +252,13 @@
   width: 100%;
 }
 
+/* yükleniyor: checkout button drawn with a surface fill */
+.cartp__checkout--pending .btn {
+  border-color: var(--c-surface);
+  background: var(--c-surface);
+  opacity: 1;
+}
+
 .cartp__sum-note {
   margin: 0;
   color: var(--c-muted);
@@ -307,11 +310,6 @@
 
 /* yükleniyor: desktop hides the whole main column content except the skeleton */
 .cartp--loading .cartp__recs {
-  display: none;
-}
-
-/* mobile sticky checkout bar (mobile only) */
-.cartp__bar {
   display: none;
 }
 
@@ -390,49 +388,9 @@
     display: flex;
   }
 
-  .cartp__bar {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: var(--space-sm) var(--space-page) calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
-    border-top: var(--size-line) solid var(--c-line);
-    background: var(--c-bg);
-    transform: translateY(100%);
-    visibility: hidden;
-    transition: transform var(--dur-base) var(--ease-out-soft), visibility 0s linear var(--dur-base);
-  }
-
-  .cartp__bar--visible {
-    transform: translateY(0);
-    visibility: visible;
-    transition: transform var(--dur-base) var(--ease-out-soft), visibility 0s;
-  }
-
-  .cartp__bar-total {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .cartp__bar-label {
-    color: var(--c-muted);
-  }
-
-  .cartp__bar-value {
-    color: var(--c-text);
-    font-weight: 500;
-  }
-
-  .cartp__bar-btn {
-    flex: 1;
-    max-width: 220px;
+  /* mobile frame shows 3 recommendation cards */
+  .cartp__rec:nth-child(n + 4) {
+    display: none;
   }
 }
 
@@ -442,9 +400,7 @@
   }
 
   .cartp__coupon-applied,
-  .cartp__coupon-remove,
-  .cartp__bar,
-  .cartp__bar--visible {
+  .cartp__coupon-remove {
     transition: none;
   }
 }

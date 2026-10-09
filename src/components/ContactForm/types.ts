@@ -33,4 +33,5 @@ export interface Props {
   channels?: any;
   socialLinks?: any;
   backgroundColor?: string;
+  messageErrorText?: string;
 }

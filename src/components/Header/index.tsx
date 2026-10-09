@@ -69,6 +69,7 @@ export function Header(props: Props) {
     favoritesLabel = "Favorilerim",
     localeText = "TL · TÜRKÇE",
     searchPlaceholder = "Ürün, kategori ya da koleksiyon ara",
+    searchPlaceholderMobile = "Ne arıyorsun?",
     searchEmptyTitle = "NE ARIYORSUN?",
     searchResultCountText = "{count} SONUÇ",
     searchNoResultText = "Sonuç bulunamadı",
@@ -332,8 +333,12 @@ export function Header(props: Props) {
               <button type="button" className="hdr__pager-btn" aria-label={announcementPrevAriaLabel} onClick={() => stepAnn(-1)}>
                 <Icon name="chevron-left" size={14} />
               </button>
-              <span className={cx("hdr__pager-count", TEXT.label, "tabular")} aria-hidden="true">
+              {/* pager-count: desktop "1 / 3" (Etiket) · mobile "1/3" (Rozet) */}
+              <span className={cx("hdr__pager-count hdr__pager-count--d", TEXT.label, "tabular")} aria-hidden="true">
                 {annCurrent + 1} / {annList.length}
+              </span>
+              <span className={cx("hdr__pager-count hdr__pager-count--m", TEXT.badge, "tabular")} aria-hidden="true">
+                {annCurrent + 1}/{annList.length}
               </span>
               <button type="button" className="hdr__pager-btn" aria-label={announcementNextAriaLabel} onClick={() => stepAnn(1)}>
                 <Icon name="chevron-right" size={14} />
@@ -470,6 +475,7 @@ export function Header(props: Props) {
         top={searchTop}
         suggestions={searchSuggestions?.links ?? []}
         searchPlaceholder={searchPlaceholder}
+        searchPlaceholderMobile={searchPlaceholderMobile}
         closeAriaLabel={closeAriaLabel}
         searchEmptyTitle={searchEmptyTitle}
         searchResultCountText={searchResultCountText}

@@ -36,13 +36,15 @@
     padding: 20px;
   }
 
+  /* address-form-actions stays a row; both buttons fill (mobile frame) */
   .aform__actions {
-    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   .aform__actions .btn {
     display: flex;
-    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 

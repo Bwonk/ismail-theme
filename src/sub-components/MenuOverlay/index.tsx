@@ -257,7 +257,8 @@ export const MenuPanel = observer(function MenuPanel({
           <ul className="mpanel__nav">
             {navLinks.map((link, i) => {
               const subs = (link.subLinks ?? []).filter((l) => l?.label);
-              const showColumns = i === megaIndex && hasColumns && !subs.length;
+              // Same rule as the desktop megamenu: the megamenu link opens the MegamenuColumn children.
+              const showColumns = i === megaIndex && hasColumns;
               const expandable = subs.length > 0 || showColumns;
               const isOpen = expanded === i;
               const bodyId = `mpanel-acc-${i}`;
@@ -272,12 +273,12 @@ export const MenuPanel = observer(function MenuPanel({
                       onClick={() => setExpanded(isOpen ? null : i)}
                     >
                       <span className={TEXT.h3}>{link.label}</span>
-                      <Icon name="chevron-down" size={18} className={cx("mpanel__caret", isOpen && "is-open")} />
+                      {/* menu-caret: plus (closed) / minus (open) */}
+                      <Icon name={isOpen ? "minus" : "plus"} size={18} className="mpanel__caret" />
                     </button>
                   ) : (
                     <a className="mpanel__link" href={link.href} onClick={onClose} {...linkTarget(link)}>
                       <span className={TEXT.h3}>{link.label}</span>
-                      <Icon name="chevron-right" size={18} className="mpanel__caret" />
                     </a>
                   )}
                   {expandable && (
@@ -331,19 +332,22 @@ export const MenuPanel = observer(function MenuPanel({
                 {favoritesLabel}
               </a>
             </div>
-            {/* Same rule as the Footer: no switcher when the store has a single locale and language. */}
-            {localeText && hasLocaleAlternatives() && (
-              <button
-                type="button"
-                className={cx("mpanel__locale", TEXT.label)}
-                onClick={() => {
-                  onClose();
-                  emitUi(UI_EVENT.openLocale);
-                }}
-              >
-                {localeText}
-              </button>
-            )}
+            {/* menu-locale: always drawn; opens the LocaleSwitcher sheet only when the store has alternatives. */}
+            {localeText &&
+              (hasLocaleAlternatives() ? (
+                <button
+                  type="button"
+                  className={cx("mpanel__locale", TEXT.label)}
+                  onClick={() => {
+                    onClose();
+                    emitUi(UI_EVENT.openLocale);
+                  }}
+                >
+                  {localeText}
+                </button>
+              ) : (
+                <p className={cx("mpanel__locale", TEXT.label)}>{localeText}</p>
+              ))}
           </div>
         </div>
       </div>

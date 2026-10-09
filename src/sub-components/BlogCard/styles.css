@@ -65,7 +65,7 @@
 
 @media (hover: hover) {
   .bcard:hover .bcard__img {
-    transform: scale(1.04);
+    transform: scale(1.05); /* canvas "BlogCard — hover": 442×332 → 464×348 */
   }
 
   /* I-CMP-06 — card hover drives the ArrowLink too */

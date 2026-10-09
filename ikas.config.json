@@ -109,6 +109,22 @@
           "type": "COLOR",
           "required": false,
           "groupId": "colors"
+        },
+        {
+          "name": "showSubtitle",
+          "displayName": "Alt metni göster",
+          "type": "BOOLEAN",
+          "required": false,
+          "defaultValue": true,
+          "groupId": "settings"
+        },
+        {
+          "name": "showButton",
+          "displayName": "Butonu göster",
+          "type": "BOOLEAN",
+          "required": false,
+          "defaultValue": true,
+          "groupId": "settings"
         }
       ],
       "propGroups": [
@@ -1192,14 +1208,6 @@
           "groupId": "texts"
         },
         {
-          "name": "orderTrackingText",
-          "displayName": "Misafir sipariş takibi bağlantısı",
-          "type": "TEXT",
-          "required": false,
-          "defaultValue": "Üye olmadan sipariş verdin mi? Siparişini takip et",
-          "groupId": "texts"
-        },
-        {
           "name": "agreementLink",
           "displayName": "Üyelik sözleşmesi bağlantısı",
           "type": "LINK",
@@ -1214,18 +1222,43 @@
           "groupId": "links"
         },
         {
-          "name": "orderTrackingLink",
-          "displayName": "Sipariş takibi sayfası",
-          "type": "LINK",
-          "required": false,
-          "groupId": "links"
-        },
-        {
           "name": "backgroundColor",
           "displayName": "Arka plan rengi",
           "type": "COLOR",
           "required": false,
           "groupId": "colors"
+        },
+        {
+          "name": "firstNamePlaceholder",
+          "displayName": "Alan — ad örneği",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Deniz",
+          "groupId": "texts"
+        },
+        {
+          "name": "lastNamePlaceholder",
+          "displayName": "Alan — soyad örneği",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Aksoy",
+          "groupId": "texts"
+        },
+        {
+          "name": "passwordPlaceholder",
+          "displayName": "Alan — şifre örneği",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "••••••••",
+          "groupId": "texts"
+        },
+        {
+          "name": "codePlaceholder",
+          "displayName": "Alan — kod örneği",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "• • • • • •",
+          "groupId": "texts"
         }
       ],
       "propGroups": [
@@ -1335,7 +1368,7 @@
           "displayName": "Alan — e-posta örneği",
           "type": "TEXT",
           "required": false,
-          "defaultValue": "ornek@eposta.com",
+          "defaultValue": "elif@ornek.com",
           "groupId": "texts"
         },
         {
@@ -1998,6 +2031,30 @@
           "required": false,
           "defaultValue": "Stokta yok",
           "groupId": "texts"
+        },
+        {
+          "name": "favoritesSortDefaultText",
+          "displayName": "Favoriler sıralama: önerilen",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Önerilen",
+          "groupId": "texts"
+        },
+        {
+          "name": "favoritesSortPriceAscText",
+          "displayName": "Favoriler sıralama: fiyat artan",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Fiyat: Düşükten yükseğe",
+          "groupId": "texts"
+        },
+        {
+          "name": "favoritesSortPriceDescText",
+          "displayName": "Favoriler sıralama: fiyat azalan",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Fiyat: Yüksekten düşüğe",
+          "groupId": "texts"
         }
       ],
       "propGroups": [
@@ -2292,6 +2349,13 @@
           "type": "LINK",
           "required": false,
           "groupId": "links"
+        },
+        {
+          "name": "shortAddress",
+          "displayName": "Kısa adres (mağaza listesi satırı; boşsa adres)",
+          "type": "TEXT",
+          "required": false,
+          "groupId": "texts"
         }
       ],
       "propGroups": [
@@ -2920,14 +2984,6 @@
           "type": "TEXT",
           "required": false,
           "defaultValue": "{count} taksit",
-          "groupId": "t-detail"
-        },
-        {
-          "name": "invoiceLabel",
-          "displayName": "Fatura etiketi",
-          "type": "TEXT",
-          "required": false,
-          "defaultValue": "Fatura",
           "groupId": "t-detail"
         },
         {
@@ -4380,6 +4436,14 @@
           "type": "COLOR",
           "required": false,
           "groupId": "colors"
+        },
+        {
+          "name": "messageErrorText",
+          "displayName": "Mesaj hata metni",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Mesaj alanı boş bırakılamaz.",
+          "groupId": "texts"
         }
       ],
       "propGroups": [
@@ -5391,6 +5455,14 @@
           "required": false,
           "defaultValue": "{d}G",
           "groupId": "texts"
+        },
+        {
+          "name": "searchPlaceholderMobile",
+          "displayName": "Arama alanı ipucu (mobil)",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Ne arıyorsun?",
+          "groupId": "search"
         }
       ],
       "propGroups": [
@@ -5982,7 +6054,7 @@
           "displayName": "Kargo ve iade metni",
           "type": "RICH_TEXT",
           "required": false,
-          "defaultValue": "<p>1.500 TL üzeri siparişlerde kargo ücretsiz; siparişin 2 iş gününde kargoda. Teslimattan sonra 14 gün içinde kolay ve ücretsiz iade.</p>",
+          "defaultValue": "<p>2 iş gününde kargoda. 14 gün içinde ücretsiz iade; etiketi sökülmemiş ürünlerde geçerli.</p>",
           "groupId": "texts-accordion"
         },
         {
@@ -6087,6 +6159,14 @@
           "type": "COLOR",
           "required": false,
           "groupId": "colors"
+        },
+        {
+          "name": "noReviewsText",
+          "displayName": "Yorumsuz puan metni",
+          "type": "TEXT",
+          "required": false,
+          "defaultValue": "Henüz yorum yok",
+          "groupId": "texts"
         }
       ],
       "propGroups": [
@@ -6393,27 +6473,11 @@
           "groupId": "texts-form"
         },
         {
-          "name": "cancelText",
-          "displayName": "Vazgeç düğmesi",
-          "type": "TEXT",
-          "required": false,
-          "defaultValue": "Vazgeç",
-          "groupId": "texts-form"
-        },
-        {
           "name": "loginRequiredText",
           "displayName": "Giriş gerekli metni",
           "type": "TEXT",
           "required": false,
           "defaultValue": "Yorum yazmak için giriş yapmalısın.",
-          "groupId": "texts-form"
-        },
-        {
-          "name": "loginLinkText",
-          "displayName": "Giriş yap bağlantısı",
-          "type": "TEXT",
-          "required": false,
-          "defaultValue": "Giriş yap",
           "groupId": "texts-form"
         },
         {

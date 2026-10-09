@@ -3,7 +3,6 @@ import { Router, activateCustomer, customerStore, resendCustomerActivationMail }
 import Button from "../../sub-components/Button";
 import FormField from "../../sub-components/FormField";
 import Icon from "../../sub-components/Icon";
-import Spinner from "../../sub-components/Spinner";
 import { cx } from "../../utils/cx";
 import { TEXT } from "../../utils/tokens";
 import { Props } from "./types";
@@ -24,7 +23,7 @@ export function EmailVerification({
   buttonText = "Giriş yap",
   resendTitle = "Doğrulama e-postasını yeniden gönder",
   emailLabel = "E-POSTA",
-  emailPlaceholder = "ornek@eposta.com",
+  emailPlaceholder = "elif@ornek.com",
   resendButtonText = "Gönder",
   resendingText = "Gönderiliyor…",
   resentTitle = "E-postanı kontrol et",
@@ -77,9 +76,12 @@ export function EmailVerification({
 
   return (
     <section className="emv" style={backgroundColor ? { backgroundColor } : undefined} aria-busy={status === "verifying"}>
-      {/* verify-icon — Spinner | check (success) | triangle-alert (danger) | mail-check (success) */}
-      <div className={cx("emv__icon", status === "error" && !sent && "emv__icon--danger")} key={`${status}-${sent}`}>
-        {status === "verifying" && <Spinner size={24} />}
+      {/* verify-icon — loader-circle (accent, spins) | check (success) | triangle-alert (danger) | mail-check (success) */}
+      <div
+        className={cx("emv__icon", status === "verifying" && "emv__icon--busy", status === "error" && !sent && "emv__icon--danger")}
+        key={`${status}-${sent}`}
+      >
+        {status === "verifying" && <Icon name="loader-circle" size={24} className="emv__loader" />}
         {status === "success" && <Icon name="check" size={24} />}
         {status === "error" && <Icon name={sent ? "mail-check" : "triangle-alert"} size={24} />}
       </div>

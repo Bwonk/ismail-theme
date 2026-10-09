@@ -5,7 +5,6 @@ import type { AccountTexts } from "../../components/Account/texts";
 import { cx } from "../../utils/cx";
 import { TEXT } from "../../utils/tokens";
 import AccountAddressForm from "../AccountAddressForm";
-import Badge from "../Badge";
 import Button from "../Button";
 
 interface Props {
@@ -80,7 +79,7 @@ const AccountAddresses = observer(function AccountAddresses({ texts: t }: Props)
               <div key={address.id} className={cx("aaddr__card", confirming && "aaddr__card--danger")}>
                 <div className="aaddr__card-head">
                   <span className={cx("aaddr__title", TEXT.ui)}>{address.title}</span>
-                  {address.isDefault && t.defaultBadgeText && <Badge text={t.defaultBadgeText} tone="new" />}
+                  {address.isDefault && t.defaultBadgeText && <span className={cx("aaddr__badge", TEXT.badge)}>{t.defaultBadgeText}</span>}
                 </div>
                 <p className={cx("aaddr__text", "acc-muted", TEXT.body)}>
                   {addressLines(address).map((line, i) => (

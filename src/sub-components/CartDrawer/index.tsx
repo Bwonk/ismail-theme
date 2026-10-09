@@ -284,7 +284,8 @@ const CartDrawer = observer(function CartDrawer({ open, onClose, recommendProduc
                 <Skeleton width={72} height={14} />
               )}
             </div>
-            {t.cartShippingNote && <p className={cx("cdrw__note", TEXT.label)}>{t.cartShippingNote}</p>}
+            {/* shipping-note: canvas font-ui at label size → nearest theme style is Arayüz Küçük */}
+            {t.cartShippingNote && <p className={cx("cdrw__note", TEXT.uiSm)}>{t.cartShippingNote}</p>}
             <Button
               className="cdrw__checkout"
               label={checkingOut ? t.checkoutLoadingText : t.checkoutButtonText}

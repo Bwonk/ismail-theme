@@ -27,16 +27,6 @@
   color: var(--c-muted);
 }
 
-/* M-01 entrance for the intro (shared fade-up keyframe) */
-.faq__intro.is-pending {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.faq__intro.is-inview {
-  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
-}
-
 .faq__items {
   display: flex;
   flex: 1 1 auto;

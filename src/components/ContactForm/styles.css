@@ -16,15 +16,6 @@
   gap: 48px;
 }
 
-.cform__hero.is-pending {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.cform__hero.is-inview {
-  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
-}
-
 .cform__title {
   flex: 0 1 880px;
   min-width: 0;
@@ -248,11 +239,9 @@
     padding: 20px;
   }
 
-  /* topic-track: horizontal scroll */
+  /* topic-track: horizontal scroll, clipped at the panel padding */
   .cform__topic-track {
     flex-wrap: nowrap;
-    margin: 0 -20px;
-    padding: 0 20px;
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;

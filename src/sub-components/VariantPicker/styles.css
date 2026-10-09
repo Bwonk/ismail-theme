@@ -23,6 +23,11 @@
   letter-spacing: 0.5px;
 }
 
+/* seçim eksik: qb-variant-label turns danger */
+.vpick__group--missing .vpick__label {
+  color: var(--c-danger);
+}
+
 .vpick__row {
   display: flex;
   flex-wrap: wrap;

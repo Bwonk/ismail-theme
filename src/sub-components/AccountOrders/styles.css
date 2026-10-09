@@ -89,6 +89,7 @@
 .aord__error-text {
   margin: 0;
   color: var(--c-text);
+  font-weight: 400;
 }
 
 @media (max-width: bp(KUQjO8W6p9)) {

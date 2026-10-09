@@ -32,9 +32,7 @@ export interface Props {
   successText?: string;
   starRequiredText?: string;
   formErrorText?: string;
-  cancelText?: string;
   loginRequiredText?: string;
-  loginLinkText?: string;
   reviewsPerPage?: number;
   backgroundColor?: string;
 }

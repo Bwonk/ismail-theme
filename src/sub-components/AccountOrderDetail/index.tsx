@@ -121,8 +121,8 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
   const backLink = (label: string, onClick: () => void) =>
     label ? (
       <button type="button" className={cx("acc-textbtn", "aodet__back", "acc-muted", TEXT.uiSm)} onClick={onClick}>
-        <Icon name="arrow-left" size={14} />
-        <span>{label}</span>
+        {/* od-back — the canvas draws the arrow as a text glyph: "← Siparişlerim" */}
+        <span aria-hidden="true">←</span> {label}
       </button>
     ) : null;
 
@@ -156,21 +156,17 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
   const head = (
     <div className="aodet__head">
       <div className="aodet__title-block">
-        {mode === "detail"
-          ? backLink(t.ordersTabText, onBack)
-          : backLink([t.orderDetailTitle, number].filter(Boolean).join(" "), () => setMode("detail"))}
+        {backLink(t.ordersTabText, onBack)}
         <h2 className="aodet__title-row">
-          <span className={cx("acc-title", TEXT.h4)}>{mode === "detail" ? t.orderDetailTitle : t.returnTitle}</span>
-          {mode === "detail" && number && <span className={cx("aodet__number", TEXT.h4, "tabular")}>{number}</span>}
+          <span className={cx("acc-title", TEXT.h4)}>{t.orderDetailTitle}</span>
+          {number && <span className={cx("aodet__number", TEXT.h4, "tabular")}>{number}</span>}
         </h2>
         <span className={cx("acc-muted", TEXT.label, "tabular")}>{upperTr(getIkasOrderFormattedOrderedAt(order) ?? "")}</span>
       </div>
-      {mode === "detail" && (
-        <span className="aodet__status">
-          <span className="aodet__status-dot" aria-hidden="true" />
-          <span className={TEXT.label}>{upperTr(getIkasOrderPackageStatusTranslation(order) ?? "")}</span>
-        </span>
-      )}
+      <span className="aodet__status">
+        <span className="aodet__status-dot" aria-hidden="true" />
+        <span className={TEXT.label}>{upperTr(getIkasOrderPackageStatusTranslation(order) ?? "")}</span>
+      </span>
     </div>
   );
 
@@ -199,8 +195,9 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
     const done = result === "success";
 
     return (
+      /* return-form: title + intro, no order head (canvas return-form-stage) */
       <form className="aodet" onSubmit={onSubmit} noValidate>
-        {head}
+        {t.returnTitle && <h2 className={cx("acc-title", TEXT.h4)}>{t.returnTitle}</h2>}
         {t.returnIntroText && <p className={cx("aodet__intro", "acc-muted", TEXT.body)}>{t.returnIntroText}</p>}
         {refundable.length === 0 && <p className={cx("acc-muted", TEXT.body)}>{t.returnEmptyText}</p>}
         <div className="aodet__return-list">
@@ -262,7 +259,6 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
   const adjustments = getIkasOrderDisplayedAdjustments(order) ?? [];
   const shippingFree = getIkasOrderShippingTotal(order) === 0;
   const transactions = order.transactions ?? [];
-  const invoices = (order.invoices ?? []).filter((i) => i.invoiceNumber);
 
   return (
     <div className="aodet">
@@ -297,19 +293,18 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
                   ) : (
                     <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>{tracking.trackingNumber}</span>
                   )}
-                  {copied === tracking.trackingNumber ? (
-                    <span className={cx("acc-success", TEXT.label)} role="status">
+                  <button
+                    type="button"
+                    className="acc-textbtn aodet__copy"
+                    aria-label={t.copyAriaLabel || undefined}
+                    onClick={() => copy(tracking.trackingNumber as string)}
+                  >
+                    <Icon name="copy" size={14} />
+                  </button>
+                  {copied === tracking.trackingNumber && (
+                    <span className={cx("aodet__copied", "acc-success", TEXT.label)} role="status">
                       {t.copiedText}
                     </span>
-                  ) : (
-                    <button
-                      type="button"
-                      className="acc-textbtn aodet__copy"
-                      aria-label={t.copyAriaLabel || undefined}
-                      onClick={() => copy(tracking.trackingNumber as string)}
-                    >
-                      <Icon name="copy" size={14} />
-                    </button>
                   )}
                 </span>
               </div>
@@ -340,7 +335,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
         <AddressCard label={t.billingAddressLabel} address={order.billingAddress} />
       </div>
 
-      {(transactions.length > 0 || invoices.length > 0) && (
+      {transactions.length > 0 && (
         <div className="aodet__card">
           {transactions.map((tr, i) => {
             const d = tr.paymentMethodDetail;
@@ -359,12 +354,6 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
               </div>
             );
           })}
-          {invoices.map((inv) => (
-            <div key={inv.id} className="aodet__row">
-              <span className={cx("acc-muted", TEXT.uiSm)}>{t.invoiceLabel}</span>
-              <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>{inv.invoiceNumber}</span>
-            </div>
-          ))}
         </div>
       )}
 

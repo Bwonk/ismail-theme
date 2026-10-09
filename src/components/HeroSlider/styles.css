@@ -51,6 +51,11 @@
   line-height: 1.2;
 }
 
+/* hero-counter digits are drawn at the label weight (400), unlike the 500 Counter default */
+.hero__counter .counter {
+  font-weight: 400;
+}
+
 .hero__counter .counter__reel {
   transition-duration: 0.6s;
 }

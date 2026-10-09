@@ -105,7 +105,7 @@ export function Account(props: Props) {
     <section className="acc" style={backgroundColor ? { backgroundColor } : undefined}>
       <h1 className={cx("acc__header", TEXT.h2)}>
         {t.greetingText && <span className="acc__greeting">{t.greetingText}</span>}
-        {firstName && <span className="acc__name">{` ${firstName}`}</span>}
+        {firstName && <span className="acc__name">{firstName}</span>}
       </h1>
       <div className="acc__body">
         <nav className="acc__nav" aria-label={t.tabsAriaLabel || undefined}>

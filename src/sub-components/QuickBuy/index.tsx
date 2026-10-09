@@ -276,7 +276,7 @@ const QuickBuy = observer(function QuickBuy({ texts: textOverrides, showPayWithI
             <div className="qb__top-text">
               <span className={cx("qb__title", TEXT.h4)}>{product.name}</span>
               <span className="qb__price">
-                <span className={cx(TEXT.price, "tabular")}>{price.price}</span>
+                <span className={cx("qb__price-value", TEXT.price, "tabular")}>{price.price}</span>
                 {price.compare && <s className={cx("qb__compare", TEXT.price, "tabular")}>{price.compare}</s>}
               </span>
               {badge && <Badge text={badge} tone="sale" />}
@@ -287,7 +287,7 @@ const QuickBuy = observer(function QuickBuy({ texts: textOverrides, showPayWithI
             <h2 className={cx("qb__title", TEXT.h3)}>{product.name}</h2>
           </div>
           <div className="qb__price qb__price--desktop">
-            <span className={cx(TEXT.h4, "tabular")}>{price.price}</span>
+            <span className={cx("qb__price-value", TEXT.h4, "tabular")}>{price.price}</span>
             {price.compare && <s className={cx("qb__compare", TEXT.h4, "tabular")}>{price.compare}</s>}
           </div>
           <span className="qb__rule" aria-hidden="true" />

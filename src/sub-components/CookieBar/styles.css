@@ -1,3 +1,18 @@
+.ckbar-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 19;
+  background: var(--c-scrim);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+
+.ckbar-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .ckbar {
   position: fixed;
   left: 0;
@@ -82,6 +97,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ckbar-scrim,
   .ckbar {
     transition: none;
   }

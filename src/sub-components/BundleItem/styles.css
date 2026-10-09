@@ -67,7 +67,7 @@
   align-items: flex-end;
   gap: 6px;
   flex-shrink: 0;
-  min-width: 104px;
+  width: 104px;
 }
 
 .bitem__qty-static {

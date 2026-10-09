@@ -19,6 +19,8 @@ export function ProductGrid({
   maxItems = 8,
   mobileMaxItems = 4,
   columns = 4,
+  showSubtitle = true,
+  showButton = true,
   backgroundColor,
 }: Props) {
   const listRef = useRef<HTMLDivElement>(null);
@@ -28,7 +30,7 @@ export function ProductGrid({
 
   return (
     <section className="pgrid" style={backgroundColor ? { backgroundColor } : undefined}>
-      <SectionHeading title={title} subtitle={subtitle} />
+      <SectionHeading title={title} subtitle={showSubtitle ? subtitle : undefined} />
       {items.length > 0 && (
         <div
           ref={listRef}
@@ -52,7 +54,7 @@ export function ProductGrid({
           ))}
         </div>
       )}
-      {buttonText && buttonLink?.href && (
+      {showButton && buttonText && buttonLink?.href && (
         <div className="pgrid__actions">
           <Button label={buttonText} href={buttonLink.href} />
         </div>
