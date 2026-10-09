@@ -1,5 +1,5 @@
 // This file is auto-generated — do not edit manually.
-import type { IkasProduct, IkasNavigationLink } from "@ikas/bp-storefront";
+import type { IkasProduct, IkasNavigationLink, IkasProductAttributeDetail } from "@ikas/bp-storefront";
 
 export interface Props {
   product?: IkasProduct | null;
@@ -63,7 +63,6 @@ export interface Props {
   shippingTitle?: string;
   careTitle?: string;
   shippingText?: string;
-  careText?: string;
   closeAriaLabel?: string;
   prevAriaLabel?: string;
   nextAriaLabel?: string;
@@ -77,4 +76,5 @@ export interface Props {
   highlights?: any;
   backgroundColor?: string;
   noReviewsText?: string;
+  careAttribute?: IkasProductAttributeDetail | null;
 }

@@ -37,6 +37,7 @@ import {
   removeIkasProductFromFavorites,
   saveProductVariantBackInStockReminder,
   withRoutePrefix,
+  getAttributeDetailValues,
 } from "@ikas/bp-storefront";
 import AccordionItem from "../../sub-components/AccordionItem";
 import ArrowLink from "../../sub-components/ArrowLink";
@@ -151,7 +152,7 @@ export function ProductDetail(props: Props) {
     shippingTitle = "Kargo ve iade",
     careTitle = "Malzeme ve bakım",
     shippingText,
-    careText,
+    careAttribute,
     closeAriaLabel = "Kapat",
     prevAriaLabel = "Önceki görsel",
     nextAriaLabel = "Sonraki görsel",
@@ -299,6 +300,13 @@ export function ProductDetail(props: Props) {
   const editMode = mounted && !!getEditLineId();
   const soldOut = isSoldOut(product, variant);
   const price = getPriceInfo(variant);
+  // Per-product care text from the product custom field picked in careAttribute.
+  const careText = careAttribute?.attributePropValue?.attributeId
+    ? getAttributeDetailValues(careAttribute)
+        .map((v) => v.value ?? "")
+        .filter(Boolean)
+        .join("")
+    : "";
   const isFavorite = isFavoriteIkasProduct(product);
   const loggedIn = hasCustomer(customerStore);
 
