@@ -1,0 +1,10 @@
+.askel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.askel__title {
+  max-width: 100%;
+}

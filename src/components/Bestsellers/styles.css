@@ -1,0 +1,178 @@
+.best {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page) 0;
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.best__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.best__heading {
+  max-width: 640px;
+}
+
+.best__tabs {
+  flex-shrink: 1;
+}
+
+/* Desktop: list column + 560 preview (the preview is absolutely placed by BestsellerTab). */
+.best__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 680px;
+  padding-right: calc(560px + var(--space-panel));
+}
+
+/* Panels: only the active one shows; before hydration the first child stands in. */
+.best__body .btab {
+  display: none;
+}
+
+.best__body .btab[data-state="active"],
+.best:not(.is-ready) .best__panels > .btab:first-child,
+.best:not(.is-ready) .best__panels > :first-child > .btab {
+  display: block;
+}
+
+/* Rows beyond maxItems (1–10) are hidden. */
+.best[data-max="1"] .btab__row:nth-child(n + 2),
+.best[data-max="1"] .btab__preview-img:nth-child(n + 2) {
+  display: none;
+}
+
+.best[data-max="2"] .btab__row:nth-child(n + 3),
+.best[data-max="2"] .btab__preview-img:nth-child(n + 3) {
+  display: none;
+}
+
+.best[data-max="3"] .btab__row:nth-child(n + 4),
+.best[data-max="3"] .btab__preview-img:nth-child(n + 4) {
+  display: none;
+}
+
+.best[data-max="4"] .btab__row:nth-child(n + 5),
+.best[data-max="4"] .btab__preview-img:nth-child(n + 5) {
+  display: none;
+}
+
+.best[data-max="5"] .btab__row:nth-child(n + 6),
+.best[data-max="5"] .btab__preview-img:nth-child(n + 6) {
+  display: none;
+}
+
+.best[data-max="6"] .btab__row:nth-child(n + 7),
+.best[data-max="6"] .btab__preview-img:nth-child(n + 7) {
+  display: none;
+}
+
+.best[data-max="7"] .btab__row:nth-child(n + 8),
+.best[data-max="7"] .btab__preview-img:nth-child(n + 8) {
+  display: none;
+}
+
+.best[data-max="8"] .btab__row:nth-child(n + 9),
+.best[data-max="8"] .btab__preview-img:nth-child(n + 9) {
+  display: none;
+}
+
+.best[data-max="9"] .btab__row:nth-child(n + 10),
+.best[data-max="9"] .btab__preview-img:nth-child(n + 10) {
+  display: none;
+}
+
+/* I-BEST-03 · M-01: y 16 → 0, opacity 0 → 1, 0.45s, stagger 0.05s */
+.best__body.is-pending .btab__row {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.best__body.is-inview .btab[data-state="active"] .btab__row {
+  animation: best-row-in 0.45s var(--ease-standard) both;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+@keyframes best-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* laptop: 440 preview */
+@media (max-width: bp(rLU3LmiCdo)) {
+  .best__body {
+    min-height: 534px;
+    padding-right: calc(440px + var(--space-panel));
+  }
+}
+
+/* tablet: preview hidden, list full width */
+@media (max-width: bp(zTpkWoce2k)) {
+  .best__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .best__tabs {
+    max-width: 100%;
+  }
+
+  .best__body {
+    min-height: 0;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+}
+
+/* mobile: heading, scrolling tabs, preview on top + list (BestsellerTab), link last */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .best {
+    gap: 24px;
+  }
+
+  .best__head {
+    align-items: stretch;
+  }
+
+  .best__body {
+    gap: 12px;
+  }
+
+  .best__body .btab[data-state="active"],
+  .best:not(.is-ready) .best__panels > .btab:first-child,
+  .best:not(.is-ready) .best__panels > :first-child > .btab {
+    display: flex;
+  }
+
+  .best__actions {
+    padding-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .best__body.is-pending .btab__row {
+    opacity: 1;
+    transform: none;
+  }
+
+  .best__body.is-inview .btab[data-state="active"] .btab__row {
+    animation: none;
+  }
+}

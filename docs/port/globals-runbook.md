@@ -18,29 +18,29 @@ Tür başına sayı: breakpoint 3 · colorScheme 3 · typography 11 · globalVar
 
 | Tür | Ad | Değer | pen.dev kaynağı | Durum |
 |---|---|---|---|---|
-| breakpoint | Kırılım / Laptop | 1199 px | globals.md §4 (`laptop`) | _doldurulacak_ |
-| breakpoint | Kırılım / Tablet | 991 px | globals.md §4 (`tablet`) | _doldurulacak_ |
-| breakpoint | Kırılım / Mobil | 767 px | globals.md §4 (`mobile`) | _doldurulacak_ |
-| colorScheme | İsmail / Kâğıt | Background #F4F4F1, Text #141414, Muted #5C5C57, Line #8A8A84, Surface #E8E8E3, PrimaryButton/Background #141414, PrimaryButton/Text #F4F4F1, Accent #F2541A, AccentText #141414, Danger #B3261E, Success #1E7A45, Scrim #13151499 | mode `kagit`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | _doldurulacak_ |
-| colorScheme | İsmail / Mürekkep | Background #131514, Text #F4F4F1, Muted #A6A69F, Line #6E6E68, Surface #1F2120, PrimaryButton/Background #F4F4F1, PrimaryButton/Text #141414, Accent #F2541A, AccentText #141414, Danger #FF8A7A, Success #6FD49A, Scrim #131514B3 | mode `murekkep`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | _doldurulacak_ |
-| colorScheme | İsmail / Şeffaf | Background #13151400, Text #F4F4F1, Muted #A6A69F, Line #6E6E68, Surface #F4F4F11A, PrimaryButton/Background #F4F4F1, PrimaryButton/Text #141414, Accent #F2541A, AccentText #141414, Danger #FF8A7A, Success #6FD49A, Scrim #131514B3 | mode `seffaf`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | _doldurulacak_ |
-| typography | Tipografi / Display | Mona Sans · 500 · 96px / 80px / 64px / 48px (≥1200 / laptop / tablet / mobil) · satır 1.0 · harf -0.02em | `text-display` + `font-display` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Başlık H2 | Mona Sans · 500 · 44px / 40px / 36px / 30px (≥1200 / laptop / tablet / mobil) · satır 1.1 · harf -0.02em | `text-h2` + `font-display` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Başlık H3 | Mona Sans · 500 · 32px / 30px / 28px / 24px (≥1200 / laptop / tablet / mobil) · satır 1.15 · harf -0.015em | `text-h3` + `font-display` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Başlık H4 | Mona Sans · 600 · 20px / 20px / 18px / 18px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf -0.01em | `text-h4` + `font-display` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Ürün Adı | Mona Sans · 500 · 14px / 14px / 13px / 13px (≥1200 / laptop / tablet / mobil) · satır 1.25 | `text-title` + `font-ui` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Arayüz | Mona Sans · 500 · 14px / 14px / 14px / 14px (≥1200 / laptop / tablet / mobil) · satır 1.25 | `text-ui` + `font-ui` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Arayüz Küçük | Mona Sans · 400 · 13px / 13px / 12px / 12px (≥1200 / laptop / tablet / mobil) · satır 1.4 | `text-ui-sm` + `font-ui` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Rozet | Inter Tight · 500 · 11px / 11px / 10px / 10px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf 0.04em · uppercase | `text-badge` + `font-mono` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Etiket | Inter Tight · 400 · 12px / 12px / 11px / 11px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf 0.04em · uppercase | `text-label` + `font-mono` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Gövde | Mona Sans · 400 · 15px / 15px / 14px / 14px (≥1200 / laptop / tablet / mobil) · satır 1.5 | `text-body` + `font-body` · globals.md §2a | _doldurulacak_ |
-| typography | Tipografi / Fiyat | Inter Tight · 500 · 14px / 14px / 13px / 13px (≥1200 / laptop / tablet / mobil) · satır 1.2 | `text-price` + `font-price` · globals.md §2a | _doldurulacak_ |
-| globalVariable | Çizgi / Varsayılan | BORDER `{"width": {"value": 1, "unit": "px"}, "style": "solid", "color": "#8A8A84"}` | `size-line`, `color-line` | _doldurulacak_ |
-| keyframe | Animasyon / Favori pop | { filled.scale: 0.6, filled.opacity: 0 } → { filled.scale: 1, filled.opacity: 1 } | I-M-03 (I-CMP-07) | _doldurulacak_ |
-| keyframe | Animasyon / Yükleme fade-up | { y: 40, opacity: 0 } → { y: 0, opacity: 1 } | M-01 (I-CMP-12, I-HERO-03, I-GRID-01, I-ACT-01, I-SPOT-01, I-BEST-01, I-MOS-01, I-COLL-01, I-REV-01, I-CRTP-02, I-BLP-01, I-TXT-01) | _doldurulacak_ |
-| keyframe | Animasyon / Yükleme fade | { opacity: 0 } → { opacity: 1 } | M-02 (I-PREV-01, I-HERO-01) | _doldurulacak_ |
+| breakpoint | Kırılım / Laptop | 1199 px | globals.md §4 (`laptop`) | yeni → oluşturuldu |
+| breakpoint | Kırılım / Tablet | 991 px | globals.md §4 (`tablet`) | yeni → oluşturuldu |
+| breakpoint | Kırılım / Mobil | 767 px | globals.md §4 (`mobile`) | yeni → oluşturuldu |
+| colorScheme | İsmail / Kâğıt | Background #F4F4F1, Text #141414, Muted #5C5C57, Line #8A8A84, Surface #E8E8E3, PrimaryButton/Background #141414, PrimaryButton/Text #F4F4F1, Accent #F2541A, AccentText #141414, Danger #B3261E, Success #1E7A45, Scrim #13151499 | mode `kagit`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | yeni → oluşturuldu |
+| colorScheme | İsmail / Mürekkep | Background #131514, Text #F4F4F1, Muted #A6A69F, Line #6E6E68, Surface #1F2120, PrimaryButton/Background #F4F4F1, PrimaryButton/Text #141414, Accent #F2541A, AccentText #141414, Danger #FF8A7A, Success #6FD49A, Scrim #131514B3 | mode `murekkep`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | yeni → oluşturuldu |
+| colorScheme | İsmail / Şeffaf | Background #13151400, Text #F4F4F1, Muted #A6A69F, Line #6E6E68, Surface #F4F4F11A, PrimaryButton/Background #F4F4F1, PrimaryButton/Text #141414, Accent #F2541A, AccentText #141414, Danger #FF8A7A, Success #6FD49A, Scrim #131514B3 | mode `seffaf`: `color-bg`, `color-text`, `color-muted`, `color-line`, `color-surface`, `color-inverse-bg`, `color-inverse-text`, `color-accent`, `color-accent-text`, `color-danger`, `color-success`, `color-scrim` | yeni → oluşturuldu |
+| typography | Tipografi / Display | Mona Sans · 500 · 96px / 80px / 64px / 48px (≥1200 / laptop / tablet / mobil) · satır 1.0 · harf -0.02em | `text-display` + `font-display` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Başlık H2 | Mona Sans · 500 · 44px / 40px / 36px / 30px (≥1200 / laptop / tablet / mobil) · satır 1.1 · harf -0.02em | `text-h2` + `font-display` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Başlık H3 | Mona Sans · 500 · 32px / 30px / 28px / 24px (≥1200 / laptop / tablet / mobil) · satır 1.15 · harf -0.015em | `text-h3` + `font-display` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Başlık H4 | Mona Sans · 600 · 20px / 20px / 18px / 18px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf -0.01em | `text-h4` + `font-display` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Ürün Adı | Mona Sans · 500 · 14px / 14px / 13px / 13px (≥1200 / laptop / tablet / mobil) · satır 1.25 | `text-title` + `font-ui` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Arayüz | Mona Sans · 500 · 14px / 14px / 14px / 14px (≥1200 / laptop / tablet / mobil) · satır 1.25 | `text-ui` + `font-ui` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Arayüz Küçük | Mona Sans · 400 · 13px / 13px / 12px / 12px (≥1200 / laptop / tablet / mobil) · satır 1.4 | `text-ui-sm` + `font-ui` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Rozet | Inter Tight · 500 · 11px / 11px / 10px / 10px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf 0.04em | `text-badge` + `font-mono` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Etiket | Inter Tight · 400 · 12px / 12px / 11px / 11px (≥1200 / laptop / tablet / mobil) · satır 1.2 · harf 0.04em | `text-label` + `font-mono` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Gövde | Mona Sans · 400 · 15px / 15px / 14px / 14px (≥1200 / laptop / tablet / mobil) · satır 1.5 | `text-body` + `font-body` · globals.md §2a | yeni → oluşturuldu |
+| typography | Tipografi / Fiyat | Inter Tight · 500 · 14px / 14px / 13px / 13px (≥1200 / laptop / tablet / mobil) · satır 1.2 | `text-price` + `font-price` · globals.md §2a | yeni → oluşturuldu |
+| globalVariable | Çizgi / Varsayılan | BORDER `{"width": {"value": 1, "unit": "px"}, "style": "solid", "color": "#8A8A84"}` | `size-line`, `color-line` | yeni → oluşturuldu |
+| keyframe | Animasyon / Favori pop | { filled.scale: 0.6, filled.opacity: 0 } → { filled.scale: 1, filled.opacity: 1 } | I-M-03 (I-CMP-07) | global yok — FavoriteButton CSS `@keyframes` |
+| keyframe | Animasyon / Yükleme fade-up | { y: 40, opacity: 0 } → { y: 0, opacity: 1 } | M-01 (I-CMP-12, I-HERO-03, I-GRID-01, I-ACT-01, I-SPOT-01, I-BEST-01, I-MOS-01, I-COLL-01, I-REV-01, I-CRTP-02, I-BLP-01, I-TXT-01) | yeni → oluşturuldu |
+| keyframe | Animasyon / Yükleme fade | { opacity: 0 } → { opacity: 1 } | M-02 (I-PREV-01, I-HERO-01) | yeni → oluşturuldu |
 
-`Durum` adım 1'den sonra doldurulur: `yeni`, `var (aynı)` ya da `çakışma`.
+`Durum` adım 1'den sonra doldurulur (2026-10-09: `list_theme_globals` boştu, hepsi yeni): `yeni`, `var (aynı)` ya da `çakışma`.
 
 ## 3. Onay
 
@@ -69,8 +69,8 @@ Ara adım: `list_theme_globals` → ilk şemanın slot id'leri okunur; ikinci ş
 {"kind": "typography", "name": "Tipografi / Ürün Adı", "font_family": "Mona Sans", "font_size": "14px", "font_weight": "500", "line_height": "1.25", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "13px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "13px"}]}
 {"kind": "typography", "name": "Tipografi / Arayüz", "font_family": "Mona Sans", "font_size": "14px", "font_weight": "500", "line_height": "1.25"}
 {"kind": "typography", "name": "Tipografi / Arayüz Küçük", "font_family": "Mona Sans", "font_size": "13px", "font_weight": "400", "line_height": "1.4", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "12px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "12px"}]}
-{"kind": "typography", "name": "Tipografi / Rozet", "font_family": "Inter Tight", "font_size": "11px", "font_weight": "500", "line_height": "1.2", "letter_spacing": "0.04em", "text_transform": "uppercase", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "10px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "10px"}]}
-{"kind": "typography", "name": "Tipografi / Etiket", "font_family": "Inter Tight", "font_size": "12px", "font_weight": "400", "line_height": "1.2", "letter_spacing": "0.04em", "text_transform": "uppercase", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "11px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "11px"}]}
+{"kind": "typography", "name": "Tipografi / Rozet", "font_family": "Inter Tight", "font_size": "11px", "font_weight": "500", "line_height": "1.2", "letter_spacing": "0.04em", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "10px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "10px"}]}
+{"kind": "typography", "name": "Tipografi / Etiket", "font_family": "Inter Tight", "font_size": "12px", "font_weight": "400", "line_height": "1.2", "letter_spacing": "0.04em", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "11px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "11px"}]}
 {"kind": "typography", "name": "Tipografi / Gövde", "font_family": "Mona Sans", "font_size": "15px", "font_weight": "400", "line_height": "1.5", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "14px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "14px"}]}
 {"kind": "typography", "name": "Tipografi / Fiyat", "font_family": "Inter Tight", "font_size": "14px", "font_weight": "500", "line_height": "1.2", "breakpoints": [{"breakpoint_id": "<Kırılım / Tablet id>", "font_size": "13px"}, {"breakpoint_id": "<Kırılım / Mobil id>", "font_size": "13px"}]}
 {"kind": "globalVariable", "display_name": "Çizgi / Varsayılan", "type": "BORDER", "value": {"width": {"value": 1, "unit": "px"}, "style": "solid", "color": "#8A8A84"}}
@@ -140,6 +140,8 @@ Boşluk, ölçü, opaklık ve alfa renkler için ikas'ta tür yok; bunlar `src/g
 
 ## 7. Canlı token tablosu
 
+Kurulum: 2026-10-09, 20 `create_theme_global` + `update_theme_color_scheme` (Kâğıt `is_default: true`); `list_theme_globals` ile her satır tam bir kez doğrulandı. Rozet/Etiket stillerinde `text_transform` yok (kullanıcı kararı, 2026-10-09; brief §6): büyük harf metnin kendisinde, dinamik veride `toLocaleUpperCase("tr-TR")`.
+
 ### Renkler (kind: color)
 
 | Token adı | ID | cssVar |
@@ -150,59 +152,59 @@ Boşluk, ölçü, opaklık ve alfa renkler için ikas'ta tür yok; bunlar `src/g
 
 | Token adı | ID | className |
 |---|---|---|
-| Tipografi / Display | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Başlık H2 | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Başlık H3 | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Başlık H4 | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Ürün Adı | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Arayüz | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Arayüz Küçük | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Rozet | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Etiket | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Gövde | _doldurulacak_ | _doldurulacak_ |
-| Tipografi / Fiyat | _doldurulacak_ | _doldurulacak_ |
+| Tipografi / Display | `f1JrzqIvcE` | `_f1JrzqIvcE` |
+| Tipografi / Başlık H2 | `FEHST3SdIj` | `_FEHST3SdIj` |
+| Tipografi / Başlık H3 | `KZwYgX5VT5` | `_KZwYgX5VT5` |
+| Tipografi / Başlık H4 | `Ud5e1Sf5zH` | `_Ud5e1Sf5zH` |
+| Tipografi / Ürün Adı | `I9GGr26BuM` | `_I9GGr26BuM` |
+| Tipografi / Arayüz | `Nx0cY45JZb` | `_Nx0cY45JZb` |
+| Tipografi / Arayüz Küçük | `X6laGBbBTC` | `_X6laGBbBTC` |
+| Tipografi / Rozet | `jzncaPrv22` | `_jzncaPrv22` |
+| Tipografi / Etiket | `TVRrGKS76Y` | `_TVRrGKS76Y` |
+| Tipografi / Gövde | `gVS3y9Wt5R` | `_gVS3y9Wt5R` |
+| Tipografi / Fiyat | `ojnnKm9mqH` | `_ojnnKm9mqH` |
 
 ### Global değişkenler
 
 | Token adı | variableName | Tip |
 |---|---|---|
-| Çizgi / Varsayılan | _doldurulacak_ | BORDER |
+| Çizgi / Varsayılan | `_cLMlr8SnkP` | BORDER |
 
 ### Kırılımlar (kind: breakpoint)
 
 | Token adı | ID | Genişlik | Kullanım |
 |---|---|---|---|
-| Kırılım / Laptop | _doldurulacak_ | 1199 | `@media (max-width: bp(<id>))` |
-| Kırılım / Tablet | _doldurulacak_ | 991 | `@media (max-width: bp(<id>))` |
-| Kırılım / Mobil | _doldurulacak_ | 767 | `@media (max-width: bp(<id>))` |
+| Kırılım / Laptop | `rLU3LmiCdo` | 1199 | `@media (max-width: bp(rLU3LmiCdo))` |
+| Kırılım / Tablet | `zTpkWoce2k` | 991 | `@media (max-width: bp(zTpkWoce2k))` |
+| Kırılım / Mobil | `KUQjO8W6p9` | 767 | `@media (max-width: bp(KUQjO8W6p9))` |
 
 ### Renk şemaları (kind: colorScheme)
 
 | Palet | ID | className |
 |---|---|---|
-| İsmail / Kâğıt | _doldurulacak_ | _doldurulacak_ |
-| İsmail / Mürekkep | _doldurulacak_ | _doldurulacak_ |
-| İsmail / Şeffaf | _doldurulacak_ | _doldurulacak_ |
+| İsmail / Kâğıt (varsayılan) | `FKRyOgJgLv` | `_FKRyOgJgLv` |
+| İsmail / Mürekkep | `OYYkHhFGEt` | `_OYYkHhFGEt` |
+| İsmail / Şeffaf | `7XjEWncbmF` | `_7XjEWncbmF` |
 
 | Slot | slotId | cssVar |
 |---|---|---|
-| Background | _doldurulacak_ | _doldurulacak_ |
-| Text | _doldurulacak_ | _doldurulacak_ |
-| Muted | _doldurulacak_ | _doldurulacak_ |
-| Line | _doldurulacak_ | _doldurulacak_ |
-| Surface | _doldurulacak_ | _doldurulacak_ |
-| PrimaryButton/Background | _doldurulacak_ | _doldurulacak_ |
-| PrimaryButton/Text | _doldurulacak_ | _doldurulacak_ |
-| Accent | _doldurulacak_ | _doldurulacak_ |
-| AccentText | _doldurulacak_ | _doldurulacak_ |
-| Danger | _doldurulacak_ | _doldurulacak_ |
-| Success | _doldurulacak_ | _doldurulacak_ |
-| Scrim | _doldurulacak_ | _doldurulacak_ |
+| Background | `YJka3yeKlR` | `var(--yJka3YeKlR)` |
+| Text | `lk0j1rx9r0` | `var(--lk0J1Rx9R0)` |
+| Muted | `tHnhMdmBcs` | `var(--tHnhMdmBcs)` |
+| Line | `VjHzZbHtew` | `var(--vjHzZbHtew)` |
+| Surface | `Qdn8YG9eBq` | `var(--qdn8Yg9EBq)` |
+| PrimaryButton/Background | `uHkyRHqUZ1` | `var(--uHkyRHqUz1)` |
+| PrimaryButton/Text | `gMMleaHYrL` | `var(--gMMleaHYrL)` |
+| Accent | `SLDDjRhHJv` | `var(--sldDjRhHJv)` |
+| AccentText | `nfsci4DZmO` | `var(--nfsci4DZmO)` |
+| Danger | `XAKu9sY6vf` | `var(--xaKu9SY6Vf)` |
+| Success | `e1Rmu5XFwk` | `var(--e1Rmu5XFwk)` |
+| Scrim | `kKz4YfekJq` | `var(--kKz4YfekJq)` |
 
 ### Keyframe'ler (kind: keyframe)
 
 | Token adı | ID | ref (animation-name) |
 |---|---|---|
-| Animasyon / Favori pop | _doldurulacak_ | _doldurulacak_ |
-| Animasyon / Yükleme fade-up | _doldurulacak_ | _doldurulacak_ |
-| Animasyon / Yükleme fade | _doldurulacak_ | _doldurulacak_ |
+| Animasyon / Favori pop | — | bileşen CSS `@keyframes` (global değil) |
+| Animasyon / Yükleme fade-up | `ovqsdHMO4b` | `_ovqsdHMO4b` |
+| Animasyon / Yükleme fade | `EMX39fgOGw` | `_EMX39fgOGw` |

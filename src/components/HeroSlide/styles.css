@@ -1,0 +1,225 @@
+/* State attribute `data-state` (active | prev | idle) is set on .hslide by HeroSlider.
+   No attribute (SSR, before hydration) = end state, fully visible. */
+.hslide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--c-transparent);
+  color: var(--c-text);
+}
+
+/* I-HERO-05 · M-07: crossfade — the incoming slide fades in over the outgoing one */
+.hslide[data-state="idle"] {
+  z-index: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hslide[data-state="prev"] {
+  z-index: 1;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.hslide[data-state="active"] {
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.8s var(--ease-out-soft);
+}
+
+/* I-HERO-01 · M-02: image fades in on load (theme keyframe "fade") */
+.hslide__mask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: _EMX39fgOGw 1s var(--ease-standard) both;
+}
+
+/* I-HERO-07 · M-27: bg is 15% taller than its frame and slides down while the hero scrolls out */
+.hslide__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 115%;
+  transform: translate3d(0, calc(var(--hero-parallax, 0) * 15%), 0);
+  will-change: transform;
+}
+
+.hslide__bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* I-HERO-05: image 1.08 → 1 as the slide becomes active */
+.hslide__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+}
+
+.hslide[data-state="idle"] .hslide__img {
+  transform: scale(1.08);
+}
+
+.hslide[data-state="active"] .hslide__img {
+  transition: transform 0.8s var(--ease-out-soft);
+}
+
+.hslide__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--c-scrim);
+  opacity: var(--hero-scrim-opacity, 1);
+  pointer-events: none;
+}
+
+.hslide__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 0 var(--space-page) 64px;
+  box-sizing: border-box;
+}
+
+.hslide__text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 880px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.hslide__title {
+  margin: 0;
+  color: var(--c-text);
+  text-wrap: balance;
+}
+
+.hslide__title-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+/* I-HERO-02 · M-03: words rise one by one (y 50 → 0, opacity), stagger 0.06s after 0.2s */
+.hslide__word {
+  display: inline-block;
+  animation: hslideWord 0.7s var(--ease-out-soft) both;
+  animation-delay: calc(0.2s + var(--w, 0) * 0.06s);
+}
+
+@keyframes hslideWord {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hslide__desc {
+  max-width: 520px;
+  margin: 0;
+  color: var(--c-text);
+}
+
+/* I-HERO-03 · M-01: description fades up after the title (theme keyframe "fade-up") */
+.hslide__desc,
+.hslide__actions {
+  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
+  animation-delay: 0.5s;
+}
+
+.hslide__actions {
+  padding-top: 8px;
+  animation-delay: 0.6s;
+}
+
+/* Entrances replay each time a slide becomes active: animation is removed while not active. */
+.hslide[data-state="idle"] .hslide__word,
+.hslide[data-state="prev"] .hslide__word,
+.hslide[data-state="idle"] .hslide__desc,
+.hslide[data-state="prev"] .hslide__desc,
+.hslide[data-state="idle"] .hslide__actions,
+.hslide[data-state="prev"] .hslide__actions {
+  animation: none;
+}
+
+/* hero-meta (desktop only): sits above the slider's counter, which HeroSlider draws at bottom 64 */
+.hslide__meta {
+  flex-shrink: 0;
+  margin: 0 0 calc(1.2em + 10px);
+  color: var(--c-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: bp(zTpkWoce2k)) {
+  .hslide__content {
+    padding-bottom: 92px;
+  }
+
+  .hslide__meta {
+    display: none;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .hslide[data-state="active"] {
+    transition-duration: 0.6s;
+  }
+
+  .hslide__bg {
+    height: 100%;
+    transform: none;
+  }
+
+  .hslide__content {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 0 var(--space-page) 32px;
+  }
+
+  .hslide__text {
+    width: 100%;
+  }
+
+  .hslide__desc {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hslide__mask,
+  .hslide__word,
+  .hslide__desc,
+  .hslide__actions {
+    animation: none;
+  }
+
+  .hslide[data-state="active"],
+  .hslide[data-state="active"] .hslide__img {
+    transition: none;
+  }
+
+  .hslide[data-state="idle"] .hslide__img {
+    transform: none;
+  }
+
+  .hslide__bg {
+    transform: none;
+  }
+}

@@ -1,0 +1,264 @@
+.iprev {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+}
+
+.iprev__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--c-scrim);
+  animation: _EMX39fgOGw 0.3s var(--ease-standard) both;
+}
+
+.iprev__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--c-bg);
+  color: var(--c-text);
+  animation: _EMX39fgOGw 0.3s var(--ease-standard) both;
+}
+
+.iprev__top {
+  position: absolute;
+  top: 24px;
+  left: var(--space-page);
+  right: var(--space-page);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iprev__count {
+  color: var(--c-text);
+}
+
+.iprev__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-transparent);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.iprev__close:focus-visible,
+.iprev__arrow:focus-visible,
+.iprev__thumb:focus-visible,
+.iprev__zoom:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .iprev__close:hover {
+    background: var(--c-surface);
+  }
+}
+
+/* swipe track: one slide per viewport width */
+.iprev__track {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.iprev__track::-webkit-scrollbar {
+  display: none;
+}
+
+.iprev__slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  padding: 88px var(--space-page) 128px;
+  box-sizing: border-box;
+}
+
+/* I-PREV-01 · M-02: image fades in (1.2s, 0.3s delay) */
+.iprev__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(640px, 100%);
+  height: min(720px, 100%);
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  animation: _EMX39fgOGw 1.2s var(--ease-out-soft) 0.3s both;
+}
+
+.iprev__zoom {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--c-transparent);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.iprev__zoom--on {
+  cursor: zoom-out;
+}
+
+.iprev__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.iprev__zoom--on .iprev__img {
+  transform: scale(2);
+}
+
+/* preview-nav: desktop only */
+.iprev__nav {
+  position: absolute;
+  top: 50%;
+  left: var(--space-page);
+  right: var(--space-page);
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.iprev__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: var(--size-line) solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .iprev__arrow:hover {
+    border-color: var(--c-text);
+  }
+}
+
+.iprev__thumbs {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  max-width: calc(100% - 2 * var(--space-page));
+  overflow-x: auto;
+  scrollbar-width: none;
+  transform: translateX(-50%);
+}
+
+.iprev__thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.iprev__thumb {
+  flex: 0 0 auto;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid var(--c-transparent);
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease-standard);
+}
+
+.iprev__thumb--on {
+  border-color: var(--c-text);
+}
+
+.iprev__thumb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.iprev__thumb-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--c-text);
+}
+
+@media (max-width: bp(zTpkWoce2k)) {
+  .iprev__media {
+    width: 100%;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .iprev__top {
+    top: 12px;
+  }
+
+  .iprev__nav {
+    display: none;
+  }
+
+  .iprev__slide {
+    padding: 64px 0 104px;
+  }
+
+  .iprev__media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .iprev__thumb {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iprev__scrim,
+  .iprev__panel,
+  .iprev__media {
+    animation: none;
+  }
+
+  .iprev__img {
+    transition: none;
+  }
+}

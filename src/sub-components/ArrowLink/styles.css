@@ -1,0 +1,76 @@
+.alink {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--c-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alink--button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+}
+
+.alink__row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alink__arrow {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.alink__arrow-top,
+.alink__arrow-bottom {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.3s var(--ease-out-soft);
+}
+
+.alink__arrow-bottom {
+  color: var(--c-accent);
+  transform: translateX(-120%);
+}
+
+.alink__line {
+  display: block;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s var(--ease-out-soft);
+}
+
+@media (hover: hover) {
+  .alink:hover .alink__arrow-top {
+    transform: translateX(120%);
+  }
+
+  .alink:hover .alink__arrow-bottom {
+    transform: translateX(0);
+  }
+
+  .alink:hover .alink__line {
+    transform: scaleX(1);
+  }
+}
+
+.alink:focus-visible .alink__line {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alink__arrow-top,
+  .alink__arrow-bottom,
+  .alink__line {
+    transition: none;
+  }
+}

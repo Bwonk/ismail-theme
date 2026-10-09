@@ -1,0 +1,53 @@
+/* I/Section/Account › address-form — inline card: 1px line, radius-card, padding 28 (mobile 20), gap 14; rows gap 12. */
+.aform {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-card);
+  animation: _ovqsdHMO4b 0.4s var(--ease-standard) both;
+}
+
+.aform__row {
+  display: grid;
+  grid-template-columns: repeat(var(--aform-cols, 1), minmax(0, 1fr));
+  gap: 12px;
+}
+
+.aform__corporate {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.aform__error {
+  margin: 0;
+}
+
+.aform__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .aform {
+    padding: 20px;
+  }
+
+  .aform__actions {
+    flex-direction: column;
+  }
+
+  .aform__actions .btn {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aform {
+    animation: none;
+  }
+}

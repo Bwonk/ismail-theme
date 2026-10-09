@@ -1,0 +1,51 @@
+.slogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  margin: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-card);
+  background: var(--c-bg);
+  color: var(--c-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+
+.slogin__icon {
+  flex-shrink: 0;
+}
+
+.slogin__label {
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slogin--inactive {
+  opacity: var(--opacity-inactive);
+  cursor: default;
+}
+
+.slogin:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .slogin:not(.slogin--inactive):hover {
+    background: var(--c-surface);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slogin {
+    transition: none;
+  }
+}

@@ -1,0 +1,28 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text);
+  white-space: nowrap;
+}
+
+.badge--new {
+  background: var(--c-inverse-bg);
+  border-color: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+}
+
+.badge--sale {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-text);
+}
+
+.badge--soldout {
+  background: var(--c-surface);
+  border-color: var(--c-surface);
+  color: var(--c-muted);
+}

@@ -6,3 +6,6 @@ dist/
 asd
 # ikas-pendev referans girdileri (look-only)
 docs/referans/girdi/
+
+# demo ürün görselleri (tuvalden dışa alındı, mağazaya yüklenir)
+.demo-urunler/

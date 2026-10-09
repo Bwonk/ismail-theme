@@ -1,0 +1,139 @@
+.act {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page) 0;
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.act__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.act__heading {
+  max-width: 640px;
+}
+
+.act__link {
+  flex-shrink: 0;
+}
+
+.act__row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* IkasComponentRenderer: renderer div > one container per child — flatten so .acard is the flex item */
+.act__renderer > *,
+.act__renderer > * > :not(.acard) {
+  display: contents;
+}
+
+/* SSR end state (and before the entrance runs): the first card is open */
+.act__row:not(.has-open):not(.is-pending):not(.is-inview) .act__renderer > div:first-of-type {
+  --acard-open-default: 1;
+}
+
+/* I-ACT-03 · I-M-04: cards rise out of a curtain left to right, corners stay round, image 1.1 → 1 */
+.act__row.is-pending .acard {
+  clip-path: inset(100% 0 0 0 round var(--radius-card));
+}
+
+.act__row.is-pending .acard__img {
+  transform: scale(1.1);
+}
+
+.act__row.is-inview .acard {
+  animation: actCurtain 0.7s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+
+.act__row.is-inview .acard__img {
+  animation: actZoom 0.7s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+
+@keyframes actCurtain {
+  from {
+    clip-path: inset(100% 0 0 0 round var(--radius-card));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius-card));
+  }
+}
+
+@keyframes actZoom {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Tablet: horizontal strip (mobile behaviour), expansion off */
+@media (max-width: bp(zTpkWoce2k)) {
+  .act {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .act__head {
+    padding: 0 var(--space-page);
+  }
+
+  .act__row {
+    overflow-x: auto;
+    padding: 0 var(--space-page);
+    box-sizing: border-box;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--space-page);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .act__row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .act__row::after {
+    content: "";
+    flex: 0 0 1px;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .act {
+    gap: 24px;
+  }
+
+  .act__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .act__row {
+    gap: 8px;
+    padding-right: 0;
+  }
+
+  /* lets the last cards reach the centre of the strip */
+  .act__row::after {
+    flex: 0 0 calc(50% - 128px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .act__row.is-inview .acard,
+  .act__row.is-inview .acard__img {
+    animation: none;
+  }
+}

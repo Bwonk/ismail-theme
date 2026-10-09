@@ -1,0 +1,103 @@
+.cbox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.cbox__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cbox__box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 1px solid var(--c-line);
+  border-radius: 3px;
+  background: var(--c-transparent);
+  color: var(--c-inverse-text);
+  transition: background-color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
+}
+
+.cbox__input {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cbox__check {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-spring-soft);
+}
+
+.cbox--on .cbox__box {
+  background: var(--c-inverse-bg);
+  border-color: var(--c-inverse-bg);
+}
+
+.cbox--on .cbox__check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cbox__box:has(.cbox__input:focus-visible) {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+.cbox__label {
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.cbox__label a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cbox--error .cbox__box {
+  border-color: var(--c-danger);
+}
+
+.cbox__msg {
+  margin: 0;
+  padding-left: 28px;
+  color: var(--c-danger);
+}
+
+.cbox--disabled {
+  opacity: var(--opacity-inactive);
+}
+
+.cbox--disabled .cbox__input,
+.cbox--disabled .cbox__label {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .cbox:not(.cbox--disabled):not(.cbox--on) .cbox__row:hover .cbox__box {
+    border-color: var(--c-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cbox__box,
+  .cbox__check {
+    transition: none;
+  }
+}

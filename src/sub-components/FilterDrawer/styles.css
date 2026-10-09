@@ -1,0 +1,112 @@
+.fdrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* I-FILT-01 · M-20: scrim 0 → 1 over 0.4s */
+.fdrawer__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--c-scrim);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-standard);
+}
+
+.fdrawer--open .fdrawer__scrim {
+  opacity: 1;
+}
+
+/* I-FILT-01 · M-20: drawer x -100% → 0 (spring-drawer ≈ ease-out-soft) */
+.fdrawer__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  max-width: 100%;
+  height: 100%;
+  background: var(--c-bg);
+  color: var(--c-text);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.fdrawer--open .fdrawer__panel {
+  transform: translateX(0);
+}
+
+.fdrawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  height: 56px;
+  padding: 0 8px 0 16px;
+  border-bottom: var(--size-line) solid var(--c-line);
+}
+
+.fdrawer__title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.fdrawer__body {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* I-FILT-01: rows stagger in at 0.2 / 0.3 / 0.4 / 0.5s */
+.fdrawer .fpanel__item,
+.fdrawer .fpanel > .fpanel__group {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.fdrawer--open .fpanel__item,
+.fdrawer--open .fpanel > .fpanel__group {
+  animation: _ovqsdHMO4b 0.45s var(--ease-standard) both;
+  animation-delay: min(calc(0.2s + var(--i, 3) * 0.1s), 0.5s);
+}
+
+.fdrawer__actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-top: var(--size-line) solid var(--c-line);
+  background: var(--c-bg);
+}
+
+.fdrawer__actions > * {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .fdrawer__panel {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fdrawer__scrim,
+  .fdrawer__panel {
+    transition: none;
+  }
+
+  .fdrawer .fpanel__item,
+  .fdrawer .fpanel > .fpanel__group {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fdrawer--open .fpanel__item,
+  .fdrawer--open .fpanel > .fpanel__group {
+    animation: none;
+  }
+}

@@ -1,0 +1,47 @@
+// This file is auto-generated — do not edit manually.
+import type { IkasProductList, IkasNavigationLink } from "@ikas/bp-storefront";
+import type { ProductListPageMode } from "../../global-types";
+
+export interface Props {
+  productList?: IkasProductList;
+  pageMode?: ProductListPageMode;
+  columns?: number;
+  breadcrumbHomeText?: string;
+  breadcrumbAriaLabel?: string;
+  searchTitle?: string;
+  favoritesTitle?: string;
+  resultsLabel?: string;
+  searchResultsLabel?: string;
+  filterButtonText?: string;
+  hideFiltersText?: string;
+  showFiltersText?: string;
+  sortLabel?: string;
+  clearFiltersText?: string;
+  removeFilterAriaLabel?: string;
+  categoryFilterTitle?: string;
+  priceMinAriaLabel?: string;
+  priceMaxAriaLabel?: string;
+  loadMoreText?: string;
+  loadingMoreText?: string;
+  loadPreviousText?: string;
+  emptyTitle?: string;
+  emptyText?: string;
+  emptyButtonText?: string;
+  searchEmptyTitle?: string;
+  searchEmptyText?: string;
+  favoritesEmptyText?: string;
+  favoritesLoginText?: string;
+  favoritesLoginSubtext?: string;
+  favoritesLoginButtonText?: string;
+  addToCartAriaLabel?: string;
+  favoriteAriaLabel?: string;
+  soldOutText?: string;
+  filterTitle?: string;
+  closeAriaLabel?: string;
+  drawerClearText?: string;
+  applyFiltersText?: string;
+  emptyButtonLink?: IkasNavigationLink | null;
+  backgroundColor?: string;
+  allProductsTitle?: string;
+  showTitle?: boolean;
+}

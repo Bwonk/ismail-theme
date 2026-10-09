@@ -1,0 +1,237 @@
+/* Panel: rows in the list column; the preview is pinned to the right of the parent's
+   .best__body (the nearest positioned ancestor) on desktop/laptop. */
+.btab {
+  min-width: 0;
+}
+
+.btab__rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* bestseller-row · I-BEST-04 · M-28: surface fill, rank/name muted → text */
+.btab__row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 124px;
+  padding: 0 16px;
+  border-bottom: var(--size-line) solid var(--c-line);
+  border-radius: var(--radius-card);
+  background: var(--c-transparent);
+  transition: background-color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
+}
+
+.btab__row.is-active {
+  border-bottom-color: var(--c-transparent);
+  background: var(--c-surface);
+}
+
+.btab__link {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.btab__link:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 4px;
+}
+
+.btab__rank {
+  flex-shrink: 0;
+  width: 40px;
+  font-weight: 500;
+  color: var(--c-muted);
+  transition: color 0.3s var(--ease-standard);
+}
+
+.btab__media {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 80px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  color: var(--c-muted);
+}
+
+.btab__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btab__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.btab__name {
+  color: var(--c-muted);
+  transition: color 0.3s var(--ease-standard);
+}
+
+.btab__price {
+  color: var(--c-text);
+}
+
+.btab__row.is-active .btab__rank,
+.btab__row.is-active .btab__name {
+  color: var(--c-text);
+}
+
+/* row-cart · I-BEST-06 · M-28: ring fills graphite, icon turns snow (0.2s) */
+.btab__cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: var(--size-line) solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-transparent);
+  color: var(--c-text);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard);
+}
+
+.btab__cart:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .btab__cart:hover {
+    border-color: var(--c-inverse-bg);
+    background: var(--c-inverse-bg);
+    color: var(--c-inverse-text);
+  }
+}
+
+/* bestsellers-preview · I-BEST-05 · M-02: images cross-fade (0.4s) to the active row */
+.btab__preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 560px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+}
+
+.btab__preview-link {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.btab__preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-standard);
+}
+
+.btab__preview-img.is-active {
+  opacity: 1;
+}
+
+.btab__fav {
+  position: absolute;
+  top: var(--space-card);
+  right: var(--space-card);
+  z-index: 1;
+}
+
+@media (max-width: bp(rLU3LmiCdo)) {
+  .btab__preview {
+    width: 440px;
+  }
+}
+
+/* tablet: preview hidden, full-width list with 96 images */
+@media (max-width: bp(zTpkWoce2k)) {
+  .btab__preview {
+    display: none;
+  }
+
+  .btab__media {
+    width: 96px;
+    height: 120px;
+  }
+
+  .btab__row {
+    min-height: 144px;
+  }
+}
+
+/* mobile: preview on top, then the list; the active row drops its thumbnail */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .btab {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btab__preview {
+    position: relative;
+    display: block;
+    order: -1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 358 / 448;
+  }
+
+  .btab__row {
+    gap: 12px;
+    min-height: 72px;
+    padding: 12px;
+  }
+
+  .btab__link {
+    gap: 12px;
+  }
+
+  .btab__rank {
+    width: 28px;
+  }
+
+  .btab__media {
+    width: 64px;
+    height: 80px;
+  }
+
+  .btab__row.is-active .btab__media {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btab__row,
+  .btab__rank,
+  .btab__name,
+  .btab__cart,
+  .btab__preview-img {
+    transition: none;
+  }
+}

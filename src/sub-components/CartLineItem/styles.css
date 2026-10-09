@@ -1,0 +1,199 @@
+.cline {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.cline__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 88px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+}
+
+.cline__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cline__placeholder {
+  color: var(--c-muted);
+}
+
+.cline__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.cline__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.cline__title {
+  max-width: 100%;
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+.cline__variant,
+.cline__option,
+.cline__bundle-item {
+  color: var(--c-muted);
+}
+
+.cline__options,
+.cline__bundle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cline__option {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.cline__option-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: var(--size-line) solid var(--c-line);
+  border-radius: var(--radius-pill);
+}
+
+.cline__option-file {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.cline__edit,
+.cline__remove {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--c-transparent);
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-standard), text-decoration-color var(--dur-fast) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+}
+
+.cline__edit {
+  color: var(--c-text);
+}
+
+.cline__remove {
+  align-self: flex-start;
+  color: var(--c-muted);
+}
+
+.cline__remove:disabled {
+  cursor: default;
+}
+
+.cline__edit:focus-visible,
+.cline__remove:focus-visible,
+.cline__title:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+.cline__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.cline__qty-static {
+  color: var(--c-text);
+}
+
+.cline__prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cline__spinner {
+  visibility: hidden;
+}
+
+.cline__compare {
+  color: var(--c-muted);
+  font-weight: 400;
+  text-decoration-thickness: 1px;
+}
+
+.cline__price {
+  color: var(--c-text);
+}
+
+.cline__limit {
+  margin: 0;
+  color: var(--c-danger);
+}
+
+/* güncelleniyor — everything but the spinner drops to the inactive opacity */
+.cline__dim {
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+
+.cline--busy .cline__dim {
+  opacity: var(--opacity-inactive);
+}
+
+.cline--busy .cline__spinner {
+  visibility: visible;
+}
+
+@media (hover: hover) {
+  .cline__title:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cline__edit:hover,
+  .cline__remove:not(:disabled):hover {
+    color: var(--c-text);
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cline__dim,
+  .cline__edit,
+  .cline__remove {
+    transition: none;
+  }
+}

@@ -1,0 +1,217 @@
+.sloc {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page) 0;
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.sloc__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sloc__head-text {
+  display: flex;
+  flex: 0 1 720px;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sloc__title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.sloc__text {
+  margin: 0;
+  color: var(--c-muted);
+}
+
+.sloc__all {
+  flex-shrink: 0;
+}
+
+.sloc__body {
+  display: grid;
+  grid-template-columns: minmax(0, 880fr) minmax(0, 472fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── featured store ── */
+.sloc__feature {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.sloc__media {
+  position: absolute;
+  inset: 0;
+  background: var(--c-surface);
+}
+
+.sloc__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: _EMX39fgOGw 0.5s var(--ease-standard) both;
+}
+
+.sloc__skel {
+  display: block;
+  border-radius: 0;
+}
+
+.sloc__card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 380px;
+  max-width: calc(100% - 40px);
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: var(--radius-card);
+  background: var(--c-bg);
+  animation: _EMX39fgOGw 0.5s var(--ease-standard) both;
+}
+
+.sloc__card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.sloc__card-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.sloc__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+.sloc__pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-muted);
+}
+
+.sloc__pill--open .sloc__pill-dot {
+  background: var(--c-success);
+}
+
+.sloc__line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--c-muted);
+}
+
+.sloc__line-icon {
+  flex-shrink: 0;
+}
+
+.sloc__actions {
+  padding-top: 6px;
+}
+
+/* ── rows: StoreItem shows its row markup here ── */
+.sloc__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sloc__rows .sitem__card {
+  display: none;
+}
+
+.sloc__rows .sitem__row {
+  display: flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sloc__img,
+  .sloc__card {
+    animation: none;
+  }
+}
+
+/* tablet: list below the feature */
+@media (max-width: bp(zTpkWoce2k)) {
+  .sloc__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sloc__feature {
+    height: 440px;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .sloc {
+    gap: 20px;
+  }
+
+  .sloc__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sloc__head-text {
+    flex-basis: auto;
+  }
+
+  .sloc__body {
+    gap: 16px;
+  }
+
+  /* image 260 tall, info card below it */
+  .sloc__feature {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .sloc__media {
+    position: relative;
+    inset: auto;
+    height: 260px;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+
+  .sloc__card {
+    position: static;
+    width: 100%;
+    max-width: none;
+    border: 1px solid var(--c-line);
+  }
+}

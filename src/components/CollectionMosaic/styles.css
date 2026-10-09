@@ -1,0 +1,138 @@
+.mos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page);
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+/* Desktop mosaic: a column-wrapping flex box, so tiles fill the columns two by two. Each pair's
+   bases add up to the column height; flex-grow lets a lone last tile fill its column. */
+.mos__grid {
+  --mos-h: 860px;
+  --mos-avail: calc(var(--mos-h) - var(--space-grid));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+  gap: var(--space-grid);
+  width: 100%;
+  height: var(--mos-h);
+}
+
+/* IkasComponentRenderer: renderer div > one container per child — flatten so .ctile is the item */
+.mos__renderer > *,
+.mos__renderer > * > :not(.ctile) {
+  display: contents;
+}
+
+/* height pattern per column: short 326 + long 510 · long + short · short + long */
+.mos__renderer > div {
+  --mos-b: 0.39;
+}
+
+.mos__renderer > div:nth-of-type(6n + 2),
+.mos__renderer > div:nth-of-type(6n + 3),
+.mos__renderer > div:nth-of-type(6n + 6) {
+  --mos-b: 0.609;
+}
+
+/* the featured tile (column 1, bottom) always shows its paragraph and button */
+.mos__renderer > div:nth-of-type(2) {
+  --ctile-featured: 1;
+}
+
+.mos__grid .ctile {
+  flex: 1 0 calc(var(--mos-avail) * var(--mos-b));
+  width: calc((100% - (var(--mos-cols, 3) - 1) * var(--space-grid)) / var(--mos-cols, 3));
+  /* I-MOS-05 · I-M-06: 0.6s ease-out-soft */
+  transition: flex-basis 0.6s var(--ease-out-soft);
+}
+
+/* hovered tile grows to 600, its column partner shrinks to 236; the column height stays fixed */
+.mos__grid .ctile[data-state="open"] {
+  --mos-b: 0.717;
+}
+
+.mos__grid .ctile[data-state="shrink"] {
+  --mos-b: 0.282;
+}
+
+/* I-MOS-02 · M-01: tiles fade up in column order, stagger 0.08s */
+.mos__grid.is-pending .ctile {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.mos__grid.is-inview .ctile {
+  animation: mosTileIn 0.6s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+
+@keyframes mosTileIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet + mobile: 2-column grid, hover off. Featured tile first and full width. */
+@media (max-width: bp(zTpkWoce2k)) {
+  .mos__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    height: auto;
+  }
+
+  .mos__grid .ctile {
+    width: auto;
+    aspect-ratio: 1 / 1;
+    transition: none;
+  }
+
+  .mos__renderer > div:nth-of-type(2) .ctile {
+    order: -1;
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .mos {
+    gap: 24px;
+  }
+
+  .mos__renderer > div:nth-of-type(2) .ctile {
+    aspect-ratio: 4 / 5;
+  }
+
+  .mos__renderer > div:last-of-type:not(:nth-of-type(2)) .ctile {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* small tiles draw the label at text-h4 size (h4 / h2 = 0.6), wrapping as h4 would */
+  .mos__renderer > div:not(:nth-of-type(2)) .ctile__label {
+    width: calc(100% / 0.6);
+    max-width: none;
+    transform: scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mos__grid .ctile {
+    transition: none;
+  }
+
+  .mos__grid.is-inview .ctile {
+    animation: none;
+  }
+}

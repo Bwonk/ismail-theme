@@ -1,0 +1,72 @@
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  min-width: 0;
+  max-width: 100%;
+  border-bottom: 1px solid var(--c-line);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-bottom: 0;
+  overflow: visible;
+}
+
+.tabs__item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 2px solid var(--c-transparent);
+  background: var(--c-transparent);
+  color: var(--c-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  /* I-CMP-09 · M-28 */
+  transition: color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
+}
+
+.tabs--vertical .tabs__item {
+  white-space: normal;
+  text-align: left;
+}
+
+.tabs__item--active {
+  border-bottom-color: var(--c-text);
+  color: var(--c-text);
+}
+
+.tabs__item--disabled {
+  opacity: var(--opacity-inactive);
+  cursor: not-allowed;
+}
+
+.tabs__item:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .tabs__item:not(.tabs__item--disabled):hover {
+    color: var(--c-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__item {
+    transition: none;
+  }
+}

@@ -1,0 +1,75 @@
+.faq {
+  display: flex;
+  align-items: flex-start;
+  gap: 64px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page);
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.faq__intro {
+  display: flex;
+  flex: 0 0 420px;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.faq__title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.faq__text {
+  margin: 0;
+  color: var(--c-muted);
+}
+
+/* M-01 entrance for the intro (shared fade-up keyframe) */
+.faq__intro.is-pending {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.faq__intro.is-inview {
+  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
+}
+
+.faq__items {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  border-top: 1px solid var(--c-line);
+}
+
+@media (max-width: bp(rLU3LmiCdo)) {
+  .faq__intro {
+    flex-basis: 360px;
+  }
+}
+
+@media (max-width: bp(zTpkWoce2k)) {
+  .faq {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .faq__intro {
+    flex-basis: auto;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .faq {
+    gap: 24px;
+  }
+
+  .faq__intro {
+    max-width: none;
+  }
+}

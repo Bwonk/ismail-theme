@@ -1,0 +1,112 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  height: 48px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--c-inverse-bg);
+  border-radius: var(--radius-card);
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+  cursor: pointer;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.btn--full {
+  display: flex;
+  width: 100%;
+}
+
+.btn__face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 28px;
+  white-space: nowrap;
+  transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.btn__face--bottom {
+  position: absolute;
+  inset: 0;
+  background: var(--c-accent);
+  color: var(--c-accent-text);
+  transform: translateY(101%);
+}
+
+.btn__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn--sm {
+  height: 40px;
+}
+
+.btn--sm .btn__face {
+  padding: 0 20px;
+}
+
+.btn--outline {
+  background: var(--c-transparent);
+  border-color: var(--c-line);
+  color: var(--c-text);
+}
+
+.btn--light {
+  background: var(--c-bg);
+  border-color: var(--c-bg);
+  color: var(--c-text);
+}
+
+.btn--added,
+.btn--soldout {
+  background: var(--c-surface);
+  border-color: var(--c-surface);
+  color: var(--c-muted);
+}
+
+.btn--added {
+  color: var(--c-success);
+}
+
+.btn__check {
+  color: var(--c-success);
+}
+
+.btn--disabled,
+.btn--loading {
+  opacity: var(--opacity-inactive);
+  cursor: default;
+}
+
+.btn--soldout {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .btn:not(:disabled):not(.btn--added):hover .btn__face--top {
+    transform: translateY(-101%);
+  }
+
+  .btn:not(:disabled):not(.btn--added):hover .btn__face--bottom {
+    transform: translateY(0);
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn__face {
+    transition: none;
+  }
+}

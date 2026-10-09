@@ -1,0 +1,64 @@
+.pgrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page);
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.pgrid__list {
+  display: grid;
+  grid-template-columns: repeat(var(--pgrid-cols, 4), minmax(0, 1fr));
+  column-gap: var(--space-grid);
+  row-gap: 40px;
+  width: 100%;
+  max-width: 1376px;
+}
+
+.pgrid__actions {
+  padding-top: 8px;
+}
+
+/* I-GRID-02 · M-01: cards enter in sequence (stagger 0.05s) */
+.pgrid__list.is-pending .pgrid__item {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.pgrid__list.is-inview .pgrid__item {
+  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+@media (max-width: bp(zTpkWoce2k)) {
+  .pgrid__list {
+    grid-template-columns: repeat(min(var(--pgrid-cols, 4), 3), minmax(0, 1fr));
+  }
+
+  .pgrid__item--wide {
+    display: none;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .pgrid {
+    gap: 24px;
+  }
+
+  .pgrid__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+  }
+
+  .pgrid__item--wide {
+    display: block;
+  }
+
+  .pgrid__item--desktop {
+    display: none;
+  }
+}

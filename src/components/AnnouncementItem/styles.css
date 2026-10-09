@@ -1,0 +1,42 @@
+.annc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.annc__text {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--c-text);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.annc__link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .annc__link:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+.annc__link:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .annc__text {
+    letter-spacing: 0.3px;
+  }
+}

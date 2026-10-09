@@ -1,0 +1,89 @@
+.cchan {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  color: var(--c-text);
+  text-decoration: none;
+  transition: background-color 0.3s var(--ease-standard);
+}
+
+.cchan--dark {
+  background: var(--c-bg);
+}
+
+.cchan__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.cchan--dark .cchan__icon {
+  background: var(--c-surface);
+}
+
+.cchan__glyph {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+}
+
+.cchan__glyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cchan__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cchan__value {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.cchan__hint {
+  color: var(--c-muted);
+}
+
+.cchan__arrow {
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-standard);
+}
+
+.cchan:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* I-CONT-03 · M-28: bg surface → line, arrow x 0 → 2 (up-right) */
+@media (hover: hover) {
+  .cchan--link:hover {
+    background: var(--c-line);
+  }
+
+  .cchan--link:hover .cchan__arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cchan,
+  .cchan__arrow {
+    transition: none;
+  }
+}

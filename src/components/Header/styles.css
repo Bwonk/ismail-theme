@@ -1,0 +1,498 @@
+.hdr {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  color: var(--c-text);
+}
+
+/* ---------- Announcement bar ---------- */
+
+.hdr__ann {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 36px;
+  padding: 0 var(--space-page);
+  background: var(--hdr-bg, var(--c-bg));
+  border-bottom: var(--size-line) solid var(--c-line);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hdr__ann--pager {
+  padding: 0 128px;
+}
+
+.hdr__ann-text {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--c-text);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.hdr__ann-link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .hdr__ann-link:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* countdown-chip: accent pill with Counter reels (I-HDR-01 · I-M-01) */
+.hdr__countdown {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent);
+  color: var(--c-accent-text);
+  font-weight: 500;
+}
+
+.hdr__ann-mask {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* M-04: several announcements stacked in a clip mask, vertical slide */
+.hdr__ann-mask.is-stacked {
+  flex: 1 1 auto;
+  max-width: 720px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hdr__ann-mask.is-stacked .hdr__ann-renderer > *,
+.hdr__ann-mask.is-stacked .hdr__ann-renderer > * > :not(.annc) {
+  display: contents;
+}
+
+.hdr__ann-mask.is-stacked .annc {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(100%);
+  transition:
+    transform 0.6s var(--ease-out-soft),
+    opacity 0.6s var(--ease-out-soft);
+}
+
+.hdr__ann-mask.is-stacked .annc[data-state="active"],
+.hdr__ann-mask.is-stacked:not(.is-ready) .hdr__ann-renderer > :first-child .annc,
+.hdr__ann-mask.is-stacked:not(.is-ready) .hdr__ann-renderer > .annc:first-child {
+  opacity: 1;
+  transform: none;
+}
+
+.hdr__ann-mask.is-stacked .annc[data-state="prev"] {
+  transform: translateY(-100%);
+}
+
+.hdr__pager {
+  position: absolute;
+  top: 50%;
+  right: var(--space-page);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-50%);
+}
+
+.hdr__pager-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: none;
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .hdr__pager-btn:hover {
+    background: var(--c-surface);
+  }
+}
+
+.hdr__pager-count {
+  color: var(--c-text);
+  white-space: nowrap;
+}
+
+/* ---------- Main bar ---------- */
+
+.hdr__slot {
+  position: relative;
+  z-index: 2;
+  height: var(--size-header);
+}
+
+/* şeffaf: the hero below slides up under the bar */
+.hdr--on-hero .hdr__slot {
+  margin-bottom: calc(-1 * var(--size-header));
+}
+
+/* I-HDR-04 · M-28: opaque ↔ transparent, 0.3s ease-standard */
+.hdr__bar {
+  position: relative;
+  height: var(--size-header);
+  background: var(--hdr-bg, var(--c-bg));
+  color: var(--c-text);
+  border-bottom: var(--size-line) solid var(--c-line);
+  box-sizing: border-box;
+  transition:
+    background-color 0.3s var(--ease-standard),
+    color 0.3s var(--ease-standard),
+    border-color 0.3s var(--ease-standard),
+    height 0.3s var(--ease-standard);
+}
+
+.hdr__bar.is-clear {
+  background: var(--c-transparent);
+  border-bottom-color: var(--c-transparent);
+}
+
+/* yapışkan: bar pinned to the top, 72 → 60 (mobile 56 → 52); the slot keeps its height */
+.hdr__bar.is-stuck {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+}
+
+.hdr__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+  padding: 0 var(--space-page);
+  box-sizing: border-box;
+}
+
+.hdr__left {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  min-width: 0;
+}
+
+.hdr__menu-btn {
+  display: none;
+}
+
+.hdr__logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--size-logo);
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+.hdr__logo-svg {
+  display: flex;
+  height: 100%;
+}
+
+.hdr__logo-svg > * {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.hdr__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hdr__nav-item {
+  display: flex;
+}
+
+/* I-HDR-02 · M-28: hovering the nav mutes the other links; active page underlined */
+.hdr__nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  color: var(--c-text);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.3s var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .hdr__nav-list:hover .hdr__nav-link:not(:hover):not(.is-open) {
+    color: var(--c-muted);
+  }
+}
+
+.hdr__nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: var(--size-line);
+  background: currentColor;
+}
+
+.hdr__caret {
+  transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.hdr__nav-link.is-open .hdr__caret {
+  transform: rotate(180deg);
+}
+
+.hdr__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 24px;
+}
+
+.hdr__action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hdr__action-label {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .hdr__action:hover .hdr__action-label {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* cart-count chip (I-HDR-03 via Counter) */
+.hdr__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  min-width: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+  font-weight: 500;
+  box-sizing: border-box;
+  transition:
+    background-color 0.3s var(--ease-standard),
+    color 0.3s var(--ease-standard);
+}
+
+.hdr__bar.is-clear .hdr__count {
+  background: var(--c-accent);
+  color: var(--c-accent-text);
+}
+
+.hdr__nav-link:focus-visible,
+.hdr__action:focus-visible,
+.hdr__logo:focus-visible,
+.hdr__pager-btn:focus-visible,
+.hdr__ann-link:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* megamenu scrim (I-MENU-01): behind the bar, over the page */
+.hdr__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: var(--c-scrim);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-base) var(--ease-standard),
+    visibility 0s linear var(--dur-base);
+}
+
+.hdr__scrim.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+
+/* ---------- Laptop 992–1199: tighter nav, icon-only actions ---------- */
+@media (max-width: bp(rLU3LmiCdo)) {
+  .hdr__left {
+    gap: 32px;
+  }
+
+  .hdr__nav-list {
+    gap: 24px;
+  }
+
+  .hdr__actions {
+    gap: 4px;
+  }
+
+  .hdr__action {
+    min-width: 40px;
+  }
+
+  .hdr__action-label {
+    display: none;
+  }
+
+  .hdr__count {
+    position: absolute;
+    top: 2px;
+    right: -2px;
+    height: 16px;
+    min-width: 16px;
+    padding: 0 4px;
+  }
+}
+
+/* ---------- Tablet 768–991: nav → menu button (left panel 420), logo left ---------- */
+@media (max-width: bp(zTpkWoce2k)) {
+  .hdr__ann--pager {
+    padding: 0 104px;
+  }
+
+  .hdr__left {
+    gap: 12px;
+  }
+
+  .hdr__menu-btn {
+    display: inline-flex;
+    margin-left: -8px;
+  }
+
+  .hdr__nav {
+    display: none;
+  }
+
+  .hdr__scrim {
+    display: none;
+  }
+}
+
+/* ---------- Mobile <768 ---------- */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .hdr__ann {
+    gap: 8px;
+    height: 32px;
+  }
+
+  .hdr__ann--pager {
+    padding: 0 76px;
+  }
+
+  .hdr__ann-text {
+    letter-spacing: 0.3px;
+  }
+
+  .hdr__countdown {
+    padding: 2px 6px;
+  }
+
+  .hdr__pager {
+    gap: 8px;
+  }
+
+  .hdr__pager-btn {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hdr__main {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr) 88px;
+    gap: 0;
+    padding: 0 8px;
+  }
+
+  .hdr__left {
+    display: contents;
+  }
+
+  .hdr__menu-btn {
+    margin-left: 0;
+  }
+
+  .hdr__logo {
+    justify-self: center;
+  }
+
+  .hdr__actions {
+    justify-self: end;
+    gap: 0;
+  }
+
+  .hdr__action-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hdr__action--account {
+    display: none;
+  }
+
+  .hdr__count {
+    top: 4px;
+    right: 2px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+  }
+
+  .hdr__bar.is-stuck {
+    height: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdr__bar,
+  .hdr__count,
+  .hdr__nav-link,
+  .hdr__caret,
+  .hdr__scrim,
+  .hdr__ann-mask.is-stacked .annc {
+    transition: none;
+  }
+}

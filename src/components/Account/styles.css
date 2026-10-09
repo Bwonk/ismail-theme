@@ -1,0 +1,197 @@
+/* I/Section/Account — 1440: 48 top, page gutters, section bottom; header + body (280 tabs · 48 · 880 panel). */
+.acc {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px var(--space-page) var(--space-section);
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.acc__header {
+  margin: 0;
+  color: var(--c-text);
+}
+
+.acc__greeting {
+  color: var(--c-muted);
+}
+
+.acc__body {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  min-width: 0;
+}
+
+.acc__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 0 0 280px;
+  width: 280px;
+  min-width: 0;
+}
+
+.acc__link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--c-transparent);
+  color: var(--c-muted);
+  text-align: left;
+  cursor: pointer;
+  /* I-ACC-01 · M-28 */
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.acc__link--active {
+  color: var(--c-text);
+}
+
+.acc__link:disabled {
+  opacity: var(--opacity-inactive);
+  cursor: default;
+}
+
+.acc__link:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .acc__link:not(:disabled):hover {
+    color: var(--c-text);
+  }
+}
+
+.acc__panel {
+  flex: 1 1 auto;
+  max-width: 880px;
+  min-width: 0;
+  /* panels crossfade like the stacked state frames */
+  animation: _EMX39fgOGw 0.3s var(--ease-standard) both;
+}
+
+/* Shared panel parts (sub-components render inside .acc) */
+.acc .acc-title {
+  margin: 0;
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+.acc .acc-muted {
+  color: var(--c-muted);
+}
+
+.acc .acc-success {
+  color: var(--c-success);
+}
+
+.acc .acc-danger {
+  color: var(--c-danger);
+}
+
+.acc .acc-textbtn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--c-transparent);
+  color: var(--c-text);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+}
+
+.acc .acc-textbtn:disabled {
+  opacity: var(--opacity-inactive);
+  cursor: default;
+}
+
+.acc .acc-textbtn:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* Button tones drawn on the canvas on top of I/Sub/Button */
+.acc .btn.acc-btn--strong {
+  border-color: var(--c-text);
+}
+
+.acc .btn.acc-btn--danger {
+  border-color: var(--c-danger);
+  background: var(--c-danger);
+  color: var(--c-inverse-text);
+}
+
+.acc .btn.acc-btn--danger-line {
+  border-color: var(--c-danger);
+  background: var(--c-transparent);
+  color: var(--c-danger);
+}
+
+.acc .btn.acc-btn--danger .btn__face--bottom,
+.acc .btn.acc-btn--danger-line .btn__face--bottom {
+  background: var(--c-danger);
+  color: var(--c-inverse-text);
+}
+
+/* Laptop 992–1199: 220 tab column */
+@media (max-width: bp(rLU3LmiCdo)) {
+  .acc__body {
+    gap: 40px;
+  }
+
+  .acc__nav {
+    flex-basis: 220px;
+    width: 220px;
+  }
+}
+
+/* Tablet ≤991: tabs on top as a horizontal scroll row, panel full width */
+@media (max-width: bp(zTpkWoce2k)) {
+  .acc__body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .acc__nav {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .acc__tabs,
+  .acc__tabs.tabs--vertical {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 28px;
+    width: 100%;
+    border-bottom: 1px solid var(--c-line);
+    overflow-x: auto;
+  }
+
+  .acc__panel {
+    max-width: none;
+  }
+}
+
+/* Mobile ≤767 */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .acc {
+    gap: 20px;
+    padding-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acc__panel {
+    animation: none;
+  }
+
+  .acc__link,
+  .acc .acc-textbtn {
+    transition: none;
+  }
+}

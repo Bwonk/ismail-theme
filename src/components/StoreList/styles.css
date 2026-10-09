@@ -1,0 +1,56 @@
+.stor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  padding: var(--space-section) var(--space-page);
+  box-sizing: border-box;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.stor__heading {
+  max-width: 640px;
+}
+
+.stor__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-grid);
+  row-gap: 40px;
+  width: 100%;
+  max-width: 1376px;
+}
+
+/* I-STOR-01 · M-01: cards enter in sequence — y 40 → 0, opacity 0 → 1, 0.5s, stagger 0.08s */
+.stor__grid.is-pending .sitem {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.stor__grid.is-inview .sitem {
+  animation: _ovqsdHMO4b 0.5s var(--ease-standard) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+
+@media (max-width: bp(zTpkWoce2k)) {
+  .stor__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .stor {
+    gap: 24px;
+  }
+
+  .stor__heading {
+    max-width: none;
+  }
+
+  .stor__grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 32px;
+  }
+}

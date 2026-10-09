@@ -1,0 +1,96 @@
+.pcsm {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+.pcsm__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 72px;
+  height: 88px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+}
+
+.pcsm--sm .pcsm__media {
+  width: 56px;
+  height: 70px;
+}
+
+.pcsm__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pcsm__placeholder {
+  color: var(--c-muted);
+}
+
+.pcsm__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* I-CMP-03 · M-28 */
+.pcsm__title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: var(--c-muted);
+  transition: color 0.3s var(--ease-standard);
+}
+
+.pcsm__prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.pcsm__price {
+  color: var(--c-text);
+}
+
+.pcsm__compare {
+  color: var(--c-muted);
+  font-weight: 400;
+  text-decoration-thickness: 1px;
+}
+
+.pcsm:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-card);
+}
+
+.pcsm:focus-visible .pcsm__title {
+  color: var(--c-text);
+}
+
+@media (hover: hover) {
+  .pcsm:hover .pcsm__title {
+    color: var(--c-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcsm__title {
+    transition: none;
+  }
+}

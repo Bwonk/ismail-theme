@@ -1,0 +1,39 @@
+/* I-CONT-04 · M-28: { bg: transparent, color: text } → { bg: inverse-bg, color: inverse-text }, 0.3s */
+.ctopic {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-transparent);
+  color: var(--c-text);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard), color 0.3s var(--ease-standard);
+}
+
+.ctopic--on {
+  border-color: var(--c-inverse-bg);
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+}
+
+.ctopic:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .ctopic:not(.ctopic--on):hover {
+    border-color: var(--c-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctopic {
+    transition: none;
+  }
+}

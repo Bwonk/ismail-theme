@@ -1,0 +1,71 @@
+.fcol {
+  min-width: 0;
+}
+
+.fcol__desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fcol__title {
+  margin: 0;
+  color: var(--c-text);
+}
+
+.fcol__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* I-FTR-01 · M-28: link colour muted → text, 0.3s */
+.fcol__link {
+  color: var(--c-muted);
+  text-decoration: none;
+  transition: color 0.3s var(--ease-standard);
+}
+
+.fcol__link:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .fcol__link:hover {
+    color: var(--c-text);
+  }
+}
+
+.fcol__mobile {
+  display: none;
+}
+
+/* AccordionItem title uses the column label style on mobile (mono label). */
+.fcol__acc .acc__title {
+  color: var(--c-text);
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  /* desktopOnly: footer-column-title, footer-link */
+  .fcol__desktop {
+    display: none;
+  }
+
+  .fcol__mobile {
+    display: block;
+  }
+
+  .fcol__mobile .fcol__list {
+    padding-bottom: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fcol__link {
+    transition: none;
+  }
+}

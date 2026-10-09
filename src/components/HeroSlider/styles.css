@@ -1,0 +1,103 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: min(100svh, var(--size-hero));
+  overflow: hidden;
+  background: var(--c-inverse-bg);
+  isolation: isolate;
+}
+
+.hero--full {
+  height: 100svh;
+  min-height: 480px;
+}
+
+.hero--short {
+  height: min(100svh, 560px);
+}
+
+.hero__slides {
+  position: absolute;
+  inset: 0;
+}
+
+/* IkasComponentRenderer: renderer div (display: contents) > one container per child. Flatten
+   any wrapper down to .hslide, which positions itself absolutely inside .hero__slides. */
+.hero__renderer > *,
+.hero__renderer > * > :not(.hslide) {
+  display: contents;
+}
+
+/* SSR / before hydration: only the first slide is shown (end state of the first slide). */
+.hero:not(.is-ready) .hero__renderer > :not(div:first-of-type) .hslide {
+  visibility: hidden;
+}
+
+/* I-HERO-06 · I-M-01: slide counter, bottom right under the meta line */
+.hero__counter {
+  position: absolute;
+  right: var(--space-page);
+  bottom: 64px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  background: var(--c-transparent);
+  pointer-events: none;
+}
+
+.hero__counter-total {
+  color: var(--c-muted);
+  white-space: pre;
+  line-height: 1.2;
+}
+
+.hero__counter .counter__reel {
+  transition-duration: 0.6s;
+}
+
+/* right-to-left: the tens digit follows the ones digit by 0.04s */
+.hero__counter .counter__mask:has(+ .counter__mask) .counter__reel {
+  transition-delay: 0.04s;
+}
+
+/* Laptop: display 80 comes from the token. Tablet: 4:3 crop, counter drops to the bottom-left. */
+@media (max-width: bp(zTpkWoce2k)) {
+  .hero--theme {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    max-height: 100svh;
+  }
+
+  .hero__counter {
+    right: auto;
+    left: var(--space-page);
+    bottom: 48px;
+  }
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .hero--theme {
+    height: min(100svh, var(--size-hero));
+    aspect-ratio: auto;
+  }
+
+  .hero--short {
+    height: min(100svh, 480px);
+  }
+
+  /* counter moves above the title: 32 bottom padding + text block + 20 gap */
+  .hero__counter {
+    left: var(--space-page);
+    bottom: calc(32px + var(--hero-text-h, 0px) + 20px);
+  }
+
+  .hero:not(.is-ready) .hero__counter {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__counter .counter__reel {
+    transition: none;
+  }
+}

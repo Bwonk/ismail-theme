@@ -1,0 +1,140 @@
+.ffield {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ffield__label {
+  color: var(--c-muted);
+}
+
+.ffield__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  box-sizing: border-box;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-card);
+  background: var(--c-bg);
+  transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.ffield__control {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 46px;
+  margin: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--radius-card);
+  outline: none;
+  background: var(--c-transparent);
+  color: var(--c-text);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.ffield__control::placeholder {
+  color: var(--c-muted);
+  opacity: 1;
+}
+
+.ffield__control--area {
+  height: auto;
+  min-height: 112px;
+  padding: 14px 16px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.ffield__control--select {
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.ffield__control--empty {
+  color: var(--c-muted);
+}
+
+.ffield__chevron {
+  position: absolute;
+  right: 16px;
+  color: var(--c-muted);
+  pointer-events: none;
+}
+
+.ffield__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--c-transparent);
+  color: var(--c-muted);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.ffield__toggle:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 0;
+}
+
+/* odak — accent 2px (1px border + 1px inset ring, no layout shift) */
+.ffield__box:focus-within {
+  border-color: var(--c-accent);
+  box-shadow: inset 0 0 0 1px var(--c-accent);
+}
+
+/* hata */
+.ffield--error .ffield__box,
+.ffield--error .ffield__box:focus-within {
+  border-color: var(--c-danger);
+  box-shadow: none;
+}
+
+.ffield--error .ffield__box:focus-within {
+  box-shadow: inset 0 0 0 1px var(--c-danger);
+}
+
+.ffield__msg {
+  margin: 0;
+  color: var(--c-danger);
+}
+
+/* pasif */
+.ffield--disabled {
+  opacity: var(--opacity-inactive);
+}
+
+.ffield--disabled .ffield__box {
+  background: var(--c-surface);
+}
+
+.ffield--disabled .ffield__control {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .ffield__toggle:hover {
+    color: var(--c-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ffield__box,
+  .ffield__toggle {
+    transition: none;
+  }
+}

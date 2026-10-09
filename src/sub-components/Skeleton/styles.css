@@ -1,0 +1,22 @@
+.skel {
+  display: block;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  animation: skel-pulse 1.4s var(--ease-standard) infinite;
+}
+
+.skel--pill {
+  border-radius: var(--radius-pill);
+}
+
+@keyframes skel-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel {
+    animation: none;
+  }
+}

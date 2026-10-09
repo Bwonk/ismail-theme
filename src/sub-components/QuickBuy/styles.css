@@ -1,0 +1,365 @@
+.qb {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-page);
+  box-sizing: border-box;
+}
+
+.qb__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--c-scrim);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-standard);
+}
+
+/* I-QB-01 · M-20: window grows from 96% (desktop), sheet slides up (mobile) */
+.qb__panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 480px minmax(0, 1fr);
+  width: min(960px, 100%);
+  height: min(600px, 100%);
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-bg);
+  color: var(--c-text);
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 0.35s var(--ease-out-soft),
+    transform 0.35s var(--ease-out-soft);
+}
+
+.qb--open .qb__scrim {
+  opacity: 1;
+}
+
+.qb--open .qb__panel {
+  opacity: 1;
+  transform: none;
+}
+
+.qb__grabber {
+  display: none;
+}
+
+.qb__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-surface);
+}
+
+/* I-QB-02 · M-02: new image fades in on colour change */
+.qb__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: _EMX39fgOGw 0.4s var(--ease-standard) both;
+}
+
+.qb__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--c-muted);
+}
+
+.qb__badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.qb__media-nav {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qb__count {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.qb__arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.qb__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.qb__arrow:focus-visible,
+.qb__close:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+.qb__details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  padding: var(--space-panel);
+  overflow-y: auto;
+}
+
+.qb__top {
+  display: none;
+}
+
+.qb__head {
+  padding-right: 48px;
+}
+
+.qb__title {
+  margin: 0;
+  color: var(--c-text);
+  font-weight: 400;
+}
+
+.qb__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--c-text);
+}
+
+.qb__compare {
+  color: var(--c-muted);
+}
+
+.qb__rule {
+  display: block;
+  flex: none;
+  height: var(--size-line);
+  background: var(--c-line);
+}
+
+.qb__spacer {
+  flex: 1 1 auto;
+}
+
+.qb__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qb__qty {
+  flex: none;
+  height: 48px;
+}
+
+.qb__add {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.qb__fav {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border: var(--size-line) solid var(--c-line);
+  border-radius: var(--radius-card);
+}
+
+.qb__error {
+  margin: -8px 0 0;
+  color: var(--c-danger);
+}
+
+.qb__pay {
+  min-height: 48px;
+}
+
+.qb__pay iframe {
+  display: block;
+  width: 100%;
+}
+
+.qb__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.qb__stock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-text);
+}
+
+.qb__stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent);
+}
+
+.qb__close {
+  position: absolute;
+  top: calc(var(--space-panel) - 4px);
+  right: calc(var(--space-panel) - 4px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-transparent);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .qb__close:hover,
+  .qb__arrow:hover {
+    background: var(--c-surface);
+  }
+}
+
+/* laptop: 880 window */
+@media (max-width: bp(rLU3LmiCdo)) {
+  .qb__panel {
+    grid-template-columns: 440px minmax(0, 1fr);
+    width: min(880px, 100%);
+  }
+}
+
+/* tablet: 640 window, 280 image */
+@media (max-width: bp(zTpkWoce2k)) {
+  .qb__panel {
+    grid-template-columns: 280px minmax(0, 1fr);
+    width: min(640px, 100%);
+    height: auto;
+    max-height: min(600px, 100%);
+  }
+
+  .qb__details {
+    gap: 16px;
+  }
+}
+
+/* mobile: bottom sheet */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .qb {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .qb__panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    max-height: 92vh;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    opacity: 1;
+    transform: translateY(100%);
+  }
+
+  .qb--open .qb__panel {
+    transform: translateY(0);
+  }
+
+  .qb__grabber {
+    display: block;
+    flex: none;
+    width: 36px;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: var(--radius-pill);
+    background: var(--c-line);
+  }
+
+  .qb__media,
+  .qb__head,
+  .qb__price--desktop,
+  .qb__rule,
+  .qb__spacer {
+    display: none;
+  }
+
+  .qb__details {
+    padding: 20px var(--space-panel) var(--space-panel);
+  }
+
+  .qb__top {
+    display: flex;
+    gap: 16px;
+    padding-right: 48px;
+  }
+
+  .qb__thumb {
+    flex: none;
+    width: 96px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--c-surface);
+  }
+
+  .qb__top-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .qb__price {
+    gap: 10px;
+  }
+
+  .qb__close {
+    top: 28px;
+    right: calc(var(--space-panel) - 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qb__scrim,
+  .qb__panel {
+    transition: none;
+  }
+
+  .qb__img {
+    animation: none;
+  }
+}

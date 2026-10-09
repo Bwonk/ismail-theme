@@ -1,0 +1,159 @@
+/* --o: 0 closed · 1 open. ActivityGrid sets [data-open]; before hydration it opens the first
+   card through --acard-open-default. Every open-dependent value derives from --o. */
+.acard {
+  --o: var(--acard-open-default, 0);
+  --acard-title-closed: 0.625; /* text-h4 / text-h3 */
+  position: relative;
+  display: block;
+  flex-grow: calc(1 + 1.6 * var(--o));
+  flex-shrink: 1;
+  flex-basis: 0;
+  min-width: 0;
+  height: 480px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  color: inherit;
+  text-decoration: none;
+  /* I-ACT-04 · I-M-05: flex-grow 1 → 2.6, 0.5s ease-out-soft */
+  transition: flex-grow 0.5s var(--ease-out-soft), flex-basis 0.5s var(--ease-out-soft);
+}
+
+.acard[data-open] {
+  --o: 1;
+}
+
+.acard:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+.acard__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.acard__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.acard__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--c-transparent) 30%, var(--c-scrim) 100%);
+  pointer-events: none;
+}
+
+.acard__scrim--deep {
+  background: linear-gradient(180deg, var(--c-transparent) 55%, var(--c-scrim) 100%);
+}
+
+.acard__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--c-transparent);
+  color: var(--c-text);
+}
+
+/* closed cards draw the title at text-h4 size: scale from the bottom-left corner */
+.acard__title {
+  margin: 0;
+  white-space: nowrap;
+  transform-origin: left bottom;
+  transform: scale(calc(var(--acard-title-closed) + (1 - var(--acard-title-closed)) * var(--o)));
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.acard__count {
+  margin: 6px 0 0;
+  white-space: nowrap;
+}
+
+/* description and "Keşfet →" appear only on the open card, 0.15s after it starts growing */
+.acard__reveal {
+  max-height: calc(var(--o) * 8em);
+  margin-top: calc(var(--o) * 6px);
+  overflow: hidden;
+  opacity: var(--o);
+  transition:
+    max-height 0.5s var(--ease-out-soft),
+    margin-top 0.5s var(--ease-out-soft),
+    opacity 0.35s var(--ease-standard) 0.15s;
+}
+
+.acard:not([data-open]) .acard__reveal {
+  transition-delay: 0s;
+}
+
+.acard__text {
+  width: 300px;
+  margin: 0;
+}
+
+.acard__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: bp(rLU3LmiCdo)) {
+  .acard {
+    --acard-title-closed: 0.667;
+  }
+}
+
+/* Tablet: horizontal strip, expansion off — every card shows its full content. */
+@media (max-width: bp(zTpkWoce2k)) {
+  .acard {
+    --o: 1;
+    flex: 0 0 280px;
+    height: 440px;
+    scroll-snap-align: start;
+  }
+
+  .acard__text {
+    width: auto;
+  }
+}
+
+/* Mobile: scroll-snap strip, the centred card is open (240), the others 88. */
+@media (max-width: bp(KUQjO8W6p9)) {
+  .acard {
+    --o: var(--acard-open-default, 0);
+    --acard-title-closed: 0.75;
+    flex: 0 0 calc(88px + 152px * var(--o));
+    height: 400px;
+    scroll-snap-align: center;
+  }
+
+  .acard[data-open] {
+    --o: 1;
+  }
+
+  .acard__content {
+    padding: 16px;
+  }
+
+  .acard__text {
+    width: 208px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acard,
+  .acard__title,
+  .acard__reveal {
+    transition: none;
+  }
+}

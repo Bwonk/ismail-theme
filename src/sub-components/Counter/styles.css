@@ -1,0 +1,33 @@
+.counter {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.counter__mask {
+  display: inline-block;
+  height: 1.2em;
+  overflow: hidden;
+}
+
+.counter__reel {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.counter__digit {
+  display: block;
+  height: 1.2em;
+  line-height: 1.2em;
+}
+
+.counter__sep {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .counter__reel {
+    transition: none;
+  }
+}

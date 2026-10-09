@@ -1,0 +1,77 @@
+/* I-CMP-14 · M-28 — the outer ring appears over 0.3s */
+.vswatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 2px solid var(--c-transparent);
+  border-radius: var(--radius-pill);
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease-standard);
+}
+
+.vswatch__fill {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--c-inverse-bg);
+  box-shadow: inset 0 0 0 var(--size-line) color-mix(in srgb, var(--c-text) 12%, transparent);
+}
+
+.vswatch__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vswatch--selected {
+  border-color: var(--c-text);
+}
+
+.vswatch--soldout .vswatch__fill {
+  opacity: var(--opacity-inactive);
+}
+
+/* 20px diagonal strike in the background colour */
+.vswatch__strike {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 1.5px;
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  pointer-events: none;
+}
+
+.vswatch:disabled {
+  cursor: not-allowed;
+}
+
+.vswatch:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .vswatch:not(.vswatch--selected):not(:disabled):hover {
+    border-color: var(--c-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vswatch {
+    transition: none;
+  }
+}

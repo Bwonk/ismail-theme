@@ -1,0 +1,118 @@
+/* I/Section/Account › orders-list — 4 equal columns (mobile: meta · 96 status · 80 total, date under the number). */
+.aord {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aord--empty {
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.aord--empty p {
+  margin: 0;
+}
+
+.aord__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.aord__head,
+.aord__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.aord__head {
+  padding: 20px 0 10px;
+}
+
+.aord__th {
+  color: var(--c-muted);
+}
+
+.aord__row {
+  padding: 16px 0;
+  color: var(--c-text);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+
+.aord__row:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .aord__row:hover .aord__number {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.aord__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.aord__number {
+  font-weight: 500;
+  color: var(--c-text);
+}
+
+.aord__date {
+  color: var(--c-muted);
+}
+
+.aord__date--stacked {
+  display: none;
+}
+
+.aord__total {
+  font-weight: 500;
+}
+
+.aord__error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 32px 0;
+}
+
+.aord__error-text {
+  margin: 0;
+  color: var(--c-text);
+}
+
+@media (max-width: bp(KUQjO8W6p9)) {
+  .aord__head,
+  .aord__row {
+    grid-template-columns: minmax(0, 1fr) 96px 80px;
+    gap: 8px;
+  }
+
+  .aord__date-col {
+    display: none;
+  }
+
+  .aord__date--stacked {
+    display: block;
+  }
+
+  .aord__total-col {
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aord__row {
+    transition: none;
+  }
+}

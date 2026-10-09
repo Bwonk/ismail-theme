@@ -1,0 +1,42 @@
+.vpick {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.vpick__group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vpick__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vpick__label {
+  color: var(--c-text);
+  letter-spacing: 0.5px;
+}
+
+.vpick__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vpick__row--swatch {
+  gap: 10px;
+}
+
+.vpick__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--c-danger);
+}
