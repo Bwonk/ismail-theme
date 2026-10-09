@@ -118,7 +118,7 @@ const CouponBox = observer(function CouponBox({
         />
       </form>
       {message && (
-        <p className={cx("cartp__coupon-msg", isError ? "cartp__coupon-msg--error" : "cartp__coupon-msg--success", TEXT.uiSm)} role={isError ? "alert" : "status"}>
+        <p className={cx("cartp__coupon-msg", isError ? "cartp__coupon-msg--error" : "cartp__coupon-msg--success", TEXT.uiXs)} role={isError ? "alert" : "status"}>
           {isError ? couponErrorText : couponSuccessText}
         </p>
       )}
@@ -185,7 +185,7 @@ const CartSummary = observer(function CartSummary({
   }
 
   const value = (text: string, big?: boolean) => (
-    <span className={cx("cartp__sum-value", big ? TEXT.h4 : TEXT.price, "tabular")}>{ready ? text : ""}</span>
+    <span className={cx("cartp__sum-value", big ? TEXT.priceLg : TEXT.price, "tabular")}>{ready ? text : ""}</span>
   );
 
   return (

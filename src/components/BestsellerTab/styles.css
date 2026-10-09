@@ -45,15 +45,10 @@
   outline-offset: 4px;
 }
 
-/* bestseller-rank: font-mono at the text-h4 size, 500 — the mono family comes from the Etiket
-   style, the size follows the H4 token steps (20 · tablet/mobile 18) */
+/* bestseller-rank: Fiyat Büyük style */
 .btab__rank {
   flex-shrink: 0;
   width: 40px;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0;
   color: var(--c-muted);
   transition: color 0.3s var(--ease-standard);
 }
@@ -187,10 +182,6 @@
 
   .btab__row {
     min-height: 144px;
-  }
-
-  .btab__rank {
-    font-size: 18px;
   }
 }
 

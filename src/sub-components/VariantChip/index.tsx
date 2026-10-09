@@ -35,7 +35,7 @@ const VariantChip = observer(function VariantChip({
   const isSelected = selected ?? value?.isSelected ?? false;
   const isSoldOut = soldOut ?? (value ? !value.hasStock : false);
   const classes = cx("vchip", isSelected && "vchip--selected", isSoldOut && "vchip--soldout", className);
-  const inner = <span className={cx("vchip__label", TEXT.price, "tabular")}>{text}</span>;
+  const inner = <span className={cx("vchip__label", TEXT.numeral, "tabular")}>{text}</span>;
   const state = role === "radio" ? { role: "radio", "aria-checked": isSelected } : { "aria-pressed": isSelected };
 
   if (href && !disabled) {

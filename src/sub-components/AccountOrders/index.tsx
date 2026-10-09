@@ -109,7 +109,7 @@ export default function AccountOrders({ texts: t }: Props) {
           return (
             <a key={order.id} className="aord__row" href={getIkasOrderHref(order)} role="row">
               <span className="aord__meta" role="cell">
-                <span className={cx("aord__number", TEXT.ui, "tabular")}>{order.orderNumber ? `#${order.orderNumber}` : ""}</span>
+                <span className={cx("aord__number", TEXT.numeral, "tabular")}>{order.orderNumber ? `#${order.orderNumber}` : ""}</span>
                 <span className={cx("aord__date", "aord__date--stacked", TEXT.label, "tabular")}>{date}</span>
               </span>
               <span className={cx("aord__date", "aord__date-col", TEXT.label, "tabular")} role="cell">

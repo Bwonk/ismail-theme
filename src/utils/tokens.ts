@@ -13,6 +13,16 @@ export const TEXT = {
   label: "_TVRrGKS76Y",
   body: "_gVS3y9Wt5R",
   price: "_ojnnKm9mqH",
+  /** Inter Tight at H4 size (prices, totals, order numbers, ranks). */
+  priceLg: "_EY0iHOcEI7",
+  /** Inter Tight at small UI size (option values, compare prices, price filter). */
+  priceSm: "_BiCxNwFKsc",
+  /** Inter Tight at UI size (quantities, chips, order numbers). */
+  numeral: "_bQ2aL21SAo",
+  /** Mona Sans at label size (field messages, notes, step labels). */
+  uiXs: "_4QXEee6muy",
+  /** Inter Tight at display size (404 digits, review score). */
+  displayNum: "_tFtJaWNgSt",
 } as const;
 
 /** Colour scheme classes. Combine with `ism-scheme` to re-resolve the --c-* aliases. */

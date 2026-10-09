@@ -39,7 +39,7 @@ export function NotFound({
     <section className="nf" style={backgroundColor ? { backgroundColor } : undefined}>
       <div className="nf__inner">
         {/* not-found-code · I-NF-01 · I-M-01 via Counter (I-CMP-08): digits roll 000 → 404, right to left */}
-        <Counter value={shown} ariaLabel={code} textClass={TEXT.display} className="nf__code" />
+        <Counter value={shown} ariaLabel={code} textClass={TEXT.displayNum} className="nf__code" />
         {title && <h1 className={cx("nf__title", TEXT.h2)}>{title}</h1>}
         {text && <p className={cx("nf__text", TEXT.body)}>{text}</p>}
         {buttonText && (

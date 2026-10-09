@@ -42,7 +42,7 @@ export default function QuantitySelector({
       >
         <Icon name="minus" size={16} />
       </button>
-      <span className={cx("qty__value", TEXT.price, "tabular")} aria-live="polite" aria-atomic="true">
+      <span className={cx("qty__value", TEXT.numeral, "tabular")} aria-live="polite" aria-atomic="true">
         {value}
       </span>
       <button

@@ -14,7 +14,7 @@ const stripTags = (html?: string | null) =>
  * I/Section/CollectionHero — collection cover: image + scrim, collection name and description
  * bottom-left in the Şeffaf scheme. Title = category.name (CATEGORY prop, bound to the page's
  * category in the editor); `title` is only the fallback when no category is resolved.
- * Image = `image` prop, else the category's own image. Description = the category description
+ * Image = the category's own image, else the `image` prop (fallback cover). Description = the category description
  * (plain text) when it has one, else the `description` prop.
  */
 export function CollectionHero({
@@ -25,7 +25,7 @@ export function CollectionHero({
   backgroundColor,
 }: Props) {
   const heading = category?.name || title;
-  const media = image ?? category?.image ?? null;
+  const media = category?.image ?? image ?? null;
   const body = stripTags(category?.description) || description;
 
   return (

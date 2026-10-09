@@ -113,7 +113,7 @@ export default function PriceRange({
       <div className="prange__inputs">
         <input
           id={`${idPrefix}-min`}
-          className={cx("prange__box", TEXT.price, "tabular", enteredLo && "prange__box--set")}
+          className={cx("prange__box", TEXT.priceSm, "tabular", enteredLo && "prange__box--set")}
           type="text"
           inputMode="decimal"
           autoComplete="off"
@@ -131,7 +131,7 @@ export default function PriceRange({
         </span>
         <input
           id={`${idPrefix}-max`}
-          className={cx("prange__box", TEXT.price, "tabular", enteredHi && "prange__box--set")}
+          className={cx("prange__box", TEXT.priceSm, "tabular", enteredHi && "prange__box--set")}
           type="text"
           inputMode="decimal"
           autoComplete="off"

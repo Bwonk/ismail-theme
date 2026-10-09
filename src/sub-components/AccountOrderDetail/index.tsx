@@ -159,7 +159,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
         {backLink(t.ordersTabText, onBack)}
         <h2 className="aodet__title-row">
           <span className={cx("acc-title", TEXT.h4)}>{t.orderDetailTitle}</span>
-          {number && <span className={cx("aodet__number", TEXT.h4, "tabular")}>{number}</span>}
+          {number && <span className={cx("aodet__number", TEXT.priceLg, "tabular")}>{number}</span>}
         </h2>
         <span className={cx("acc-muted", TEXT.label, "tabular")}>{upperTr(getIkasOrderFormattedOrderedAt(order) ?? "")}</span>
       </div>
@@ -274,7 +274,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
             {tracking?.cargoCompany && (
               <div className="aodet__row">
                 <span className={cx("acc-muted", TEXT.uiSm)}>{t.cargoLabel}</span>
-                <span className={cx("aodet__value", TEXT.uiSm)}>{tracking.cargoCompany}</span>
+                <span className={cx("aodet__value", TEXT.priceSm)}>{tracking.cargoCompany}</span>
               </div>
             )}
             {tracking?.trackingNumber && (
@@ -283,7 +283,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
                 <span className="aodet__tracking">
                   {tracking.trackingLink ? (
                     <a
-                      className={cx("aodet__value", "aodet__link", TEXT.uiSm, "tabular")}
+                      className={cx("aodet__value", "aodet__link", TEXT.priceSm, "tabular")}
                       href={tracking.trackingLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -291,7 +291,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
                       {tracking.trackingNumber}
                     </a>
                   ) : (
-                    <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>{tracking.trackingNumber}</span>
+                    <span className={cx("aodet__value", TEXT.priceSm, "tabular")}>{tracking.trackingNumber}</span>
                   )}
                   <button
                     type="button"
@@ -302,7 +302,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
                     <Icon name="copy" size={14} />
                   </button>
                   {copied === tracking.trackingNumber && (
-                    <span className={cx("aodet__copied", "acc-success", TEXT.label)} role="status">
+                    <span className={cx("aodet__copied", "acc-success", TEXT.uiXs)} role="status">
                       {t.copiedText}
                     </span>
                   )}
@@ -350,7 +350,7 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
             return (
               <div key={tr.id ?? i} className="aodet__row">
                 <span className={cx("acc-muted", TEXT.uiSm)}>{t.paymentLabel}</span>
-                <span className={cx("aodet__value", TEXT.uiSm)}>{value}</span>
+                <span className={cx("aodet__value", TEXT.priceSm)}>{value}</span>
               </div>
             );
           })}
@@ -360,23 +360,23 @@ const AccountOrderDetail = observer(function AccountOrderDetail({ texts: t, onBa
       <div className="aodet__card">
         <div className="aodet__row">
           <span className={cx("acc-muted", TEXT.uiSm)}>{t.subtotalLabel}</span>
-          <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>{getIkasOrderFormattedTotalPrice(order)}</span>
+          <span className={cx("aodet__value", TEXT.priceSm, "tabular")}>{getIkasOrderFormattedTotalPrice(order)}</span>
         </div>
         {adjustments.map((adj, i) => (
           <div key={`${adj.name}-${i}`} className="aodet__row">
             <span className={cx("acc-muted", TEXT.uiSm)}>{getOrderAdjustmentDisplayName(adj)}</span>
-            <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>{getOrderAdjustmentFormattedAmount(adj)}</span>
+            <span className={cx("aodet__value", TEXT.priceSm, "tabular")}>{getOrderAdjustmentFormattedAmount(adj)}</span>
           </div>
         ))}
         <div className="aodet__row">
           <span className={cx("acc-muted", TEXT.uiSm)}>{t.shippingLabel}</span>
-          <span className={cx("aodet__value", TEXT.uiSm, "tabular")}>
+          <span className={cx("aodet__value", TEXT.priceSm, "tabular")}>
             {shippingFree && t.freeShippingText ? t.freeShippingText : getIkasOrderFormattedShippingTotal(order)}
           </span>
         </div>
         <div className="aodet__row aodet__total">
           <span className={cx("acc-title", TEXT.h4)}>{t.totalLabel}</span>
-          <span className={cx("aodet__total-value", TEXT.h4, "tabular")}>{getIkasOrderFormattedTotalFinalPrice(order)}</span>
+          <span className={cx("aodet__total-value", TEXT.priceLg, "tabular")}>{getIkasOrderFormattedTotalFinalPrice(order)}</span>
         </div>
       </div>
 

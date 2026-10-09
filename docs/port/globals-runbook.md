@@ -140,7 +140,7 @@ Boşluk, ölçü, opaklık ve alfa renkler için ikas'ta tür yok; bunlar `src/g
 
 ## 7. Canlı token tablosu
 
-Kurulum: 2026-10-09, 20 `create_theme_global` + `update_theme_color_scheme` (Kâğıt `is_default: true`); `list_theme_globals` ile her satır tam bir kez doğrulandı. Rozet/Etiket stillerinde `text_transform` yok (kullanıcı kararı, 2026-10-09; brief §6): büyük harf metnin kendisinde, dinamik veride `toLocaleUpperCase("tr-TR")`.
+Kurulum: 2026-10-09, 20 `create_theme_global` + `update_theme_color_scheme` (Kâğıt `is_default: true`); `list_theme_globals` ile her satır tam bir kez doğrulandı. Port sonrası 5 ek stil (2026-10-09, kullanıcı kararı): tuvaldeki aile+boyut kombinasyonları için Fiyat Büyük, Fiyat Küçük, Rakam, Arayüz Mini, Display Rakam. Rozet/Etiket stillerinde `text_transform` yok (kullanıcı kararı, 2026-10-09; brief §6): büyük harf metnin kendisinde, dinamik veride `toLocaleUpperCase("tr-TR")`.
 
 ### Renkler (kind: color)
 
@@ -163,6 +163,11 @@ Kurulum: 2026-10-09, 20 `create_theme_global` + `update_theme_color_scheme` (Kâ
 | Tipografi / Etiket | `TVRrGKS76Y` | `_TVRrGKS76Y` |
 | Tipografi / Gövde | `gVS3y9Wt5R` | `_gVS3y9Wt5R` |
 | Tipografi / Fiyat | `ojnnKm9mqH` | `_ojnnKm9mqH` |
+| Tipografi / Fiyat Büyük | `EY0iHOcEI7` | `_EY0iHOcEI7` |
+| Tipografi / Fiyat Küçük | `BiCxNwFKsc` | `_BiCxNwFKsc` |
+| Tipografi / Rakam | `bQ2aL21SAo` | `_bQ2aL21SAo` |
+| Tipografi / Arayüz Mini | `4QXEee6muy` | `_4QXEee6muy` |
+| Tipografi / Display Rakam | `tFtJaWNgSt` | `_tFtJaWNgSt` |
 
 ### Global değişkenler
 

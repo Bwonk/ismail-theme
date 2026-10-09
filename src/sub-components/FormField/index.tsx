@@ -42,6 +42,8 @@ export interface FormFieldProps {
   hidePasswordLabel?: string;
   /** Extra node rendered inside the field box on the right (e.g. an IconButton). */
   suffix?: ComponentChildren;
+  /** Text style of the input/select/textarea (default `TEXT.ui`). */
+  controlTextClass?: string;
   className?: string;
   inputRef?: Ref<any>;
   onInput?: (value: string, e: Event) => void;
@@ -79,6 +81,7 @@ export default function FormField({
   showPasswordLabel,
   hidePasswordLabel,
   suffix,
+  controlTextClass = TEXT.ui,
   className,
   inputRef,
   onInput,
@@ -116,7 +119,7 @@ export default function FormField({
     control = (
       <textarea
         {...(shared as any)}
-        className={cx("ffield__control", "ffield__control--area", TEXT.ui)}
+        className={cx("ffield__control", "ffield__control--area", controlTextClass)}
         value={strValue}
         placeholder={placeholder}
         readOnly={readOnly}
@@ -130,7 +133,7 @@ export default function FormField({
       <>
         <select
           {...(shared as any)}
-          className={cx("ffield__control", "ffield__control--select", !strValue && "ffield__control--empty", TEXT.ui)}
+          className={cx("ffield__control", "ffield__control--select", !strValue && "ffield__control--empty", controlTextClass)}
           value={strValue ?? ""}
           autoComplete={autoComplete}
         >
@@ -152,7 +155,7 @@ export default function FormField({
     control = (
       <input
         {...(shared as any)}
-        className={cx("ffield__control", TEXT.ui, (type === "number" || type === "tel") && "tabular")}
+        className={cx("ffield__control", controlTextClass, (type === "number" || type === "tel") && "tabular")}
         type={canToggle && reveal ? "text" : type}
         value={strValue}
         placeholder={placeholder}
@@ -200,7 +203,7 @@ export default function FormField({
         {suffix}
       </div>
       {error && (
-        <p id={msgId} className={cx("ffield__msg", TEXT.uiSm)} role="alert">
+        <p id={msgId} className={cx("ffield__msg", TEXT.uiXs)} role="alert">
           {error}
         </p>
       )}

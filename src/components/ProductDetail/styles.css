@@ -242,12 +242,10 @@
 
 .pdp__price-value {
   color: var(--c-text);
-  font-weight: 500;
 }
 
 .pdp__price-compare {
   color: var(--c-muted);
-  font-weight: 400;
 }
 
 .pdp__campaign {

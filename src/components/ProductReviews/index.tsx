@@ -172,7 +172,7 @@ export function ProductReviews({
         <div className="rev__summary">
           {title && <h2 className={cx("rev__title", TEXT.h2)}>{title}</h2>}
           <div className="rev__score">
-            <span className={cx("rev__score-value", isEmpty && "rev__score-value--empty", TEXT.display, "tabular")}>{score}</span>
+            <span className={cx("rev__score-value", isEmpty && "rev__score-value--empty", TEXT.displayNum, "tabular")}>{score}</span>
             <div className="rev__score-meta">
               <RatingStars
                 rating={isEmpty ? 0 : average}

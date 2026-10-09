@@ -39,7 +39,6 @@
 }
 
 .rev__score-value {
-  line-height: 1;
   color: var(--c-text);
   font-weight: 400;
 }

@@ -574,8 +574,8 @@ export function ProductDetail(props: Props) {
           )}
 
           <div className="pdp__price">
-            <span className={cx("pdp__price-value", TEXT.h4, "tabular")}>{price.price}</span>
-            {price.compare && <s className={cx("pdp__price-compare", TEXT.h4, "tabular")}>{price.compare}</s>}
+            <span className={cx("pdp__price-value", TEXT.priceLg, "tabular")}>{price.price}</span>
+            {price.compare && <s className={cx("pdp__price-compare", TEXT.priceLg, "tabular")}>{price.compare}</s>}
           </div>
 
           {campaignTitle && tiers.length === 0 && (
@@ -783,8 +783,8 @@ export function ProductDetail(props: Props) {
               <div className="pdp__offers-summary">
                 <div className="pdp__offers-total-row">
                   <div className="pdp__offers-total">
-                    {offersCompare && <s className={cx("pdp__offers-compare", TEXT.uiSm, "tabular")}>{offersCompare}</s>}
-                    <span className={cx("pdp__offers-total-value", TEXT.h4, "tabular")}>{offersTotal}</span>
+                    {offersCompare && <s className={cx("pdp__offers-compare", TEXT.priceSm, "tabular")}>{offersCompare}</s>}
+                    <span className={cx("pdp__offers-total-value", TEXT.priceLg, "tabular")}>{offersTotal}</span>
                   </div>
                   {offersSaving > 0 && offersSavingText && (
                     <span className={cx("pdp__offers-saving", TEXT.badge, "tabular")}>

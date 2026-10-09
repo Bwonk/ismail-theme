@@ -113,7 +113,7 @@ export function OrderTracking({
         <div className="trk__result-head">
           <h2 className="trk__result-title">
             <span className={TEXT.h4}>{statusTitle}</span>
-            {order.orderNumber && <span className={cx("trk__number", TEXT.h4, "tabular")}>#{order.orderNumber}</span>}
+            {order.orderNumber && <span className={cx("trk__number", TEXT.priceLg, "tabular")}>#{order.orderNumber}</span>}
           </h2>
           <span className={cx("trk__status", cancelled && "trk__status--danger")}>
             <span className="trk__status-dot" aria-hidden="true" />
@@ -130,7 +130,7 @@ export function OrderTracking({
             return (
               <li key={i} className={cx("trk__step", done && "trk__step--done", !cancelled && i === current && "trk__step--current")}>
                 <span className="trk__step-bar" aria-hidden="true" />
-                <span className={cx("trk__step-label", TEXT.uiSm)}>{label}</span>
+                <span className={cx("trk__step-label", TEXT.uiXs)}>{label}</span>
                 <span className={cx("trk__step-date", TEXT.label, "tabular")}>{date || "—"}</span>
               </li>
             );
@@ -143,7 +143,7 @@ export function OrderTracking({
             {info.cargoCompany && (
               <div className="trk__row">
                 <span className={cx("trk__row-label", TEXT.uiSm)}>{cargoCompanyLabel}</span>
-                <span className={cx("trk__row-value", TEXT.label)}>{info.cargoCompany}</span>
+                <span className={cx("trk__row-value", TEXT.priceSm)}>{info.cargoCompany}</span>
               </div>
             )}
             {info.trackingNumber && (
@@ -152,7 +152,7 @@ export function OrderTracking({
                 {/* canvas draws no separate link: the tracking number itself opens the carrier page when ikas has one */}
                 {info.trackingLink ? (
                   <a
-                    className={cx("trk__row-value", "trk__row-link", TEXT.label, "tabular")}
+                    className={cx("trk__row-value", "trk__row-link", TEXT.priceSm, "tabular")}
                     href={info.trackingLink}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -161,7 +161,7 @@ export function OrderTracking({
                     {info.trackingNumber}
                   </a>
                 ) : (
-                  <span className={cx("trk__row-value", TEXT.label, "tabular")}>{info.trackingNumber}</span>
+                  <span className={cx("trk__row-value", TEXT.priceSm, "tabular")}>{info.trackingNumber}</span>
                 )}
               </div>
             )}

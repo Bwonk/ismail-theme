@@ -224,6 +224,11 @@
   }
 }
 
+/* option-date-value: Rakam style at regular weight */
+.popt__date .ffield__control {
+  font-weight: 400;
+}
+
 /* option-child: linked option, 2px line rule on the left */
 .popt__children {
   display: flex;

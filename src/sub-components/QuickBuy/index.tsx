@@ -287,8 +287,8 @@ const QuickBuy = observer(function QuickBuy({ texts: textOverrides, showPayWithI
             <h2 className={cx("qb__title", TEXT.h3)}>{product.name}</h2>
           </div>
           <div className="qb__price qb__price--desktop">
-            <span className={cx("qb__price-value", TEXT.h4, "tabular")}>{price.price}</span>
-            {price.compare && <s className={cx("qb__compare", TEXT.h4, "tabular")}>{price.compare}</s>}
+            <span className={cx("qb__price-value", TEXT.priceLg, "tabular")}>{price.price}</span>
+            {price.compare && <s className={cx("qb__compare", TEXT.priceLg, "tabular")}>{price.compare}</s>}
           </div>
           <span className="qb__rule" aria-hidden="true" />
 

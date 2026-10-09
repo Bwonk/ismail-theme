@@ -26,7 +26,6 @@
   outline: none;
   background: var(--c-bg);
   color: var(--c-text);
-  font-weight: 400;
   appearance: none;
   -webkit-appearance: none;
   transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);

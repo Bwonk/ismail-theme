@@ -323,7 +323,7 @@ const OptionField = observer(function OptionField({
       <label className={cx("popt__box", invalid && "popt__box--error")}>
         <span className="popt__box-left">
           <span className="popt__color-dot" style={value ? { background: value } : undefined} />
-          <span className={cx("popt__box-value", TEXT.uiSm, "tabular")}>{value ? value.toUpperCase() : option.name}</span>
+          <span className={cx("popt__box-value", TEXT.priceSm, "tabular")}>{value ? value.toUpperCase() : option.name}</span>
         </span>
         <Icon name="pipette" size={16} className="popt__box-icon" />
         <input
@@ -342,6 +342,8 @@ const OptionField = observer(function OptionField({
         id={fieldId}
         type="date"
         ariaLabel={option.name}
+        controlTextClass={cx(TEXT.numeral, "tabular")}
+        className="popt__date"
         value={option.values[0] ?? ""}
         min={relativeDate(ds?.minRelativeNextDate, ds?.min)}
         max={relativeDate(ds?.maxRelativeNextDate, ds?.max)}
